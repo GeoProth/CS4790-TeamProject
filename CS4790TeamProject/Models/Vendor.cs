@@ -7,5 +7,10 @@ namespace CS4790TeamProject.Models
 {
     public class Vendor
     {
+        public int VendorID { get; set; }
+        public string VendorName { get; set; }
+        public string VendorAddress { get; set; }
+        public string LastModifiedBy { get; set; }
+        public DateTime LastModifiedDate { get; set; }
     }
 }

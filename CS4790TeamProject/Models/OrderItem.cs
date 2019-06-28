@@ -7,5 +7,14 @@ namespace CS4790TeamProject.Models
 {
     public class OrderItem
     {
+        public int OrderItemID { get; set; }
+        public int ItemID { get; set; }
+        public int PurchaseOrderID { get; set; }
+        public string VendorSKU { get; set; }
+        public decimal Price { get; set; }
+        public int QuantityOrdered { get; set; }
+        public DateTime DateDelivered { get; set; }
+        public string LastModifiedBy { get; set; }
+        public DateTime LastModifiedDate { get; set; }
     }
 }

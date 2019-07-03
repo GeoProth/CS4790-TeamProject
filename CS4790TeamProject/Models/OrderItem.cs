@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,7 +8,8 @@ namespace CS4790TeamProject.Models
 {
     public class OrderItem
     {
-        public int OrderItemID { get; set; }
+        [Key]
+        public int OrderItemId { get; set; }
         public int ItemID { get; set; }
         public int PurchaseOrderID { get; set; }
         public string VendorSKU { get; set; }

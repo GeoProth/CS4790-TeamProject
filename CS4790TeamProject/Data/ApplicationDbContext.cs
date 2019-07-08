@@ -15,15 +15,15 @@ namespace CS4790TeamProject.Data
             
         }
 
-        DbSet<AssemblyHistory> AssemblyHistory { get; set; }
-        DbSet<AssemblyRecipe> AssemblyRecipe { get; set; }
-        DbSet<InventoryLog> InventoryLog { get; set; }
-        DbSet<Item> Item { get; set; }
-        DbSet<Measures> Measures { get; set; }
-        DbSet<OrderItem> OrderItem { get; set; }
-        DbSet<PurchaseOrder> PurchaseOrder { get; set; }
-        DbSet<RecievedItems> RecievedItems { get; set; }
-        DbSet<RecipeLine> RecipeLine { get; set; }
-        DbSet<Vendor> Vendor { get; set; }
+        public DbSet<AssemblyHistory> AssemblyHistory { get; set; }
+        public DbSet<AssemblyRecipe> AssemblyRecipe { get; set; }
+        public DbSet<InventoryLog> InventoryLog { get; set; }
+        public DbSet<Item> Item { get; set; }
+        public DbSet<Measures> Measures { get; set; }
+        public DbSet<OrderItem> OrderItem { get; set; }
+        public DbSet<PurchaseOrder> PurchaseOrder { get; set; }
+        public DbSet<RecievedItems> RecievedItems { get; set; }
+        public DbSet<RecipeLine> RecipeLine { get; set; }
+        public DbSet<Vendor> Vendor { get; set; }
     }
 }

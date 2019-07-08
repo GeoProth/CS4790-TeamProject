@@ -94,3 +94,10 @@ J:\Git Repositories\GeoProth\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netc
 J:\Git Repositories\GeoProth\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\CS4790TeamProject.dll
 J:\Git Repositories\GeoProth\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\CS4790TeamProject.pdb
 J:\Git Repositories\GeoProth\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\CS4790TeamProject.csproj.CopyComplete
+J:\Git Repositories\GeoProth\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\CS4790TeamProject.csprojAssemblyReference.cache
+J:\Git Repositories\GeoProth\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\Inventory\Index.g.cshtml.cs
+J:\Git Repositories\GeoProth\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\Inventory\Create.g.cshtml.cs
+J:\Git Repositories\GeoProth\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\Inventory\Delete.g.cshtml.cs
+J:\Git Repositories\GeoProth\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\Inventory\Details.g.cshtml.cs
+J:\Git Repositories\GeoProth\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\Inventory\Edit.g.cshtml.cs
+J:\Git Repositories\GeoProth\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\Inventory\Assemble.g.cshtml.cs

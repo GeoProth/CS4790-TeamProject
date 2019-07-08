@@ -1,0 +1,76 @@
+﻿@model CS4790TeamProject.Models.Item
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>Item</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ItemName" class="control-label"></label>
+                <input asp-for="ItemName" class="form-control" />
+                <span asp-validation-for="ItemName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OnhandQty" class="control-label"></label>
+                <input asp-for="OnhandQty" class="form-control" />
+                <span asp-validation-for="OnhandQty" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ListRetailCost" class="control-label"></label>
+                <input asp-for="ListRetailCost" class="form-control" />
+                <span asp-validation-for="ListRetailCost" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReorderQty" class="control-label"></label>
+                <input asp-for="ReorderQty" class="form-control" />
+                <span asp-validation-for="ReorderQty" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaxQty" class="control-label"></label>
+                <input asp-for="MaxQty" class="form-control" />
+                <span asp-validation-for="MaxQty" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MeasureID" class="control-label"></label>
+                <input asp-for="MeasureID" class="form-control" />
+                <span asp-validation-for="MeasureID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MeasureAmnt" class="control-label"></label>
+                <input asp-for="MeasureAmnt" class="form-control" />
+                <span asp-validation-for="MeasureAmnt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastModifiedBy" class="control-label"></label>
+                <input asp-for="LastModifiedBy" class="form-control" />
+                <span asp-validation-for="LastModifiedBy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastModifiedDate" class="control-label"></label>
+                <input asp-for="LastModifiedDate" class="form-control" />
+                <span asp-validation-for="LastModifiedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

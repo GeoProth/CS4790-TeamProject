@@ -3,6 +3,25 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <ul>
+        <li>
+            <a href="@Url.Action("Index", "Inventory")"><span>Inventory</span></a>
+        </li>
+        <li>
+            <a href=""><span>Orders</span></a>
+        </li>
+        <li>
+            <a href="@Url.Action("Assemble", "Inventory")"><span>Assemble</span></a>
+        </li>
+        <li>
+            <a href=""><span>Vendor</span></a>
+        </li>
+        <li>
+            <a href=""><span>Alerts</span></a>
+        </li>
+        <li>
+            <a href=""><span>Reports</span></a>
+        </li>
+    </ul>
+    
 </div>

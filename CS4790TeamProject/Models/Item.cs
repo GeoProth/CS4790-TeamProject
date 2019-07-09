@@ -10,11 +10,11 @@ namespace CS4790TeamProject.Models
     {
         [Key]
         public int ItemId { get; set; }
-        [Display(Name = "Item Type")]
+        [Display(Name = "Name")]
         public string ItemName { get; set; }
         [Display(Name = "Description")]
         public string Description { get; set; }
-        [Display(Name = "Qty On Hand")]
+        [Display(Name = "On Hand")]
         public int OnhandQty { get; set; }
         [Display(Name = "Retail Cost")]
         public decimal ListRetailCost { get; set; }
@@ -25,7 +25,9 @@ namespace CS4790TeamProject.Models
         public int MeasureID { get; set; }
         [Display(Name = "Measure Amount")]
         public decimal MeasureAmnt { get; set; }
+        [Display(Name = "Last Modified By")]
         public string LastModifiedBy { get; set; }
+        [Display(Name = "Last Modified Date")]
         public DateTime LastModifiedDate { get; set; }
 
         /*

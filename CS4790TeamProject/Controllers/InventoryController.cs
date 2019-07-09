@@ -18,11 +18,25 @@ namespace CS4790TeamProject.Controllers
         {
             _context = context;
         }
-
+        /*
         // GET: Inventory
         public async Task<IActionResult> Index()
         {
             return View(await _context.Item.ToListAsync());
+        }*/
+
+        public async Task<IActionResult> Index(string searchString)
+        {
+            
+            var items = from i in _context.Item
+                        select i;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                items = items.Where(s => s.ItemName.Contains(searchString));
+            }
+
+            return View(await items.ToListAsync());
         }
 
         // GET: Inventory/Details/5
@@ -167,5 +181,12 @@ namespace CS4790TeamProject.Controllers
         {
             return _context.Item.Any(e => e.ItemId == id);
         }
+
+
+        public async Task<IActionResult> Reorder(int? id)
+        {
+            return View(await _context.Item.ToListAsync());
+        }
     }
 }
+

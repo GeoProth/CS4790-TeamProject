@@ -80,7 +80,6 @@ J:\Git Repositories\GeoProth\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netc
 J:\Git Repositories\GeoProth\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Areas\Identity\Pages\_ViewImports.g.cshtml.cs
 J:\Git Repositories\GeoProth\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Areas\Identity\Pages\_ViewStart.g.cshtml.cs
 J:\Git Repositories\GeoProth\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\Home\Index.g.cshtml.cs
-J:\Git Repositories\GeoProth\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\Home\Privacy.g.cshtml.cs
 J:\Git Repositories\GeoProth\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Error.g.cshtml.cs
 J:\Git Repositories\GeoProth\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_CookieConsentPartial.g.cshtml.cs
 J:\Git Repositories\GeoProth\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_Layout.g.cshtml.cs
@@ -172,3 +171,5 @@ C:\Users\reddt\Source\Repos\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netco
 C:\Users\reddt\Source\Repos\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\CS4790TeamProject.pdb
 C:\Users\reddt\Source\Repos\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\CS4790TeamProject.csproj.CopyComplete
 C:\Users\reddt\Source\Repos\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\Home\Login.g.cshtml.cs
+J:\Git Repositories\GeoProth\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\Home\Login.g.cshtml.cs
+J:\Git Repositories\GeoProth\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\Inventory\Reorder.g.cshtml.cs

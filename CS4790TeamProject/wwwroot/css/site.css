@@ -56,3 +56,27 @@ body {
 
   text-align:center;
 }
+
+/**
+----Index Page-----------------
+*/
+
+a.indexItems {
+    color:black;
+    font-size:25px;
+    font-family:'Comic Sans MS';
+}
+
+a.navbar-brand {
+    font-family: 'Comic Sans MS';
+}
+
+ul.nav-item {
+    list-style-type: none;
+}
+ 
+li.nav-item {
+    
+    padding: 5px;
+}
+

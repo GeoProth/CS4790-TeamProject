@@ -22,54 +22,53 @@
 <body>
     <header>
 
-        <div class="pos-f-t">
-            <div class="collapse" id="navbarToggleExternalContent">
-                <div class="bg-light p-4">
-                    <ul>
-                        <li>
-                            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Inventory">Inventory</a>
-                        </li>
-                        <li>
-                            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Orders">Orders</a>
-                        </li>
-                        <li>
-                            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Assemble">Assemble</a>
-                        </li>
-                        <li>
-                            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Vendor">Vendor</a>
-                        </li>
-                        <li>
-                            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Alerts">Alerts</a>
-                        </li>
-                        <li>
-                            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Reports">Reports</a>
-                        </li>
-                    </ul>
-                </div>
+        <div class="collapse" id="navbarToggleExternalContent">
+            <div class="bg-light p-4">
+                <ul class="nav-item">
+                    <li class="nav-item">
+                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Inventory">Inventory</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Orders">Orders</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Assemble">Assemble</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Vendor">Vendor</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Alerts">Alerts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Reports">Reports</a>
+                    </li>
+                </ul>
             </div>
-            <nav class="navbar navbar-dark bg-dark">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="mx-auto">
-                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" style="font-size:36px;">Village Drill</a>
-                </div>
-
-                <partial name="_LoginPartial" />
-            </nav>
         </div>
+        <nav class="navbar navbar-dark bg-dark">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
+            <div class="mx-auto">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" style="font-size:36px;font-family:'Comic Sans MS';">Village Drill</a>
+            </div>
+
+            <partial name="_LoginPartial" />
+        </nav>
+     
     </header>
 
+    <section>
+        <div class="container">
+            <partial name="_CookieConsentPartial" />
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+    </section>
 
-
-    <div class="container">
-        <partial name="_CookieConsentPartial" />
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
     <footer class="border-top footer text-muted">
         <div class="container-fluid">

@@ -10,6 +10,7 @@ namespace CS4790TeamProject.Models
     {
         [Key]
         public int MeasureId { get; set; }
+        [Display(Name="Metric")]
         public string MeasureName { get; set; }
     }
 }

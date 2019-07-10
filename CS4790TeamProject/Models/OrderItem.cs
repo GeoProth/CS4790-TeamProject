@@ -19,7 +19,7 @@ namespace CS4790TeamProject.Models
         public string VendorSKU { get; set; }
         [Display(Name="Price")]
         public decimal Price { get; set; }
-        [Display(Name="Qnty Ordered")]
+        [Display(Name="Qty Ordered")]
         public int QuantityOrdered { get; set; }
         public DateTime DateDelivered { get; set; }
         public string LastModifiedBy { get; set; }

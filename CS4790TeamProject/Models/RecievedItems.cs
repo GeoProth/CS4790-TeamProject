@@ -13,7 +13,9 @@ namespace CS4790TeamProject.Models
         public int ReceivedId { get; set; }
         //foreign key
         public int OrderItemID { get; set; }
+        [Display(Name="Qty Received")]
         public int QuantityReceived { get; set; }
+        [Display(Name="Notes")]
         public string Notes { get; set; }
         public string LastModifiedBy { get; set; }
         public DateTime LastModifiedDate { get; set; }

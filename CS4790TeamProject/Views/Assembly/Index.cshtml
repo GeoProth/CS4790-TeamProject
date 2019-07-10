@@ -1,11 +1,11 @@
-﻿@model IEnumerable<CS4790TeamProject.Models.AssemblyRecipe>
-
+﻿@model IEnumerable<CS4790TeamProject.Models.ViewModels.AssemblyRecipeViewModel>
+@using CS4790TeamProject.Models;
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Assembly</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -14,7 +14,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ItemID)
+                Assembly Item
             </th>
             <th></th>
         </tr>
@@ -23,12 +23,13 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.ItemID)
+                @Html.DisplayFor(modelItem => item.items.ItemName)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.AssemblyRecipeId">Edit</a> |
+                @*
+                <a asp-action="Edit" asp-route-id="@item.AssemblyRecipe.FirstOrDefault(r => r.AssemblyRecipeId == Model.)">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.AssemblyRecipeId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.AssemblyRecipeId">Delete</a>
+                <a asp-action="Delete" asp-route-id="@item.AssemblyRecipeId">Delete</a>*@
             </td>
         </tr>
 }

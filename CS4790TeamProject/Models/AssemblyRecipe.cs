@@ -10,6 +10,7 @@ namespace CS4790TeamProject.Models
     {
         [Key]
         public int AssemblyRecipeId { get; set; }
+        [Display(Name = "Assembly Item")]
         public int ItemID { get; set; }
     }
 }

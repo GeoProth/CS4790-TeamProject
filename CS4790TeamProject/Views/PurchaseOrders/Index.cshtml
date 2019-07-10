@@ -1,0 +1,60 @@
+﻿@model IEnumerable<CS4790TeamProject.Models.PurchaseOrder>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOrdered)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VendorPO)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastModifiedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastModifiedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vendor)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOrdered)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VendorPO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastModifiedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastModifiedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vendor.VendorId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.PurchaseOrderId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.PurchaseOrderId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.PurchaseOrderId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

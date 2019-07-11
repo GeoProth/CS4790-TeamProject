@@ -28,8 +28,6 @@ namespace CS4790TeamProject.Models
         public string LastModifiedBy { get; set; }
         public DateTime LastModifiedDate { get; set; }
 
-        /*
-        [ForeignKey()]
-        public virtual Item Item { get; set; }*/
+        
     }
 }

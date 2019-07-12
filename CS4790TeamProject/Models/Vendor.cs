@@ -16,5 +16,8 @@ namespace CS4790TeamProject.Models
         public string VendorAddress { get; set; }
         public string LastModifiedBy { get; set; }
         public DateTime LastModifiedDate { get; set; }
+
+
+        public ICollection<PurchaseOrder> PurchaseOrders { get; set; }
     }
 }

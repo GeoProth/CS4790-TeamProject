@@ -12936,24 +12936,27 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\gprot\\.nuget\\packages\\": {},
+    "C:\\Users\\Muhlestein\\.nuget\\packages\\": {},
+    "C:\\Microsoft\\Xamarin\\NuGet\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\gprot\\Desktop\\CS4790\\CS4790TeamProject\\CS4790TeamProject\\CS4790TeamProject.csproj",
+      "projectUniqueName": "C:\\Users\\Muhlestein\\Desktop\\Brandon\\Weber\\Summer 2019\\CS 4790\\Group Project\\CS4790TeamProject\\CS4790TeamProject.csproj",
       "projectName": "CS4790TeamProject",
-      "projectPath": "C:\\Users\\gprot\\Desktop\\CS4790\\CS4790TeamProject\\CS4790TeamProject\\CS4790TeamProject.csproj",
-      "packagesPath": "C:\\Users\\gprot\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\gprot\\Desktop\\CS4790\\CS4790TeamProject\\CS4790TeamProject\\obj\\",
+      "projectPath": "C:\\Users\\Muhlestein\\Desktop\\Brandon\\Weber\\Summer 2019\\CS 4790\\Group Project\\CS4790TeamProject\\CS4790TeamProject.csproj",
+      "packagesPath": "C:\\Users\\Muhlestein\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Muhlestein\\Desktop\\Brandon\\Weber\\Summer 2019\\CS 4790\\Group Project\\CS4790TeamProject\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
+        "C:\\Microsoft\\Xamarin\\NuGet\\",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\gprot\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\Muhlestein\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.2"

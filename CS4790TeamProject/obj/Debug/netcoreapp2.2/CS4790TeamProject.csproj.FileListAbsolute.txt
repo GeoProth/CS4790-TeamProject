@@ -297,3 +297,13 @@ C:\Users\Muhlestein\Desktop\Brandon\Weber\Summer 2019\CS 4790\Group Project\CS47
 C:\Users\Muhlestein\Desktop\Brandon\Weber\Summer 2019\CS 4790\Group Project\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\Vendors\Details.g.cshtml.cs
 C:\Users\Muhlestein\Desktop\Brandon\Weber\Summer 2019\CS 4790\Group Project\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\Vendors\Edit.g.cshtml.cs
 C:\Users\Muhlestein\Desktop\Brandon\Weber\Summer 2019\CS 4790\Group Project\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\Vendors\Index.g.cshtml.cs
+C:\Users\reddt\Source\Repos\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\PurchaseOrders\Create.g.cshtml.cs
+C:\Users\reddt\Source\Repos\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\PurchaseOrders\Delete.g.cshtml.cs
+C:\Users\reddt\Source\Repos\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\PurchaseOrders\Details.g.cshtml.cs
+C:\Users\reddt\Source\Repos\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\PurchaseOrders\Edit.g.cshtml.cs
+C:\Users\reddt\Source\Repos\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\PurchaseOrders\Index.g.cshtml.cs
+C:\Users\reddt\Source\Repos\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\Vendors\Create.g.cshtml.cs
+C:\Users\reddt\Source\Repos\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\Vendors\Delete.g.cshtml.cs
+C:\Users\reddt\Source\Repos\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\Vendors\Details.g.cshtml.cs
+C:\Users\reddt\Source\Repos\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\Vendors\Edit.g.cshtml.cs
+C:\Users\reddt\Source\Repos\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\Vendors\Index.g.cshtml.cs

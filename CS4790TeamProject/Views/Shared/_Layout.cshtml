@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -21,43 +22,55 @@
 </head>
 <body>
     <header>
-
-        <div class="collapse" id="navbarToggleExternalContent">
-            <div class="bg-light p-4">
-                <ul class="nav-item">
-                    <li class="nav-item">
-                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Inventory">Inventory</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Orders">Orders</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Assemble">Assemble</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Vendor">Vendor</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Alerts">Alerts</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Reports">Reports</a>
-                    </li>
-                </ul>
+        <div>
+            <div class="collapse" id="navbarToggleExternalContent">
+                <div class="bg-light p-4">
+                    <ul class="nav-item">
+                        <li class="nav-item">
+                            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Inventory">Inventory</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Orders">Orders</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Assemble">Assemble</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Vendor">Vendor</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Alerts">Alerts</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Reports">Reports</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
+            <nav class="navbar navbar-dark bg-dark">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <div class="col-3 offset-4">
+                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" style="font-size:36px;font-family:'Comic Sans MS';">Village Drill</a>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-3 offset-2">
+                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" style="font-size:36px;font-family:'Comic Sans MS';">Village Drill</a>
+                    </div>
+                }
+                <div style="float:right;">
+                    <partial name="_LoginPartial" />
+                </div>
+
+            </nav>
+
         </div>
-        <nav class="navbar navbar-dark bg-dark">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
 
-            <div class="mx-auto">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" style="font-size:36px;font-family:'Comic Sans MS';">Village Drill</a>
-            </div>
-
-            <partial name="_LoginPartial" />
-        </nav>
-     
     </header>
 
     <section>
@@ -72,7 +85,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container-fluid">
-            &copy; 2019 - CS4790TeamProject 
+            &copy; 2019 - CS4790TeamProject
         </div>
     </footer>
 

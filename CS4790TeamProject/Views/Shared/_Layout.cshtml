@@ -53,14 +53,14 @@
                 </button>
                 @if (User.Identity.IsAuthenticated)
                 {
-                    <div class="col-3 offset-4">
-                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" style="font-size:36px;font-family:'Comic Sans MS';">Village Drill</a>
+                    <div>
+                        <a id="navbarTitle" class="navbar-brand offset-lg-4 col-12 offset-md-4" asp-area="" asp-controller="Home" asp-action="Index" >Village Drill</a>
                     </div>
                 }
                 else
                 {
-                    <div class="col-3 offset-2">
-                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" style="font-size:36px;font-family:'Comic Sans MS';">Village Drill</a>
+                    <div>
+                        <a id="navbarTitle" class="navbar-brand offset-lg-3 col-lg-12" asp-area="" asp-controller="Home" asp-action="Index" >Village Drill</a>
                     </div>
                 }
                 <div style="float:right;">

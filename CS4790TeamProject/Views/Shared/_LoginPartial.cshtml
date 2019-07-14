@@ -8,18 +8,19 @@
 
         <div class="nav-item float-right" style="display:inline;">
             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                <button type="submit" class="nav-link btn btn-link text-light" style="font-family:'Comic Sans MS';"><i class="fa fa-user-circle-o" style="font-size:36px;"></i>Logout</button>
+                <button type="submit" class="nav-link btn btn-link text-light" style="font-family:'Comic Sans MS';"><i id="userIcon" class="fa fa-user-circle-o"></i>Logout</button>
             </form>
         </div>
+        <br/>
         <div class="nav-item float-right" style="display:inline;">
-            <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage" style="font-size:20px;font-family:'Comic Sans MS';">@User.Identity.Name </a>
+            <a id="navbarUsername" class="nav-link text-light" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage" >@User.Identity.Name </a>
         </div>
 
     }
     else
     {
         <div class="nav-item">
-            <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Login"><i class="fa fa-user-circle-o" style="font-size:36px;"></i></a>
+            <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Login"><i class="fa fa-user-circle-o" id="userIcon"></i></a>
         </div>
     }
 </div>

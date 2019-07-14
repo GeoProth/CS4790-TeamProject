@@ -67,8 +67,9 @@ a.indexItems {
     font-family:'Comic Sans MS';
 }
 
-a.navbar-brand {
+#navbarTitle {
     font-family: 'Comic Sans MS';
+    font-size: 36px;
 }
 
 ul.nav-item {
@@ -80,3 +81,42 @@ li.nav-item {
     padding: 5px;
 }
 
+#navbarUsername{
+
+    font-size:15px;
+    font-family:'Comic Sans MS';
+}
+
+#userIcon {
+    font-size:36px;
+}
+
+/*Responsive*/
+/*@media only screen and (max-width:768px) {
+    #navbarTitle {
+        font-size:20px;
+    }
+
+    #navbarUsername{
+        font-size:15px;
+    }
+
+    #userIcon {
+        font-size:20px;
+    }
+}*/
+
+
+@media only screen and (max-width:375px) {
+    #navbarTitle {
+        font-size:17px;
+    }
+
+    #navbarUsername{
+        font-size:7px;
+    }
+
+    #userIcon {
+        font-size:15px;
+    }
+}

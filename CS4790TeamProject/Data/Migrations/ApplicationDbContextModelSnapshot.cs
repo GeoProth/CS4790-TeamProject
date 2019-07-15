@@ -39,6 +39,8 @@ namespace CS4790TeamProject.Data.Migrations
 
                     b.HasKey("AssemblyHistoryId");
 
+                    b.HasIndex("ItemID");
+
                     b.ToTable("AssemblyHistory");
                 });
 
@@ -73,7 +75,11 @@ namespace CS4790TeamProject.Data.Migrations
 
                     b.Property<int>("PreviousQty");
 
+                    b.Property<bool>("Reconciled");
+
                     b.HasKey("LogId");
+
+                    b.HasIndex("ItemID");
 
                     b.ToTable("InventoryLog");
                 });
@@ -146,6 +152,10 @@ namespace CS4790TeamProject.Data.Migrations
 
                     b.HasKey("OrderItemId");
 
+                    b.HasIndex("ItemID");
+
+                    b.HasIndex("PurchaseOrderID");
+
                     b.ToTable("OrderItem");
                 });
 
@@ -166,6 +176,8 @@ namespace CS4790TeamProject.Data.Migrations
                     b.Property<string>("VendorPO");
 
                     b.HasKey("PurchaseOrderId");
+
+                    b.HasIndex("VendorID");
 
                     b.ToTable("PurchaseOrder");
                 });
@@ -188,6 +200,8 @@ namespace CS4790TeamProject.Data.Migrations
 
                     b.HasKey("ReceivedId");
 
+                    b.HasIndex("OrderItemID");
+
                     b.ToTable("RecievedItems");
                 });
 
@@ -208,6 +222,10 @@ namespace CS4790TeamProject.Data.Migrations
                     b.Property<int>("RequiredItemQuantity");
 
                     b.HasKey("RecipeLineId");
+
+                    b.HasIndex("AssemblyRecipeID");
+
+                    b.HasIndex("ItemID");
 
                     b.ToTable("RecipeLine");
                 });
@@ -394,6 +412,64 @@ namespace CS4790TeamProject.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("CS4790TeamProject.Models.AssemblyHistory", b =>
+                {
+                    b.HasOne("CS4790TeamProject.Models.Item", "Item")
+                        .WithMany()
+                        .HasForeignKey("ItemID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("CS4790TeamProject.Models.InventoryLog", b =>
+                {
+                    b.HasOne("CS4790TeamProject.Models.Item", "Item")
+                        .WithMany()
+                        .HasForeignKey("ItemID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("CS4790TeamProject.Models.OrderItem", b =>
+                {
+                    b.HasOne("CS4790TeamProject.Models.Item", "Items")
+                        .WithMany()
+                        .HasForeignKey("ItemID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("CS4790TeamProject.Models.PurchaseOrder", "PurchaseOrder")
+                        .WithMany()
+                        .HasForeignKey("PurchaseOrderID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("CS4790TeamProject.Models.PurchaseOrder", b =>
+                {
+                    b.HasOne("CS4790TeamProject.Models.Vendor", "Vendor")
+                        .WithMany()
+                        .HasForeignKey("VendorID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("CS4790TeamProject.Models.RecievedItems", b =>
+                {
+                    b.HasOne("CS4790TeamProject.Models.OrderItem", "OrderItem")
+                        .WithMany()
+                        .HasForeignKey("OrderItemID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("CS4790TeamProject.Models.RecipeLine", b =>
+                {
+                    b.HasOne("CS4790TeamProject.Models.AssemblyRecipe", "AssemblyRecipe")
+                        .WithMany()
+                        .HasForeignKey("AssemblyRecipeID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("CS4790TeamProject.Models.Item", "Item")
+                        .WithMany()
+                        .HasForeignKey("ItemID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

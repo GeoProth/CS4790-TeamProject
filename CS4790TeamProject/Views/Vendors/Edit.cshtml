@@ -5,43 +5,48 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Edit</h1>
+<h1>Update Vendor Details:</h1>
 
+<!---
 <h4>Vendor</h4>
+-->
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-12">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="VendorId" />
             <div class="form-group">
-                <label asp-for="VendorName" class="control-label"></label>
+                <label asp-for="VendorName" class="control-label">Name:</label>
                 <input asp-for="VendorName" class="form-control" />
                 <span asp-validation-for="VendorName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="VendorAddress" class="control-label"></label>
+                <label asp-for="VendorAddress" class="control-label">Address:</label>
                 <input asp-for="VendorAddress" class="form-control" />
                 <span asp-validation-for="VendorAddress" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="LastModifiedBy" class="control-label"></label>
-                <input asp-for="LastModifiedBy" class="form-control" />
-                <span asp-validation-for="LastModifiedBy" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LastModifiedDate" class="control-label"></label>
-                <input asp-for="LastModifiedDate" class="form-control" />
-                <span asp-validation-for="LastModifiedDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+            <!---
+    <div class="form-group">
+        <label asp-for="LastModifiedBy" class="control-label"></label>
+        <input asp-for="LastModifiedBy" class="form-control" />
+        <span asp-validation-for="LastModifiedBy" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="LastModifiedDate" class="control-label"></label>
+        <input asp-for="LastModifiedDate" class="form-control" />
+        <span asp-validation-for="LastModifiedDate" class="text-danger"></span>
+    </div>
+    -->
+            <div class="form-group text-center">
+                <input type="submit" value="Save" class="btn btn-primary col-sm-3" />
+                <a asp-action="Index" class="btn btn-secondary col-sm-3">Back to List</a>
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+
 </div>
 

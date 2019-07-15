@@ -10,36 +10,22 @@ using CS4790TeamProject.Models;
 
 namespace CS4790TeamProject.Controllers
 {
-    public class InventoryController : Controller
+    public class AssemblyController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public InventoryController(ApplicationDbContext context)
+        public AssemblyController(ApplicationDbContext context)
         {
             _context = context;
         }
-        /*
-        // GET: Inventory
+
+        // GET: Assembly
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Item.ToListAsync());
-        }*/
-
-        public async Task<IActionResult> Index(string searchString)
-        {
-            
-            var items = from i in _context.Item
-                        select i;
-
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                items = items.Where(s => s.ItemName.Contains(searchString));
-            }
-
-            return View(await items.ToListAsync());
+            return View(await _context.AssemblyRecipe.ToListAsync());
         }
 
-        // GET: Inventory/Details/5
+        // GET: Assembly/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -47,39 +33,39 @@ namespace CS4790TeamProject.Controllers
                 return NotFound();
             }
 
-            var item = await _context.Item
-                .FirstOrDefaultAsync(m => m.ItemId == id);
-            if (item == null)
+            var assemblyRecipe = await _context.AssemblyRecipe
+                .FirstOrDefaultAsync(m => m.AssemblyRecipeId == id);
+            if (assemblyRecipe == null)
             {
                 return NotFound();
             }
 
-            return View(item);
+            return View(assemblyRecipe);
         }
 
-        // GET: Inventory/Create
+        // GET: Assembly/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Inventory/Create
+        // POST: Assembly/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ItemId,ItemName,Description,OnhandQty,ListRetailCost,ReorderQty,MaxQty,MeasureID,MeasureAmnt,LastModifiedBy,LastModifiedDate")] Item item)
+        public async Task<IActionResult> Create([Bind("AssemblyRecipeId,ItemID")] AssemblyRecipe assemblyRecipe)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(item);
+                _context.Add(assemblyRecipe);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(item);
+            return View(assemblyRecipe);
         }
 
-        // GET: Inventory/Edit/5
+        // GET: Assembly/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -87,22 +73,22 @@ namespace CS4790TeamProject.Controllers
                 return NotFound();
             }
 
-            var item = await _context.Item.FindAsync(id);
-            if (item == null)
+            var assemblyRecipe = await _context.AssemblyRecipe.FindAsync(id);
+            if (assemblyRecipe == null)
             {
                 return NotFound();
             }
-            return View(item);
+            return View(assemblyRecipe);
         }
 
-        // POST: Inventory/Edit/5
+        // POST: Assembly/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ItemId,ItemName,Description,OnhandQty,ListRetailCost,ReorderQty,MaxQty,MeasureID,MeasureAmnt,LastModifiedBy,LastModifiedDate")] Item item)
+        public async Task<IActionResult> Edit(int id, [Bind("AssemblyRecipeId,ItemID")] AssemblyRecipe assemblyRecipe)
         {
-            if (id != item.ItemId)
+            if (id != assemblyRecipe.AssemblyRecipeId)
             {
                 return NotFound();
             }
@@ -111,12 +97,12 @@ namespace CS4790TeamProject.Controllers
             {
                 try
                 {
-                    _context.Update(item);
+                    _context.Update(assemblyRecipe);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ItemExists(item.ItemId))
+                    if (!AssemblyRecipeExists(assemblyRecipe.AssemblyRecipeId))
                     {
                         return NotFound();
                     }
@@ -127,10 +113,10 @@ namespace CS4790TeamProject.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(item);
+            return View(assemblyRecipe);
         }
 
-        // GET: Inventory/Delete/5
+        // GET: Assembly/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -138,55 +124,30 @@ namespace CS4790TeamProject.Controllers
                 return NotFound();
             }
 
-            var item = await _context.Item
-                .FirstOrDefaultAsync(m => m.ItemId == id);
-            if (item == null)
+            var assemblyRecipe = await _context.AssemblyRecipe
+                .FirstOrDefaultAsync(m => m.AssemblyRecipeId == id);
+            if (assemblyRecipe == null)
             {
                 return NotFound();
             }
 
-            return View(item);
+            return View(assemblyRecipe);
         }
 
-        // POST: Inventory/Delete/5
+        // POST: Assembly/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var item = await _context.Item.FindAsync(id);
-            _context.Item.Remove(item);
+            var assemblyRecipe = await _context.AssemblyRecipe.FindAsync(id);
+            _context.AssemblyRecipe.Remove(assemblyRecipe);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        // GET: Inventory/Details/5
-        public async Task<IActionResult> Assemble(int? id)
+        private bool AssemblyRecipeExists(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var recipe = await _context.AssemblyRecipe
-                .FirstOrDefaultAsync(m => m.AssemblyRecipeId == id);
-            if (recipe == null)
-            {
-                return NotFound();
-            }
-
-            return View(recipe);
-        }
-
-        private bool ItemExists(int id)
-        {
-            return _context.Item.Any(e => e.ItemId == id);
-        }
-
-
-        public async Task<IActionResult> Reorder(int? id)
-        {
-            return View(await _context.Item.ToListAsync());
+            return _context.AssemblyRecipe.Any(e => e.AssemblyRecipeId == id);
         }
     }
 }
-

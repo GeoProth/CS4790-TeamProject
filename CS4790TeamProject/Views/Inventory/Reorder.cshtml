@@ -1,0 +1,47 @@
+﻿@model IEnumerable<CS4790TeamProject.Models.Item>
+
+@{
+    ViewData["Title"] = "Reorder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Reorder</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ItemName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OnhandQty)
+            </th>
+            <th>
+                In transit
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReorderQty)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ItemName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OnhandQty)
+            </td>
+            <td></td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReorderQty)
+            </td>
+            <td>
+                <a asp-action="Reorder" asp-route-id="@item.ItemId">Reorder</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

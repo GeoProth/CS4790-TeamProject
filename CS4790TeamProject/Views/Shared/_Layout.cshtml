@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -18,46 +19,67 @@
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+
+    @*<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css" />*@
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   
+    
+
 </head>
 <body>
     <header>
-
-        <div class="collapse" id="navbarToggleExternalContent">
-            <div class="bg-light p-4">
-                <ul class="nav-item">
-                    <li class="nav-item">
-                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Inventory">Inventory</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Orders">Orders</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Assemble">Assemble</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Vendor">Vendor</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Alerts">Alerts</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Reports">Reports</a>
-                    </li>
-                </ul>
+        <div>
+            <div class="collapse" id="navbarToggleExternalContent">
+                <div class="bg-light p-4">
+                    <ul class="nav-item">
+                        <li class="nav-item">
+                            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Inventory">Inventory</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Orders">Orders</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Assemble">Assemble</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Vendor">Vendor</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Alerts">Alerts</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Reports">Reports</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
+            <nav class="navbar navbar-dark bg-dark container-fluid">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" style="border:solid white;" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <div>
+                        <a id="navbarTitle" class="navbar-brand offset-lg-5 col-12 offset-md-5" asp-area="" asp-controller="Home" asp-action="Index" >Village Drill</a>
+                    </div>
+                }
+                else
+                {
+                    <div>
+                        <a id="navbarTitle" class="navbar-brand offset-lg-1 offset-md-1 col-12" asp-area="" asp-controller="Home" asp-action="Index" >Village Drill</a>
+                    </div>
+                }
+                <div style="float:right;">
+                    <partial name="_LoginPartial" />
+                </div>
+
+            </nav>
+
         </div>
-        <nav class="navbar navbar-dark bg-dark">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
 
-            <div class="mx-auto">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" style="font-size:36px;font-family:'Comic Sans MS';">Village Drill</a>
-            </div>
-
-            <partial name="_LoginPartial" />
-        </nav>
-     
     </header>
 
     <section>
@@ -72,7 +94,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container-fluid">
-            &copy; 2019 - CS4790TeamProject 
+            &copy; 2019 - CS4790TeamProject
         </div>
     </footer>
 
@@ -95,7 +117,7 @@
         </script>
     </environment>
     <script src="~/js/site.js" asp-append-version="true"></script>
-
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

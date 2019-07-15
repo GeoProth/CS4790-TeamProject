@@ -54,7 +54,7 @@ namespace CS4790TeamProject.Views.Vendors
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("VendorId,VendorName,VendorAddress,LastModifiedBy,LastModifiedDate")] Vendor vendor)
+        public async Task<IActionResult> Create([Bind("VendorId,VendorName,VendorAddress")] Vendor vendor)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace CS4790TeamProject.Views.Vendors
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("VendorId,VendorName,VendorAddress,LastModifiedBy,LastModifiedDate")] Vendor vendor)
+        public async Task<IActionResult> Edit(int id, [Bind("VendorId,VendorName,VendorAddress")] Vendor vendor)
         {
             if (id != vendor.VendorId)
             {

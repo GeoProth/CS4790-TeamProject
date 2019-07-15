@@ -5,17 +5,20 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Vendors</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<div class="text-right">
+    <p>
+        <a asp-action="Create"><i class="fa fa-plus-circle" style="font-size:48px;"></i></a>
+    </p>
+</div>
 <table class="table">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.VendorName)
             </th>
+            <!--
             <th>
                 @Html.DisplayNameFor(model => model.VendorAddress)
             </th>
@@ -25,6 +28,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.LastModifiedDate)
             </th>
+            -->
             <th></th>
         </tr>
     </thead>
@@ -34,21 +38,28 @@
             <td>
                 @Html.DisplayFor(modelItem => item.VendorName)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VendorAddress)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastModifiedBy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastModifiedDate)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.VendorId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.VendorId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.VendorId">Delete</a>
-            </td>
+            <!---
+    <td>
+        @Html.DisplayFor(modelItem => item.VendorAddress)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.LastModifiedBy)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.LastModifiedDate)
+    </td>
+    -->
+        <td>
+            <a asp-action="Details" asp-route-id="@item.VendorId">Details</a>
+            <!--
+    <a asp-action="Edit" asp-route-id="@item.VendorId">Edit</a> |
+    <a asp-action="Details" asp-route-id="@item.VendorId">Details</a> |
+    <a asp-action="Delete" asp-route-id="@item.VendorId">Delete</a>
+    -->
+        </td>
         </tr>
 }
     </tbody>
 </table>
+
+

@@ -6,5 +6,19 @@
 
 //Initialising DataTables
 $(document).ready(function () {
-    $('#table_inventory').DataTable();
+    var table1 = $('#table_inventory').DataTable({
+        responsive: true
+
+    });
+
+    table1.column(1).visible(false);
+    table1.column(3).visible(false);
+    table1.column(5).visible(false);
+    table1.column(6).visible(false);
+    table1.column(7).visible(false);
+    table1.column(8).visible(false);
+    table1.column(9).visible(false);
+    //table1.column(6).visible(false);
 });
+
+

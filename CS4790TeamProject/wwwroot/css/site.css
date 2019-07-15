@@ -91,6 +91,11 @@ li.nav-item {
     font-size:36px;
 }
 
+thead {
+    background-color: #343a40;
+    color:white;
+}
+
 /*Responsive*/
 /*@media only screen and (max-width:768px) {
     #navbarTitle {
@@ -118,5 +123,11 @@ li.nav-item {
 
     #userIcon {
         font-size:15px;
+    }
+}
+
+@media only screen and (max-width:768px) {
+    table, td, tr, thead, #tab-content, #tab-pane, tbody{
+        width:10px;
     }
 }

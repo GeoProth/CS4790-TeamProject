@@ -11,14 +11,19 @@ $(document).ready(function () {
 
     });
 
+
     table1.column(1).visible(false);
     table1.column(3).visible(false);
-    table1.column(5).visible(false);
+    //table1.column(5).visible(false);
     table1.column(6).visible(false);
     table1.column(7).visible(false);
     table1.column(8).visible(false);
     table1.column(9).visible(false);
     //table1.column(6).visible(false);
+
+
+    let today = new Date().toISOString().substr(0, 10);
+    document.querySelector("#today").value = today;
 });
 
 

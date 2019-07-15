@@ -5,9 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using CS4790TeamProject.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CS4790TeamProject.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         public IActionResult Index()

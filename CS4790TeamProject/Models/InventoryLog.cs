@@ -21,6 +21,9 @@ namespace CS4790TeamProject.Models
         public bool Reconciled { get; set; } 
 
         public string LastModifiedBy { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/YYYY}", ApplyFormatInEditMode = true)]
         public DateTime LastModifiedDate { get; set; }
         [ForeignKey("ItemID")]
         public virtual Item Item { get; set; }

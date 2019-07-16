@@ -60,6 +60,10 @@ body {
 /**
 ----Index Page-----------------
 */
+a.indexItems:hover {
+    background-color:ActiveBorder;
+}
+
 
 a.indexItems {
     color:black;

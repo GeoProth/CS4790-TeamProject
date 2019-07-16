@@ -101,24 +101,44 @@
         </table>
     </div>
     <div class="tab-pane" id="reorder_tab">
+        <br />
         <table id="table_inventory2" class="table table-striped table-bordered" style="width:100%">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>On Hand</th>
-                    <th>In Transit</th>
-                    <th>Reorder Part</th>
-                    <th>Reorder</th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ItemName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.OnhandQty)
+                    </th>
+                    <th>
+                        In transit
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ReorderQty)
+                    </th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ItemName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OnhandQty)
+                        </td>
+                        <td></td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ReorderQty)
+                        </td>
+                        <td>
+                            <a asp-action="Reorder" asp-route-id="@item.ItemId">Reorder</a>
+                        </td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>

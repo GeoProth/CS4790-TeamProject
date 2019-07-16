@@ -8,9 +8,11 @@
 $(document).ready(function () {
     var table1 = $('#table_inventory').DataTable({
         responsive: true
-
     });
 
+    var table2 = $('#table_inventory2').DataTable({
+        responsive: true
+    });
 
     table1.column(1).visible(false);
     table1.column(3).visible(false);

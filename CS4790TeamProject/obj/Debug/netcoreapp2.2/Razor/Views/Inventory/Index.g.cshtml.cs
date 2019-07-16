@@ -23,8 +23,13 @@ using CS4790TeamProject.Models;
 
 #line default
 #line hidden
+#line 3 "C:\Users\gprot\Desktop\CS4790\TeamProject\CS4790-TeamProject\CS4790TeamProject\Views\_ViewImports.cshtml"
+using CS4790TeamProject.Models.ViewModels;
+
+#line default
+#line hidden
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"6718ea2f2bdec88d002a9e2f08f4eda01cf451db", @"/Views/Inventory/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"4ee5fd99bc547497ff347ecd2ceb83c83045ba09", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"d70d7d54c44ef77a4a86b82a410f17318020d08d", @"/Views/_ViewImports.cshtml")]
     public class Views_Inventory_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<IEnumerable<CS4790TeamProject.Models.Item>>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-action", "Create", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -59,7 +64,7 @@ using CS4790TeamProject.Models;
             WriteLiteral("\r\n<br />\r\n\r\n<p>\r\n    ");
             EndContext();
             BeginContext(72, 103, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6718ea2f2bdec88d002a9e2f08f4eda01cf451db5207", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6718ea2f2bdec88d002a9e2f08f4eda01cf451db5398", async() => {
                 BeginContext(114, 57, true);
                 WriteLiteral("<i class=\"fa fa-plus-circle\" style=\"font-size:36px;\"></i>");
                 EndContext();
@@ -310,7 +315,7 @@ using CS4790TeamProject.Models;
             WriteLiteral("\r\n                        </td>\r\n                        <td>\r\n                            ");
             EndContext();
             BeginContext(3846, 57, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6718ea2f2bdec88d002a9e2f08f4eda01cf451db17912", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6718ea2f2bdec88d002a9e2f08f4eda01cf451db18103", async() => {
                 BeginContext(3895, 4, true);
                 WriteLiteral("Edit");
                 EndContext();
@@ -345,7 +350,7 @@ using CS4790TeamProject.Models;
             WriteLiteral(" |\r\n                            ");
             EndContext();
             BeginContext(3935, 63, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6718ea2f2bdec88d002a9e2f08f4eda01cf451db20314", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6718ea2f2bdec88d002a9e2f08f4eda01cf451db20505", async() => {
                 BeginContext(3987, 7, true);
                 WriteLiteral("Details");
                 EndContext();
@@ -380,7 +385,7 @@ using CS4790TeamProject.Models;
             WriteLiteral(" |\r\n                            ");
             EndContext();
             BeginContext(4030, 61, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6718ea2f2bdec88d002a9e2f08f4eda01cf451db22722", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6718ea2f2bdec88d002a9e2f08f4eda01cf451db22913", async() => {
                 BeginContext(4081, 6, true);
                 WriteLiteral("Delete");
                 EndContext();
@@ -501,7 +506,7 @@ using CS4790TeamProject.Models;
             WriteLiteral("\r\n                        </td>\r\n                        <td>\r\n                            ");
             EndContext();
             BeginContext(5580, 63, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6718ea2f2bdec88d002a9e2f08f4eda01cf451db29287", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6718ea2f2bdec88d002a9e2f08f4eda01cf451db29478", async() => {
                 BeginContext(5632, 7, true);
                 WriteLiteral("Reorder");
                 EndContext();

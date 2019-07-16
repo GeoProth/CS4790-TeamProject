@@ -23,13 +23,18 @@ using CS4790TeamProject.Models;
 
 #line default
 #line hidden
+#line 3 "C:\Users\gprot\Desktop\CS4790\TeamProject\CS4790-TeamProject\CS4790TeamProject\Views\_ViewImports.cshtml"
+using CS4790TeamProject.Models.ViewModels;
+
+#line default
+#line hidden
 #line 1 "C:\Users\gprot\Desktop\CS4790\TeamProject\CS4790-TeamProject\CS4790TeamProject\Views\Shared\_LoginPartial.cshtml"
 using Microsoft.AspNetCore.Identity;
 
 #line default
 #line hidden
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"bce07e2cfe43ffa7c92d98d805aa85b09a2bae8a", @"/Views/Shared/_LoginPartial.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"4ee5fd99bc547497ff347ecd2ceb83c83045ba09", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"d70d7d54c44ef77a4a86b82a410f17318020d08d", @"/Views/_ViewImports.cshtml")]
     public class Views_Shared__LoginPartial : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("class", new global::Microsoft.AspNetCore.Html.HtmlString("form-inline"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -78,7 +83,7 @@ using Microsoft.AspNetCore.Identity;
             WriteLiteral("        <div class=\"nav-item float-right\" style=\"display:inline;\">\r\n            ");
             EndContext();
             BeginContext(276, 346, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "bce07e2cfe43ffa7c92d98d805aa85b09a2bae8a6841", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "bce07e2cfe43ffa7c92d98d805aa85b09a2bae8a7032", async() => {
                 BeginContext(419, 196, true);
                 WriteLiteral("\r\n                <button type=\"submit\" class=\"nav-link btn btn-link text-light\" style=\"font-family:\'Comic Sans MS\';\"><i id=\"userIcon\" class=\"fa fa-user-circle-o\"></i>Logout</button>\r\n            ");
                 EndContext();
@@ -118,7 +123,7 @@ using Microsoft.AspNetCore.Identity;
             WriteLiteral("\r\n        </div>\r\n        <br/>\r\n        <div class=\"nav-item float-right\" style=\"display:inline;\">\r\n            ");
             EndContext();
             BeginContext(735, 144, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "bce07e2cfe43ffa7c92d98d805aa85b09a2bae8a10202", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "bce07e2cfe43ffa7c92d98d805aa85b09a2bae8a10393", async() => {
                 BeginContext(856, 18, false);
 #line 16 "C:\Users\gprot\Desktop\CS4790\TeamProject\CS4790-TeamProject\CS4790TeamProject\Views\Shared\_LoginPartial.cshtml"
                                                                                                                                Write(User.Identity.Name);
@@ -163,7 +168,7 @@ using Microsoft.AspNetCore.Identity;
             WriteLiteral("        <div class=\"nav-item\">\r\n            ");
             EndContext();
             BeginContext(967, 130, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "bce07e2cfe43ffa7c92d98d805aa85b09a2bae8a12753", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "bce07e2cfe43ffa7c92d98d805aa85b09a2bae8a12944", async() => {
                 BeginContext(1044, 49, true);
                 WriteLiteral("<i class=\"fa fa-user-circle-o\" id=\"userIcon\"></i>");
                 EndContext();

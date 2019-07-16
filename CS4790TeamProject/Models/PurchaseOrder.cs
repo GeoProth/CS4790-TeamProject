@@ -14,6 +14,7 @@ namespace CS4790TeamProject.Models
         //foreign key
         [Display(Name="Vendor ID")]
         public int VendorID { get; set; }
+        [Display(Name="Order Date")]
         public DateTime DateOrdered { get; set; }
         [Display(Name="Vendor PO")]
         public string VendorPO { get; set; }

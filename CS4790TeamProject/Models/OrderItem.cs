@@ -21,6 +21,9 @@ namespace CS4790TeamProject.Models
         public decimal Price { get; set; }
         [Display(Name="Qty Ordered")]
         public int QuantityOrdered { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/YYYY}", ApplyFormatInEditMode = true)]
+        [Display(Name="Delivery Date")]
         public DateTime DateDelivered { get; set; }
         public string LastModifiedBy { get; set; }
         [DataType(DataType.Date)]

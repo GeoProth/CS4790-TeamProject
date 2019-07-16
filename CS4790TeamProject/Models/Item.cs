@@ -23,7 +23,7 @@ namespace CS4790TeamProject.Models
         public int ReorderQty { get; set; }
         [Display(Name = "Max Quantity")]
         public int MaxQty { get; set; }
-        public int MeasureID { get; set; }
+        public int? MeasureID { get; set; }
         [Display(Name = "Measure Amount")]
         public decimal MeasureAmnt { get; set; }
         [Display(Name = "Last Modified By")]
@@ -33,8 +33,8 @@ namespace CS4790TeamProject.Models
         [DisplayFormat(DataFormatString = "{0:MM/dd/YYYY}", ApplyFormatInEditMode = true)]
         public DateTime LastModifiedDate { get; set; }
 
-        [ForeignKey("MeasureID")]
-        public virtual Measures Measures { get; set; }
+        //[ForeignKey("MeasureID")]
+       // public virtual Measures Measures { get; set; }
 
         public ICollection<OrderItem> OrderItems { get; set; }
         public ICollection<AssemblyHistory> AssemblyHistories { get; set; }

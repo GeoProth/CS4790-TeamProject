@@ -13,6 +13,6 @@ namespace CS4790TeamProject.Models
         [Display(Name="Metric")]
         public string MeasureName { get; set; }
         
-        public virtual Item Item { get; set; }
+        ///public virtual Item Item { get; set; }
     }
 }

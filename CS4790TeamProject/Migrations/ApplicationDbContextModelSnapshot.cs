@@ -106,16 +106,13 @@ namespace CS4790TeamProject.Migrations
 
                     b.Property<decimal>("MeasureAmnt");
 
-                    b.Property<int>("MeasureID");
+                    b.Property<int?>("MeasureID");
 
                     b.Property<int>("OnhandQty");
 
                     b.Property<int>("ReorderQty");
 
                     b.HasKey("ItemId");
-
-                    b.HasIndex("MeasureID")
-                        .IsUnique();
 
                     b.ToTable("Item");
                 });
@@ -440,14 +437,6 @@ namespace CS4790TeamProject.Migrations
                     b.HasOne("CS4790TeamProject.Models.Item", "Item")
                         .WithMany("InventoryLogs")
                         .HasForeignKey("ItemID")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("CS4790TeamProject.Models.Item", b =>
-                {
-                    b.HasOne("CS4790TeamProject.Models.Measures", "Measures")
-                        .WithOne("Item")
-                        .HasForeignKey("CS4790TeamProject.Models.Item", "MeasureID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

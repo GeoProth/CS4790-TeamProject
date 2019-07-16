@@ -23,10 +23,14 @@ namespace CS4790TeamProject.Models
         public int QuantityOrdered { get; set; }
         public DateTime DateDelivered { get; set; }
         public string LastModifiedBy { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/YYYY}", ApplyFormatInEditMode = true)]
         public DateTime LastModifiedDate { get; set; }
-        [ForeignKey("ItemID")]//local key (singular) that points to the Primary key in  Item table (plural)
-        public virtual Item Items { get; set; }
+        [ForeignKey("ItemID")]//local key (singular) that points to the Primary key in  Item table (singular)
+        public virtual Item Item { get; set; }
         [ForeignKey("PurchaseOrderID")]//local key (singular) that points to the Primary key in  PurchaseOrder table (Singular)
         public virtual PurchaseOrder PurchaseOrder { get; set; }
+
+        public ICollection<RecievedItems> RecievedItems { get; set; }
     }
 }

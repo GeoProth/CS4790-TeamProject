@@ -22,6 +22,8 @@ namespace CS4790TeamProject.Models
 
         [ForeignKey("VendorID")] //local key (singular) that points to the Primary key in  Vendor table 
         public virtual Vendor Vendor { get; set; }
+
+        public ICollection<OrderItem> OrderItems { get; set; }
         
     }
 }

@@ -12,5 +12,7 @@ namespace CS4790TeamProject.Models
         public int MeasureId { get; set; }
         [Display(Name="Metric")]
         public string MeasureName { get; set; }
+        
+        public virtual Item Item { get; set; }
     }
 }

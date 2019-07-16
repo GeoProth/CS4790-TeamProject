@@ -15,6 +15,8 @@ namespace CS4790TeamProject.Models
         [Display(Name="Vendor Address")]
         public string VendorAddress { get; set; }
         public string LastModifiedBy { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/YYYY}", ApplyFormatInEditMode = true)]
         public DateTime LastModifiedDate { get; set; }
 
 

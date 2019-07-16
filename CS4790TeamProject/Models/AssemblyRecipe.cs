@@ -14,5 +14,7 @@ namespace CS4790TeamProject.Models
         public string RecipeName { get; set; }
         [Display(Name = "Assembly Item")]
         public int ItemID { get; set; }
+
+        public ICollection<RecipeLine> RecipeLines { get; set; }
     }
 }

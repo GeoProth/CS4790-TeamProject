@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -28,8 +29,20 @@ namespace CS4790TeamProject.Models
         [Display(Name = "Last Modified By")]
         public string LastModifiedBy { get; set; }
         [Display(Name = "Last Modified Date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/YYYY}", ApplyFormatInEditMode = true)]
         public DateTime LastModifiedDate { get; set; }
 
+        [ForeignKey("MeasureID")]
+        public virtual Measures Measures { get; set; }
+
+        public ICollection<OrderItem> OrderItems { get; set; }
+        public ICollection<AssemblyHistory> AssemblyHistories { get; set; }
+
+        public ICollection<InventoryLog> InventoryLogs { get; set; }
+        public ICollection<AssemblyRecipe> AssemblyRecipes { get; set; }
+
+        public ICollection<RecipeLine> RecipeLines { get; set; }
         
     }
 }

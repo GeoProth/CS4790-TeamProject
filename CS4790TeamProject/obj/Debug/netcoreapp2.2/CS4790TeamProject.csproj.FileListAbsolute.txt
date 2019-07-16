@@ -388,3 +388,9 @@ C:\Users\Muhlestein\Documents\GitHub\CS4790-TeamProject\CS4790TeamProject\obj\De
 C:\Users\Muhlestein\Documents\GitHub\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\CS4790TeamProject.dll
 C:\Users\Muhlestein\Documents\GitHub\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\CS4790TeamProject.pdb
 C:\Users\Muhlestein\Documents\GitHub\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\CS4790TeamProject.csproj.CopyComplete
+C:\Users\reddt\Source\Repos\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\Assembly\Create.g.cshtml.cs
+C:\Users\reddt\Source\Repos\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\Assembly\Delete.g.cshtml.cs
+C:\Users\reddt\Source\Repos\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\Assembly\Details.g.cshtml.cs
+C:\Users\reddt\Source\Repos\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\Assembly\Edit.g.cshtml.cs
+C:\Users\reddt\Source\Repos\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\Assembly\Index.g.cshtml.cs
+C:\Users\reddt\Source\Repos\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\Inventory\Reorder.g.cshtml.cs

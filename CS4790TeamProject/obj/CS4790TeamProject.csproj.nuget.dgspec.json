@@ -1,26 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Muhlestein\\Documents\\GitHub\\CS4790-TeamProject\\CS4790TeamProject\\CS4790TeamProject.csproj": {}
+    "C:\\Users\\reddt\\Source\\Repos\\CS4790-TeamProject\\CS4790TeamProject\\CS4790TeamProject.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Muhlestein\\Documents\\GitHub\\CS4790-TeamProject\\CS4790TeamProject\\CS4790TeamProject.csproj": {
+    "C:\\Users\\reddt\\Source\\Repos\\CS4790-TeamProject\\CS4790TeamProject\\CS4790TeamProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Muhlestein\\Documents\\GitHub\\CS4790-TeamProject\\CS4790TeamProject\\CS4790TeamProject.csproj",
+        "projectUniqueName": "C:\\Users\\reddt\\Source\\Repos\\CS4790-TeamProject\\CS4790TeamProject\\CS4790TeamProject.csproj",
         "projectName": "CS4790TeamProject",
-        "projectPath": "C:\\Users\\Muhlestein\\Documents\\GitHub\\CS4790-TeamProject\\CS4790TeamProject\\CS4790TeamProject.csproj",
-        "packagesPath": "C:\\Users\\Muhlestein\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Muhlestein\\Documents\\GitHub\\CS4790-TeamProject\\CS4790TeamProject\\obj\\",
+        "projectPath": "C:\\Users\\reddt\\Source\\Repos\\CS4790-TeamProject\\CS4790TeamProject\\CS4790TeamProject.csproj",
+        "packagesPath": "C:\\Users\\reddt\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\reddt\\Source\\Repos\\CS4790-TeamProject\\CS4790TeamProject\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Muhlestein\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\reddt\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp2.2"

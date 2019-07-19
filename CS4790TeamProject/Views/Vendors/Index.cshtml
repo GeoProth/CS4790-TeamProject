@@ -30,6 +30,7 @@
             </th>
             -->
             <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -57,6 +58,9 @@
     <a asp-action="Delete" asp-route-id="@item.VendorId">Delete</a>
     -->
         </td>
+            <td>
+                <a asp-action="History" asp-route-id="@item.VendorId">Purchase History</a>
+            </td>
         </tr>
 }
     </tbody>

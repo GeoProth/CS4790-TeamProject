@@ -14,6 +14,22 @@ $(document).ready(function () {
         responsive: true
     });
 
+    var table3 = $('#table_orders').DataTable({
+        responsive: true
+    });
+
+    var table4 = $('#table_orders2').DataTable({
+        responsive: true
+    });
+
+    var table5 = $('#table_orders3').DataTable({
+        responsive: true
+    });
+
+    var table6 = $('#table_orders4').DataTable({
+        responsive: true
+    });
+
     table1.column(1).visible(false);
     table1.column(3).visible(false);
     //table1.column(5).visible(false);
@@ -26,6 +42,8 @@ $(document).ready(function () {
 
     let today = new Date().toISOString().substr(0, 10);
     document.querySelector("#today").value = today;
+    document.querySelector("#today2").value = today;
+
 });
 
 

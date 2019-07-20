@@ -91,9 +91,9 @@
                             @Html.DisplayFor(modelItem => item.LastModifiedDate)
                         </td>
                         <td>
-                            <a asp-action="Edit" asp-route-id="@item.ItemId">Edit</a> |
-                            <a asp-action="Details" asp-route-id="@item.ItemId">Details</a> |
-                            <a asp-action="Delete" asp-route-id="@item.ItemId">Delete</a>
+                            <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.ItemId">Edit</a> 
+                            <a class="btn btn-info" asp-action="Details" asp-route-id="@item.ItemId">Details</a> 
+                            <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.ItemId">Delete</a>
                         </td>
                     </tr>
                 }
@@ -135,7 +135,7 @@
                             @Html.DisplayFor(modelItem => item.ReorderQty)
                         </td>
                         <td>
-                            <a asp-action="Reorder" asp-route-id="@item.ItemId">Reorder</a>
+                            <a class="btn btn-primary" asp-action="Reorder" asp-route-id="@item.ItemId">Reorder</a>
                         </td>
                     </tr>
                 }

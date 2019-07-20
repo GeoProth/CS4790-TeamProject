@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CS4790TeamProject.Data;
 using CS4790TeamProject.Models;
+using CS4790TeamProject.Models.ViewModels;
 
 namespace CS4790TeamProject.Views.Vendors
 {
@@ -44,16 +45,16 @@ namespace CS4790TeamProject.Views.Vendors
         }
 
         // Get; Vendors/Purchase History
-        public async Task<IActionResult> History(int id)
+        public async Task<IActionResult> History(VendorHistoryViewModel model, int id)
         {
-            var vendor = await _context.Vendor
-                .FirstOrDefaultAsync(m => m.VendorId == id);
-            if (vendor == null)
+            var orders = await _context.PurchaseOrder
+                .FirstOrDefaultAsync(m => m.PurchaseOrderId == id);
+            if (orders == null)
             {
                 return NotFound();
             }
 
-            return View(vendor);
+            return View(orders);
                
         }
 

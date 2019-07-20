@@ -12,6 +12,8 @@
         <a asp-action="Create"><i class="fa fa-plus-circle" style="font-size:48px;"></i></a>
     </p>
 </div>
+
+
 <table class="table">
     <thead>
         <tr>
@@ -34,35 +36,36 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.VendorName)
-            </td>
-            <!---
-    <td>
-        @Html.DisplayFor(modelItem => item.VendorAddress)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.LastModifiedBy)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.LastModifiedDate)
-    </td>
-    -->
-        <td>
-            <a asp-action="Details" asp-route-id="@item.VendorId">Details</a>
-            <!--
-    <a asp-action="Edit" asp-route-id="@item.VendorId">Edit</a> |
-    <a asp-action="Details" asp-route-id="@item.VendorId">Details</a> |
-    <a asp-action="Delete" asp-route-id="@item.VendorId">Delete</a>
-    -->
-        </td>
-            <td>
-                <a asp-action="History" asp-route-id="@item.VendorId">Purchase History</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VendorName)
+                </td>
+                <!---
+                <td>
+                    @Html.DisplayFor(modelItem => item.VendorAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastModifiedBy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastModifiedDate)
+                </td>
+                -->
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.VendorId">Details</a>
+                    <!--
+                    <a asp-action="Edit" asp-route-id="@item.VendorId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.VendorId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.VendorId">Delete</a>
+                    -->
+                </td>
+                <td>
+                    <a asp-action="History" asp-route-id="@item.VendorId">Purchase History</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
 

@@ -5,45 +5,90 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
+<h1 style="text-align:center">Order Details</h1>
 
-<div>
-    <h4>PurchaseOrder</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DateOrdered)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DateOrdered)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.VendorPO)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.VendorPO)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LastModifiedBy)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LastModifiedBy)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LastModifiedDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LastModifiedDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Vendor)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Vendor.VendorId)
-        </dd>
-    </dl>
+</br>
+
+<div class="container">
+    <h5>
+        @Html.DisplayNameFor(model => Model.Vendor.VendorName):
+        @Html.DisplayFor(modle => Model.Vendor.VendorName)
+    </h5>
+    <h5>
+        Status: ???
+    </h5>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.PurchaseOrderId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+<div class="container">
+    <h5>
+        @Html.DisplayNameFor(model => Model.DateOrdered):
+        @Html.DisplayFor(model => Model.DateOrdered)
+    </h5>
+    <h5>
+        Delivery Date: ???
+    </h5>
 </div>
+<table class="table table-striped table-bordered" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                Item
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th>
+                U/M
+            </th>
+            <th>
+                Price
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                ??
+            </td>
+            <td>
+                ??
+            </td>
+            <td>
+                ??
+            </td>
+            <td>
+               ??
+            </td>
+        </tr>
+        @* @foreach (var item in Model.OrderItems)
+         {
+             <tr>
+                 <td>
+                     @Html.DisplayFor(modelItem => item.Item.ItemName)
+                 </td>
+                 <td>
+                     @Html.DisplayFor(modelItem => item.QuantityOrdered)
+                 </td>
+                 <td>
+                     ??
+                 </td>
+                 <td>
+                     @Html.DisplayFor(modelItem => item.Price)
+                 </td>
+             </tr>
+        } *@
+    </tbody>
+</table>
+<div>
+    <a asp-action="Index" class="btn btn-primary btn-sm" style="padding-right:5em">Back</a>
+    <a asp-action="Edit" asp-route-id="@Model.PurchaseOrderId" class="btn btn-success btn-sm" style="padding-right:5em">Edit</a>
+    <a asp-action="Delete" asp-route-id="@Model.PurchaseOrderId" class="btn btn-danger btn-sm">Delete</a>
+</div>
+
+<style type="text/css">
+    .container {
+        display: flex;
+        justify-content: space-between;
+        margin-right: 10em;
+    }
+  
+</style>

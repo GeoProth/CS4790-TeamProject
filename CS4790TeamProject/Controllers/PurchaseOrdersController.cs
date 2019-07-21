@@ -23,6 +23,7 @@ namespace CS4790TeamProject.Controllers
         {
 
             var orders = from i in _context.PurchaseOrder.Include(p => p.Vendor)
+                         .Include(p => p.OrderItems)
                         select i;
 
 
@@ -81,7 +82,7 @@ namespace CS4790TeamProject.Controllers
         // GET: PurchaseOrders/Create
         public IActionResult Create()
         {
-            ViewData["VendorID"] = new SelectList(_context.Vendor, "VendorId", "VendorId");
+            ViewData["VendorID"] = new SelectList(_context.Vendor, "VendorId", "VendorName");
             return View();
         }
 

@@ -8,18 +8,53 @@
 <h1 style="text-align:center">Receive</h1>
 
 </br>
+<h4 style="float:left">
+    @Html.DisplayNameFor(model => Model.Vendor):
+    @Html.DisplayFor(model => Model.Vendor.VendorName)
+</h4>
+<h4 style="float:right">
+    @Html.DisplayNameFor(model => Model.DateOrdered):
+    @Html.DisplayFor(model => Model.DateOrdered)
+</h4>
+</br>
+<input type="checkbox" onClick="checkAll()" id="myCheckAll" />Select All
 
-<div class="vendorInfo">
-    <div class="vendorName">
-        @Html.DisplayNameFor(model => Model.Vendor):
-        @Html.DisplayFor(model => Model.Vendor.VendorName)
+<form asp-action="Receive" method="post">
+    <input type="hidden" asp-for="PurchaseOrderId" />
+    <table id="myTable">
+        @if (Model.OrderItems.Count() > 0)
+        {
+        <tbody>
+            @foreach (OrderItem oi in Model.OrderItems)
+            {
+                <tr class="form-group">
+                    <td><input type="checkbox"/></td>
+                    <td>@Html.DisplayFor(model => oi.Item.ItemName)</td>
+                    <td>@Html.TextBoxFor(model => oi.QuantityOrdered)</td>
+                </tr>
+
+            }
+        </tbody>
+        }
+    </table>
+    <div class="text-center">
+        <button class="btn btn-succes btn-sm" type="submit">Receive</button>
+        <a asp-action="Index" class="btn btn-primary btn-sm">Back</a>
     </div>
-    <div class="orderDate">
-        @Html.DisplayNameFor(model => Model.DateOrdered):
-        @Html.DisplayFor(model => Model.DateOrdered)
-    </div>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.PurchaseOrderId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+</form>
+
+<script type="text/javascript">
+    $('#myCheckAll').click(function () {
+        var chk = $(this).is(':checked');
+        var cnt = $('input[type=checkbox]', "#myTable").length;
+        $('input[type=checkbox]', "#myTable").each(function () {
+            if (chk) {
+                $(this).attr('checked', 'checked');
+            }
+            else {
+                $(this).removeAttr('checked');
+            }
+        });
+    });
+
+</script>

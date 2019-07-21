@@ -15,6 +15,8 @@ namespace CS4790TeamProject.Models
         [Display(Name="Vendor ID")]
         public int VendorID { get; set; }
         [Display(Name="Order Date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DateOrdered { get; set; }
         [Display(Name="Vendor PO")]
         public string VendorPO { get; set; }

@@ -27,27 +27,7 @@
 
                 @foreach (var item in Model)
                 {
-                    <div class="card">
-
-                        <div class="card-body">
-                            <div>
-                                @Html.DisplayFor(modelItem => item.Vendor.VendorName)
-                            </div>
-                            <div>
-                                @Html.DisplayFor(modelItem => item.DateOrdered)
-                            </div>
-                            <div>
-                                Null
-                            </div>
-                            <div>
-                                <a asp-action="Edit" asp-route-id="@item.PurchaseOrderId">Edit</a> |
-                                <a asp-action="Details" asp-route-id="@item.PurchaseOrderId">Details</a> |
-                                <a asp-action="Delete" asp-route-id="@item.PurchaseOrderId">Delete</a>
-                            </div>
-                        </div>
-
-                    </div>
-                    <br />
+                    @Html.Partial("PurchaseOrderSummary", item);
                 }
 
             </div>

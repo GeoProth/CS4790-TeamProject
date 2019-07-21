@@ -19,13 +19,27 @@ namespace CS4790TeamProject.Controllers
             _context = context;
         }
 
-        // GET: PurchaseOrders
+        public async Task<IActionResult> Index(string searchString)
+        {
+
+            var orders = from i in _context.PurchaseOrder.Include(p => p.Vendor)
+                        select i;
+
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                orders = orders.Where(s => s.Vendor.VendorName.Contains(searchString));
+            }
+
+            return View(await orders.ToListAsync());
+        }
+     /*   // GET: PurchaseOrders
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.PurchaseOrder.Include(p => p.Vendor);
             return View(await applicationDbContext.ToListAsync());
         }
-
+*/
         // GET: PurchaseOrders/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -37,6 +51,25 @@ namespace CS4790TeamProject.Controllers
             var purchaseOrder = await _context.PurchaseOrder
                 .Include(p => p.Vendor)
                 .FirstOrDefaultAsync(m => m.PurchaseOrderId == id);
+            if (purchaseOrder == null)
+            {
+                return NotFound();
+            }
+
+            return View(purchaseOrder);
+        }
+
+        //GET: PurchaseOrders/Receive/5
+        public async Task<IActionResult> Receive(int? id)
+        {
+            if(id == null)
+            {
+                return NotFound();
+            }
+            var purchaseOrder = await _context.PurchaseOrder
+                .Include(p => p.Vendor)
+                .FirstOrDefaultAsync(m => m.PurchaseOrderId == id);
+
             if (purchaseOrder == null)
             {
                 return NotFound();

@@ -44,19 +44,21 @@ namespace CS4790TeamProject.Views.Vendors
             return View(vendor);
         }
 
-        // Get; Vendors/Purchase History
+        // Get; Vendors/Purchase History 
         public async Task<IActionResult> History(VendorHistoryViewModel model, int id)
         {
-            var orders = await _context.PurchaseOrder
-                .FirstOrDefaultAsync(m => m.PurchaseOrderId == id);
-            if (orders == null)
-            {
-                return NotFound();
-            }
+            //var orders = await _context.PurchaseOrder
+            //    .FirstOrDefaultAsync(m => m.PurchaseOrderId == id);
 
-            return View(orders);
-               
+            //if (orders == null)
+            // {
+            //     return NotFound();
+            // }
+
+            //return View(orders);
+            return View();
         }
+        
 
         // GET: Vendors/Create
         public IActionResult Create()

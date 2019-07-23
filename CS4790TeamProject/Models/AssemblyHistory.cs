@@ -19,7 +19,7 @@ namespace CS4790TeamProject.Models
         public string Notes { get; set; }
         public string LastModifiedBy { get; set; }
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:MM/dd/YYYY}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime LastModifiedDate { get; set; }
 
         [ForeignKey("ItemID")]

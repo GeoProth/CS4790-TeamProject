@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CS4790TeamProject.Migrations
 {
-    public partial class FixedEntityRelationships : Migration
+    public partial class FixedEntityRelationShips : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -45,28 +45,6 @@ namespace CS4790TeamProject.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Item",
-                columns: table => new
-                {
-                    ItemId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ItemName = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    OnhandQty = table.Column<int>(nullable: false),
-                    ListRetailCost = table.Column<decimal>(nullable: false),
-                    ReorderQty = table.Column<int>(nullable: false),
-                    MaxQty = table.Column<int>(nullable: false),
-                    MeasureID = table.Column<int>(nullable: true),
-                    MeasureAmnt = table.Column<decimal>(nullable: false),
-                    LastModifiedBy = table.Column<string>(nullable: true),
-                    LastModifiedDate = table.Column<DateTime>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Item", x => x.ItemId);
                 });
 
             migrationBuilder.CreateTable(
@@ -205,6 +183,58 @@ namespace CS4790TeamProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Item",
+                columns: table => new
+                {
+                    ItemId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ItemName = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    OnhandQty = table.Column<int>(nullable: false),
+                    ListRetailCost = table.Column<decimal>(nullable: false),
+                    ReorderQty = table.Column<int>(nullable: false),
+                    MaxQty = table.Column<int>(nullable: false),
+                    MeasureID = table.Column<int>(nullable: false),
+                    MeasureAmnt = table.Column<decimal>(nullable: false),
+                    LastModifiedBy = table.Column<string>(nullable: true),
+                    LastModifiedDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Item", x => x.ItemId);
+                    table.ForeignKey(
+                        name: "FK_Item_Measures_MeasureID",
+                        column: x => x.MeasureID,
+                        principalTable: "Measures",
+                        principalColumn: "MeasureId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PurchaseOrder",
+                columns: table => new
+                {
+                    PurchaseOrderId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    VendorID = table.Column<int>(nullable: false),
+                    DateOrdered = table.Column<DateTime>(nullable: false),
+                    VendorPO = table.Column<string>(nullable: true),
+                    Received = table.Column<bool>(nullable: false),
+                    LastModifiedBy = table.Column<string>(nullable: true),
+                    LastModifiedDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PurchaseOrder", x => x.PurchaseOrderId);
+                    table.ForeignKey(
+                        name: "FK_PurchaseOrder_Vendor_VendorID",
+                        column: x => x.VendorID,
+                        principalTable: "Vendor",
+                        principalColumn: "VendorId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AssemblyHistory",
                 columns: table => new
                 {
@@ -273,25 +303,33 @@ namespace CS4790TeamProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PurchaseOrder",
+                name: "OrderItem",
                 columns: table => new
                 {
-                    PurchaseOrderId = table.Column<int>(nullable: false)
+                    OrderItemId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    VendorID = table.Column<int>(nullable: false),
-                    DateOrdered = table.Column<DateTime>(nullable: false),
-                    VendorPO = table.Column<string>(nullable: true),
+                    ItemID = table.Column<int>(nullable: false),
+                    PurchaseOrderID = table.Column<int>(nullable: false),
+                    VendorSKU = table.Column<string>(nullable: true),
+                    Price = table.Column<decimal>(nullable: false),
+                    QuantityOrdered = table.Column<int>(nullable: false),
                     LastModifiedBy = table.Column<string>(nullable: true),
                     LastModifiedDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PurchaseOrder", x => x.PurchaseOrderId);
+                    table.PrimaryKey("PK_OrderItem", x => x.OrderItemId);
                     table.ForeignKey(
-                        name: "FK_PurchaseOrder_Vendor_VendorID",
-                        column: x => x.VendorID,
-                        principalTable: "Vendor",
-                        principalColumn: "VendorId",
+                        name: "FK_OrderItem_Item_ItemID",
+                        column: x => x.ItemID,
+                        principalTable: "Item",
+                        principalColumn: "ItemId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_OrderItem_PurchaseOrder_PurchaseOrderID",
+                        column: x => x.PurchaseOrderID,
+                        principalTable: "PurchaseOrder",
+                        principalColumn: "PurchaseOrderId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -325,38 +363,6 @@ namespace CS4790TeamProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "OrderItem",
-                columns: table => new
-                {
-                    OrderItemId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ItemID = table.Column<int>(nullable: false),
-                    PurchaseOrderID = table.Column<int>(nullable: false),
-                    VendorSKU = table.Column<string>(nullable: true),
-                    Price = table.Column<decimal>(nullable: false),
-                    QuantityOrdered = table.Column<int>(nullable: false),
-                    DateDelivered = table.Column<DateTime>(nullable: false),
-                    LastModifiedBy = table.Column<string>(nullable: true),
-                    LastModifiedDate = table.Column<DateTime>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_OrderItem", x => x.OrderItemId);
-                    table.ForeignKey(
-                        name: "FK_OrderItem_Item_ItemID",
-                        column: x => x.ItemID,
-                        principalTable: "Item",
-                        principalColumn: "ItemId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_OrderItem_PurchaseOrder_PurchaseOrderID",
-                        column: x => x.PurchaseOrderID,
-                        principalTable: "PurchaseOrder",
-                        principalColumn: "PurchaseOrderId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "RecievedItems",
                 columns: table => new
                 {
@@ -365,6 +371,7 @@ namespace CS4790TeamProject.Migrations
                     OrderItemID = table.Column<int>(nullable: false),
                     QuantityReceived = table.Column<int>(nullable: false),
                     Notes = table.Column<string>(nullable: true),
+                    DateDelivered = table.Column<DateTime>(nullable: false),
                     LastModifiedBy = table.Column<string>(nullable: true),
                     LastModifiedDate = table.Column<DateTime>(nullable: false)
                 },
@@ -434,6 +441,11 @@ namespace CS4790TeamProject.Migrations
                 column: "ItemID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Item_MeasureID",
+                table: "Item",
+                column: "MeasureID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_OrderItem_ItemID",
                 table: "OrderItem",
                 column: "ItemID");
@@ -488,9 +500,6 @@ namespace CS4790TeamProject.Migrations
                 name: "InventoryLog");
 
             migrationBuilder.DropTable(
-                name: "Measures");
-
-            migrationBuilder.DropTable(
                 name: "RecievedItems");
 
             migrationBuilder.DropTable(
@@ -516,6 +525,9 @@ namespace CS4790TeamProject.Migrations
 
             migrationBuilder.DropTable(
                 name: "Vendor");
+
+            migrationBuilder.DropTable(
+                name: "Measures");
         }
     }
 }

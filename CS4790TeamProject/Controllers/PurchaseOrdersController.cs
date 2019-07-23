@@ -7,13 +7,14 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CS4790TeamProject.Data;
 using CS4790TeamProject.Models;
+using CS4790TeamProject.Models.ViewModels;
 
 namespace CS4790TeamProject.Controllers
 {
     public class PurchaseOrdersController : Controller
     {
         private readonly ApplicationDbContext _context;
-
+       // private readonly OrdersViewModel
         public PurchaseOrdersController(ApplicationDbContext context)
         {
             _context = context;

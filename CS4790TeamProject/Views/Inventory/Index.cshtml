@@ -121,7 +121,17 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model)
+                @{ 
+                    List<CS4790TeamProject.Models.Item> reorderItems = new List<CS4790TeamProject.Models.Item>();
+                    foreach (var item in Model)
+                    {
+                        if(item.OnhandQty <= item.ReorderQty)
+                        {
+                            reorderItems.Add(item);
+                        }
+                    }
+                }
+                @foreach (var item in reorderItems)
                 {
                     <tr>
                         <td>

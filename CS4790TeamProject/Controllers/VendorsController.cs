@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CS4790TeamProject.Data;
 using CS4790TeamProject.Models;
+using CS4790TeamProject.Models.ViewModels;
 
 namespace CS4790TeamProject.Views.Vendors
 {
@@ -41,6 +42,34 @@ namespace CS4790TeamProject.Views.Vendors
             }
 
             return View(vendor);
+        }
+
+        public async Task<IActionResult> History(int id)
+        {
+            var vendor = await _context.Vendor
+                .FirstOrDefaultAsync(m => m.VendorId == id);
+
+            var orders = new List<PurchaseOrder>();
+
+            //var orders = new List<PurchaseOrder>(await _context.PurchaseOrder.Where(n => n.VendorID == id));
+
+            /****
+            var order = await _context.PurchaseOrder
+                .FirstOrDefaultAsync(n => n.VendorID == id);
+                ****/
+
+           /***
+           var orders = await _context.PurchaseOrder
+               .Where(VendorId == id);
+               ***/
+
+            var VendorHistoryViewModel = new VendorHistoryViewModel
+            {
+                Vendors = vendor,
+                PurchaseOrders = orders
+            };
+
+            return View(VendorHistoryViewModel);
         }
 
         // GET: Vendors/Create

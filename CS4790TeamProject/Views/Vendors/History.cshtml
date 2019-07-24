@@ -1,0 +1,22 @@
+﻿@model  CS4790TeamProject.Models.ViewModels.VendorHistoryViewModel
+
+
+@{
+
+}
+
+<h2>This is a list of both vendors and purchase orders</h2>
+
+<h5>@Model.Vendors.VendorName</h5>
+
+
+<h5>List of more stuff</h5>
+
+<ul>
+    @foreach (var order in Model.PurchaseOrders)
+    {
+        <li>
+            @order.PurchaseOrderId;
+        </li>
+    }
+</ul>

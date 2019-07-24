@@ -17,9 +17,12 @@ namespace CS4790TeamProject.Models
         public int QuantityReceived { get; set; }
         [Display(Name="Notes")]
         public string Notes { get; set; }
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Date Delivered")]
+        public DateTime DateDelivered { get; set; }
         public string LastModifiedBy { get; set; }
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:MM/dd/YYYY}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime LastModifiedDate { get; set; }
         [ForeignKey("OrderItemID")]//local key (singular) that points to the Primary key in  OrderItem table 
         public virtual OrderItem OrderItem { get; set; }

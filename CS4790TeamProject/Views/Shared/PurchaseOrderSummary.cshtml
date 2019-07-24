@@ -1,0 +1,25 @@
+﻿@model CS4790TeamProject.Models.PurchaseOrder
+
+    <div class="card card-outline-primary m-1 p-1">
+        <div class="bg-faded p-1">
+            <h4>
+                @Model.Vendor.VendorName
+            </h4>
+            <h5 style="text-align: center">
+                Pending
+            </h5>
+        </div>
+        <div>
+            <span class="card-text p-1">
+                @Html.DisplayNameFor(model => Model.DateOrdered): 
+                @Html.DisplayFor(model => Model.DateOrdered)
+                <a asp-route-id="@Model.PurchaseOrderId" asp-action="Receive" class="btn btn-success btn-sm pull-right" style="margin-right:2em">Receive</a>
+               <a asp-route-id="@Model.PurchaseOrderId" asp-action="Details" class="btn btn-primary btn-sm pull-right" style="margin-right:5em">Details</a>
+            </span>
+        </div>
+        <div>
+            <span class="card-text p-1">
+                Delivery Date:  Null
+            </span>
+        </div>
+    </div>

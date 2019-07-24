@@ -5,46 +5,45 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
+<h1>Create Order</h1>
 
-<h4>PurchaseOrder</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="VendorID" class="control-label"></label>
-                <select asp-for="VendorID" class ="form-control" asp-items="ViewBag.VendorID"></select>
+                <label asp-for="Vendor.VendorName" class="control-label"></label>
+                <select asp-for="VendorID" class="form-control" asp-items="ViewBag.VendorID"></select>
             </div>
             <div class="form-group">
                 <label asp-for="DateOrdered" class="control-label"></label>
-                <input asp-for="DateOrdered" class="form-control" />
+                <input asp-for="DateOrdered" class="form-control" id="today" type="date" />
                 <span asp-validation-for="DateOrdered" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="VendorPO" class="control-label"></label>
-                <input asp-for="VendorPO" class="form-control" />
-                <span asp-validation-for="VendorPO" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LastModifiedBy" class="control-label"></label>
-                <input asp-for="LastModifiedBy" class="form-control" />
-                <span asp-validation-for="LastModifiedBy" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LastModifiedDate" class="control-label"></label>
-                <input asp-for="LastModifiedDate" class="form-control" />
-                <span asp-validation-for="LastModifiedDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="box-shadow" style="border:solid 1px">
+                <div class="form-group">
+                    <label asp-for="VendorPO" class="control-label"></label>
+                    <input asp-for="VendorPO" class="form-control" />
+                    <span asp-validation-for="VendorPO" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LastModifiedBy" class="control-label"></label>
+                    <input asp-for="LastModifiedBy" class="form-control" />
+                    <span asp-validation-for="LastModifiedBy" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LastModifiedDate" class="control-label"></label>
+                    <input asp-for="LastModifiedDate" class="form-control" id="today2" type="date" />
+                    <span asp-validation-for="LastModifiedDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" style="margin-right:5em" />
+                    <a asp-action="Index" class="btn btn-danger">Cancel</a>
+                </div>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 

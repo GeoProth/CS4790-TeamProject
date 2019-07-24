@@ -106,13 +106,15 @@ namespace CS4790TeamProject.Migrations
 
                     b.Property<decimal>("MeasureAmnt");
 
-                    b.Property<int?>("MeasureID");
+                    b.Property<int>("MeasureID");
 
                     b.Property<int>("OnhandQty");
 
                     b.Property<int>("ReorderQty");
 
                     b.HasKey("ItemId");
+
+                    b.HasIndex("MeasureID");
 
                     b.ToTable("Item");
                 });
@@ -135,8 +137,6 @@ namespace CS4790TeamProject.Migrations
                     b.Property<int>("OrderItemId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("DateDelivered");
 
                     b.Property<int>("ItemID");
 
@@ -173,6 +173,8 @@ namespace CS4790TeamProject.Migrations
 
                     b.Property<DateTime>("LastModifiedDate");
 
+                    b.Property<bool>("Received");
+
                     b.Property<int>("VendorID");
 
                     b.Property<string>("VendorPO");
@@ -189,6 +191,8 @@ namespace CS4790TeamProject.Migrations
                     b.Property<int>("ReceivedId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateDelivered");
 
                     b.Property<string>("LastModifiedBy");
 
@@ -437,6 +441,14 @@ namespace CS4790TeamProject.Migrations
                     b.HasOne("CS4790TeamProject.Models.Item", "Item")
                         .WithMany("InventoryLogs")
                         .HasForeignKey("ItemID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("CS4790TeamProject.Models.Item", b =>
+                {
+                    b.HasOne("CS4790TeamProject.Models.Measures", "Measure")
+                        .WithMany("Items")
+                        .HasForeignKey("MeasureID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

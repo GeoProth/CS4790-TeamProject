@@ -7,25 +7,41 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CS4790TeamProject.Data;
 using CS4790TeamProject.Models;
+using CS4790TeamProject.Models.ViewModels;
 
 namespace CS4790TeamProject.Controllers
 {
     public class PurchaseOrdersController : Controller
     {
         private readonly ApplicationDbContext _context;
-
+       // private readonly OrdersViewModel
         public PurchaseOrdersController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: PurchaseOrders
+        public async Task<IActionResult> Index(string searchString)
+        {
+
+            var orders = from i in _context.PurchaseOrder.Include(p => p.Vendor)
+                         .Include(p => p.OrderItems)
+                        select i;
+
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                orders = orders.Where(s => s.Vendor.VendorName.Contains(searchString));
+            }
+
+            return View(await orders.ToListAsync());
+        }
+     /*   // GET: PurchaseOrders
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.PurchaseOrder.Include(p => p.Vendor);
             return View(await applicationDbContext.ToListAsync());
         }
-
+*/
         // GET: PurchaseOrders/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -45,10 +61,29 @@ namespace CS4790TeamProject.Controllers
             return View(purchaseOrder);
         }
 
+        //GET: PurchaseOrders/Receive/5
+        public async Task<IActionResult> Receive(int? id)
+        {
+            if(id == null)
+            {
+                return NotFound();
+            }
+            var purchaseOrder = await _context.PurchaseOrder
+                .Include(p => p.Vendor)
+                .FirstOrDefaultAsync(m => m.PurchaseOrderId == id);
+
+            if (purchaseOrder == null)
+            {
+                return NotFound();
+            }
+
+            return View(purchaseOrder);
+        }
+
         // GET: PurchaseOrders/Create
         public IActionResult Create()
         {
-            ViewData["VendorID"] = new SelectList(_context.Vendor, "VendorId", "VendorId");
+            ViewData["VendorID"] = new SelectList(_context.Vendor, "VendorId", "VendorName");
             return View();
         }
 

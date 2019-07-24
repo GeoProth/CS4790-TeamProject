@@ -481,3 +481,5 @@ C:\Users\gprot\Desktop\CS4790\TeamProject\CS4790-TeamProject\CS4790TeamProject\o
 C:\Users\gprot\Desktop\CS4790\TeamProject\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\PurchaseOrders\Details.g.cshtml.cs
 C:\Users\gprot\Desktop\CS4790\TeamProject\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\PurchaseOrders\Edit.g.cshtml.cs
 C:\Users\gprot\Desktop\CS4790\TeamProject\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\PurchaseOrders\Index.g.cshtml.cs
+C:\Users\gprot\Desktop\CS4790\TeamProject\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\PurchaseOrders\Receive.g.cshtml.cs
+C:\Users\gprot\Desktop\CS4790\TeamProject\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\Shared\PurchaseOrderSummary.g.cshtml.cs

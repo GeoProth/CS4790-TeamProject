@@ -48,7 +48,7 @@ namespace CS4790TeamProject.Controllers
         // GET: PurchaseOrders/Create
         public IActionResult Create()
         {
-            ViewData["VendorID"] = new SelectList(_context.Vendor, "VendorId", "VendorId");
+            ViewData["VendorID"] = new SelectList(_context.Vendor, "VendorId", "VendorName");
             return View();
         }
 

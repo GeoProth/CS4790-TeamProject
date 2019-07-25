@@ -1,6 +1,4 @@
-﻿//Index
-
-@model IEnumerable<CS4790TeamProject.Models.PurchaseOrder>
+﻿@model IEnumerable<CS4790TeamProject.Models.PurchaseOrder>
 
 @{
     ViewData["Title"] = "Index";
@@ -29,7 +27,7 @@
 
             @foreach (var p in Model)
             {
-                @Html.PartialAsync("PurchaseOrderSummary", p);
+                @await Html.PartialAsync("PurchaseOrderSummary", p);
             }
 
         </div>

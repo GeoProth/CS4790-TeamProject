@@ -66,12 +66,14 @@ namespace CS4790TeamProject.Controllers
             return View(purchaseOrder);
         }
 
+        
         // GET: PurchaseOrders/Create
         public IActionResult Create()
         {
             ViewData["VendorID"] = new SelectList(_context.Vendor, "VendorId", "VendorName");
             return View();
         }
+        
 
         // POST: PurchaseOrders/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 

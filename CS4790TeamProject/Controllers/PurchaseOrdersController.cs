@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CS4790TeamProject.Data;
 using CS4790TeamProject.Models;
+using CS4790TeamProject.Models.ViewModels;
 
 namespace CS4790TeamProject.Controllers
 {
@@ -20,12 +21,32 @@ namespace CS4790TeamProject.Controllers
         }
 
         // GET: PurchaseOrders
+        public IActionResult Index()
+        {
+            var purchase = _context.PurchaseOrder.Include(p => p.Vendor).ToList();
+
+            var orderItems = _context.OrderItem.Include(o => o.PurchaseOrder).Include(o => o.Item).ToList();
+
+            var received = _context.RecievedItems.Include(r => r.OrderItem).ToList();
+
+            var OVM = new OrdersViewModel()
+            {
+                PurchaseOrders = purchase,
+                OrderItems = orderItems,
+                RecievedItems = received
+            };
+
+            return View(OVM);
+        }
+        /*
         public async Task<IActionResult> Index()
         {
+
             var applicationDbContext = _context.PurchaseOrder.Include(p => p.Vendor);
             return View(await applicationDbContext.ToListAsync());
+            
         }
-
+        */
         // GET: PurchaseOrders/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -155,6 +176,25 @@ namespace CS4790TeamProject.Controllers
         private bool PurchaseOrderExists(int id)
         {
             return _context.PurchaseOrder.Any(e => e.PurchaseOrderId == id);
+        }
+
+      
+        public async Task<IActionResult> Receive(int id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var purchaseOrder = await _context.PurchaseOrder
+                .Include(p => p.Vendor)
+                .FirstOrDefaultAsync(m => m.PurchaseOrderId == id);
+            if (purchaseOrder == null)
+            {
+                return NotFound();
+            }
+
+            return View(purchaseOrder);
         }
     }
 }

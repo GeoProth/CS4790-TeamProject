@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CS4790TeamProject.Models.PurchaseOrder>
+﻿@model CS4790TeamProject.Models.ViewModels.OrdersViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -25,7 +25,7 @@
 
         <div class="container" style="overflow:scroll;">
 
-            @foreach (var p in Model)
+            @foreach (var p in Model.PurchaseOrders)
             {
                 @await Html.PartialAsync("PurchaseOrderSummary", p);
             }
@@ -53,7 +53,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model)
+                @foreach (var item in Model.PurchaseOrders)
                 {
                     <tr>
                         <td></td>

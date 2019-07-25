@@ -21,12 +21,7 @@ namespace CS4790TeamProject.Views.Vendors
         {
             _context = context;
 
-            VendorHistoryVM = new VendorHistoryViewModel()
-            {
-                Vendors = new Models.Vendor(),
-                PurchaseOrders = _context.PurchaseOrder
-                    .ToList()
-            };
+
         }
 
         // GET: Vendors
@@ -55,8 +50,19 @@ namespace CS4790TeamProject.Views.Vendors
 
         public async Task<IActionResult> History(int id)
         {
+
+            VendorHistoryVM = new VendorHistoryViewModel()
+            {
+                Vendors = new Models.Vendor(),
+                PurchaseOrders = _context.PurchaseOrder
+                    .Where(m => m.VendorID == id)
+                    .ToList()
+            };
+
+
             VendorHistoryVM.Vendors = await _context.Vendor
                 .Include(m => m.PurchaseOrders)
+                .AsNoTracking()
                 .SingleOrDefaultAsync(n => n.VendorId == id);
 
             if (VendorHistoryVM.Vendors == null)

@@ -9,6 +9,6 @@ namespace CS4790TeamProject.Models.ViewModels
     {
         public Vendor Vendors { get; set; }
 
-        public IEnumerable<PurchaseOrder> PurchaseOrders { get; set; }
+        public List<PurchaseOrder> PurchaseOrders { get; set; }
     }
 }

@@ -18,7 +18,7 @@ namespace CS4790TeamProject.Models
         [Display(Name="Notes")]
         public string Notes { get; set; }
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
-        [Display(Name = "Date Delivered")]
+        [Display(Name = "Date Received")]
         public DateTime DateDelivered { get; set; }
         public string LastModifiedBy { get; set; }
         [DataType(DataType.Date)]

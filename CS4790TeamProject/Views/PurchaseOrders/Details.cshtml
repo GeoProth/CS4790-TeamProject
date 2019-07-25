@@ -1,4 +1,6 @@
-﻿@model CS4790TeamProject.Models.PurchaseOrder
+﻿//details
+
+@model CS4790TeamProject.Models.PurchaseOrder
 
 @{
     ViewData["Title"] = "Details";
@@ -56,26 +58,26 @@
                 ??
             </td>
             <td>
-               ??
+                ??
             </td>
         </tr>
         @* @foreach (var item in Model.OrderItems)
-         {
-             <tr>
-                 <td>
-                     @Html.DisplayFor(modelItem => item.Item.ItemName)
-                 </td>
-                 <td>
-                     @Html.DisplayFor(modelItem => item.QuantityOrdered)
-                 </td>
-                 <td>
-                     ??
-                 </td>
-                 <td>
-                     @Html.DisplayFor(modelItem => item.Price)
-                 </td>
-             </tr>
-        } *@
+             {
+                 <tr>
+                     <td>
+                         @Html.DisplayFor(modelItem => item.Item.ItemName)
+                     </td>
+                     <td>
+                         @Html.DisplayFor(modelItem => item.QuantityOrdered)
+                     </td>
+                     <td>
+                         ??
+                     </td>
+                     <td>
+                         @Html.DisplayFor(modelItem => item.Price)
+                     </td>
+                 </tr>
+            } *@
     </tbody>
 </table>
 <div>
@@ -90,5 +92,4 @@
         justify-content: space-between;
         margin-right: 10em;
     }
-  
 </style>

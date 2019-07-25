@@ -24,17 +24,17 @@
     <table id="myTable">
         @if (Model.OrderItems.Count() > 0)
         {
-        <tbody>
-            @foreach (OrderItem oi in Model.OrderItems)
-            {
-                <tr class="form-group">
-                    <td><input type="checkbox"/></td>
-                    <td>@Html.DisplayFor(model => oi.Item.ItemName)</td>
-                    <td>@Html.TextBoxFor(model => oi.QuantityOrdered)</td>
-                </tr>
+            <tbody>
+                @foreach (OrderItem oi in Model.OrderItems)
+                {
+                    <tr class="form-group">
+                        <td><input type="checkbox" /></td>
+                        <td>@Html.DisplayFor(model => oi.Item.ItemName)</td>
+                        <td>@Html.TextBoxFor(model => oi.QuantityOrdered)</td>
+                    </tr>
 
-            }
-        </tbody>
+                }
+            </tbody>
         }
     </table>
     <div class="text-center">

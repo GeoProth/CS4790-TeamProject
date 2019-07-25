@@ -7,41 +7,25 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CS4790TeamProject.Data;
 using CS4790TeamProject.Models;
-using CS4790TeamProject.Models.ViewModels;
 
 namespace CS4790TeamProject.Controllers
 {
     public class PurchaseOrdersController : Controller
     {
         private readonly ApplicationDbContext _context;
-       // private readonly OrdersViewModel
+
         public PurchaseOrdersController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public async Task<IActionResult> Index(string searchString)
-        {
-
-            var orders = from i in _context.PurchaseOrder.Include(p => p.Vendor)
-                         .Include(p => p.OrderItems)
-                        select i;
-
-
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                orders = orders.Where(s => s.Vendor.VendorName.Contains(searchString));
-            }
-
-            return View(await orders.ToListAsync());
-        }
-     /*   // GET: PurchaseOrders
+        // GET: PurchaseOrders
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.PurchaseOrder.Include(p => p.Vendor);
             return View(await applicationDbContext.ToListAsync());
         }
-*/
+
         // GET: PurchaseOrders/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -61,29 +45,10 @@ namespace CS4790TeamProject.Controllers
             return View(purchaseOrder);
         }
 
-        //GET: PurchaseOrders/Receive/5
-        public async Task<IActionResult> Receive(int? id)
-        {
-            if(id == null)
-            {
-                return NotFound();
-            }
-            var purchaseOrder = await _context.PurchaseOrder
-                .Include(p => p.Vendor)
-                .FirstOrDefaultAsync(m => m.PurchaseOrderId == id);
-
-            if (purchaseOrder == null)
-            {
-                return NotFound();
-            }
-
-            return View(purchaseOrder);
-        }
-
         // GET: PurchaseOrders/Create
         public IActionResult Create()
         {
-            ViewData["VendorID"] = new SelectList(_context.Vendor, "VendorId", "VendorName");
+            ViewData["VendorID"] = new SelectList(_context.Vendor, "VendorId", "VendorId");
             return View();
         }
 
@@ -92,7 +57,7 @@ namespace CS4790TeamProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PurchaseOrderId,VendorID,DateOrdered,VendorPO,LastModifiedBy,LastModifiedDate")] PurchaseOrder purchaseOrder)
+        public async Task<IActionResult> Create([Bind("PurchaseOrderId,VendorID,DateOrdered,VendorPO,Received,LastModifiedBy,LastModifiedDate")] PurchaseOrder purchaseOrder)
         {
             if (ModelState.IsValid)
             {
@@ -126,7 +91,7 @@ namespace CS4790TeamProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PurchaseOrderId,VendorID,DateOrdered,VendorPO,LastModifiedBy,LastModifiedDate")] PurchaseOrder purchaseOrder)
+        public async Task<IActionResult> Edit(int id, [Bind("PurchaseOrderId,VendorID,DateOrdered,VendorPO,Received,LastModifiedBy,LastModifiedDate")] PurchaseOrder purchaseOrder)
         {
             if (id != purchaseOrder.PurchaseOrderId)
             {

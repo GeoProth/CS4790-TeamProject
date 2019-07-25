@@ -1,115 +1,117 @@
-﻿@model IEnumerable<CS4790TeamProject.Models.PurchaseOrder>
+﻿//Index
 
-    @{
-        ViewData["Title"] = "Index";
-        Layout = "~/Views/Shared/_Layout.cshtml";
-    }
+@model IEnumerable<CS4790TeamProject.Models.PurchaseOrder>
 
-    <h1 style="text-align:center">Orders</h1>
-    <br />
-    <p>
-        <a asp-action="Create" id="create-button"><i class="fa fa-plus-circle" style="font-size:36px;"></i></a>
-    </p>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
-    <ul class="nav nav-pills" role="tablist" style="font-weight:bold;">
-        <li><a id="Orders-tab" class="nav-link active" href="#all_tab" role="tab" data-toggle="tab">All</a></li>
-        <li><a id="Orders-tab" class="nav-link" href="#pending_tab" role="tab" data-toggle="tab">Pending</a></li>
-        <li><a id="Orders-tab" class="nav-link" href="#received_tab" role="tab" data-toggle="tab">Received</a></li>
-        <li><a id="Orders-tab" class="nav-link" href="#overdue_tab" role="tab" data-toggle="tab">Overdue</a></li>
-    </ul>
+<h1 style="text-align:center">Orders</h1>
+<br />
+<p>
+    <a asp-action="Create" id="create-button"><i class="fa fa-plus-circle" style="font-size:36px;"></i></a>
+</p>
+
+<ul class="nav nav-pills" role="tablist" style="font-weight:bold;">
+    <li><a id="Orders-tab" class="nav-link active" href="#all_tab" role="tab" data-toggle="tab">All</a></li>
+    <li><a id="Orders-tab" class="nav-link" href="#pending_tab" role="tab" data-toggle="tab">Pending</a></li>
+    <li><a id="Orders-tab" class="nav-link" href="#received_tab" role="tab" data-toggle="tab">Received</a></li>
+    <li><a id="Orders-tab" class="nav-link" href="#overdue_tab" role="tab" data-toggle="tab">Overdue</a></li>
+</ul>
 
 
-    <div class="tab-content">
-        <div class="tab-pane active" id="all_tab">
-            <br />
+<div class="tab-content">
+    <div class="tab-pane active" id="all_tab">
+        <br />
 
-            <div class="container" style="overflow:scroll;">
+        <div class="container" style="overflow:scroll;">
 
+            @foreach (var p in Model)
+            {
+                @Html.PartialAsync("PurchaseOrderSummary", p);
+            }
+
+        </div>
+    </div>
+    <div class="tab-pane" id="pending_tab">
+        <br />
+        <table id="table_orders2" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+                <tr>
+                    <th>
+
+                    </th>
+                    <th>
+
+                    </th>
+                    <th>
+
+                    </th>
+                    <th>
+
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
                 @foreach (var item in Model)
                 {
-                    @Html.Partial("PurchaseOrderSummary", item);
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
                 }
-
-            </div>
-        </div>
-        <div class="tab-pane" id="pending_tab">
-            <br />
-            <table id="table_orders2" class="table table-striped table-bordered" style="width:100%">
-                <thead>
-                    <tr>
-                        <th>
-
-                        </th>
-                        <th>
-
-                        </th>
-                        <th>
-
-                        </th>
-                        <th>
-
-                        </th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-        <div class="tab-pane" id="received_tab">
-            <table id="table_orders3" class="table table-striped table-bordered" style="width:100%">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="tab-pane" id="overdue_tab">
-            <table id="table_orders4" class="table table-striped table-bordered" style="width:100%">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-
+            </tbody>
+        </table>
     </div>
+    <div class="tab-pane" id="received_tab">
+        <table id="table_orders3" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="tab-pane" id="overdue_tab">
+        <table id="table_orders4" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+</div>

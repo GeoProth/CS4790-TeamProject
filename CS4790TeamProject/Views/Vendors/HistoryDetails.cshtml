@@ -1,0 +1,16 @@
+﻿@model CS4790TeamProject.Models.ViewModels.OrdersViewModel
+
+
+@{
+
+}
+
+
+@Model.PurchaseOrder.PurchaseOrderId
+
+@foreach(var item in Model.OrderItems)
+{
+    <ul>
+        @item.ItemID | @item.Price | @item.QuantityOrdered |
+    </ul>
+}

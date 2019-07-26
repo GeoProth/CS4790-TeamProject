@@ -20,8 +20,6 @@ namespace CS4790TeamProject.Views.Vendors
         public VendorsController(ApplicationDbContext context)
         {
             _context = context;
-
-
         }
 
         // GET: Vendors
@@ -73,45 +71,29 @@ namespace CS4790TeamProject.Views.Vendors
             return View(VendorHistoryVM);
         }
 
-        /*
-        public async Task History(int? id)
+        public async Task<IActionResult> HistoryDetails(int id)
         {
-            var Vendor = new VendorHistoryViewModel();
-            Vendor.Vendors = await _context.Vendor
-                .Include(v => v.PurchaseOrders)
+
+            var HistoryOrderVM = new OrdersViewModel()
+            {
+                PurchaseOrder = new Models.PurchaseOrder(),
+                OrderItems = _context.OrderItem
+                    .Where(m => m.PurchaseOrderID == id)
+            };
+
+            HistoryOrderVM.PurchaseOrder = await _context.PurchaseOrder
+                .Include(m => m.OrderItems)
                 .AsNoTracking()
-                .OrderBy(i => v.PurchaseDate)
-                .ToListAsync();
-            /*
-            var vendor = await _context.Vendor
-                .FirstOrDefaultAsync(m => m.VendorId == id);
+                .SingleOrDefaultAsync(n => n.PurchaseOrderId == id);
 
-            var orders = new List<PurchaseOrder>();
-            */
-        //var orders = new List<PurchaseOrder>(await _context.PurchaseOrder.Where(n => n.VendorID == id));
+            if (HistoryOrderVM.PurchaseOrder == null)
+            {
+                return NotFound();
+            }
 
-        /****
-        var order = await _context.PurchaseOrder
-            .FirstOrDefaultAsync(n => n.VendorID == id);
-            ****/
+            return View(HistoryOrderVM);
 
-        /***
-        var orders = await _context.PurchaseOrder
-            .Where(VendorId == id);
-            ***/
-
-        /*
-        var VendorHistoryViewModel = new VendorHistoryViewModel
-        {
-            Vendors = vendor,
-            PurchaseOrders = orders
-        };
-        */
-
-        //return View(Vendor);
-        /*
-    }
-    */
+        }
 
         // GET: Vendors/Create
         public IActionResult Create()

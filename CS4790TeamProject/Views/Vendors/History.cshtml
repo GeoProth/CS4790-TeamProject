@@ -14,30 +14,17 @@
         <div>
             @foreach (var order in Model.PurchaseOrders)
             {
-                <div class="btn btn-outline-primary col-sm-6 text-center" style="margin: 20px" asp-route-id="@order.PurchaseOrderId">
+                <a class="btn btn-outline-primary col-sm-6 text-center" style="margin: 20px" asp-action="HistoryDetails" asp-route-id="@order.PurchaseOrderId">
                     Order @order.PurchaseOrderId <br>
                     Date Ordered: @order.DateOrdered.ToShortDateString()
-                </div>
+                </a>
             }
         </div>
     </div>
 
 
     <div style="float: right; border: solid blue 2px" class="col-sm-6">
-        <div>
-            <h5>@Model.Vendors.VendorName</h5>
-        </div>
-
-        <div>
-            <ul>
-                @foreach (var order in Model.PurchaseOrders)
-                {
-                    <li>
-                        Purchase Order: @order.PurchaseOrderId;
-                    </li>
-                }
-            </ul>
-        </div>
+        <partial name="_HistoryOrderDetails.cshtml" />
     </div>
 </div>
 

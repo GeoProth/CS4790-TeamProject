@@ -7,7 +7,7 @@ namespace CS4790TeamProject.Models.ViewModels
 {
     public class OrdersViewModel
     {
-        public IEnumerable<PurchaseOrder> PurchaseOrders { get; set; }
+        public PurchaseOrder PurchaseOrders { get; set; }
 
         public IEnumerable<OrderItem> OrderItems { get; set; }
 

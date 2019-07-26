@@ -14,18 +14,33 @@ namespace CS4790TeamProject.Controllers
     public class PurchaseOrdersController : Controller
     {
         private readonly ApplicationDbContext _context;
-
+        [BindProperty]
+        public OrdersViewModel OrdersVM { get; set; }
         public PurchaseOrdersController(ApplicationDbContext context)
         {
             _context = context;
+            OrdersVM = new OrdersViewModel()
+            {
+                PurchaseOrders = new PurchaseOrder(),
+                OrderItems = _context.OrderItem
+                                      .Include(o => o.Item)
+                                      .Include(o => o.RecievedItems)
+                                      .ToList(),
+                RecievedItems = _context.RecievedItems.Include(r => r.OrderItem).ToList()
+            };
         }
 
-        // GET: PurchaseOrders
+     /*   // GET: PurchaseOrders
         public IActionResult Index()
         {
-            var purchase = _context.PurchaseOrder.Include(p => p.Vendor).ToList();
+            var purchase = _context.PurchaseOrder.Include(p => p.Vendor)
+                                                  .Include(p => p.OrderItems)
+                                                  .ThenInclude(o => o.RecievedItems)
+                                                  .ToList();
 
-            var orderItems = _context.OrderItem.Include(o => o.PurchaseOrder).Include(o => o.Item).ToList();
+            var orderItems = _context.OrderItem.Include(o => o.PurchaseOrder)
+                                               .Include(o => o.Item)
+                                               .Include(o => o.RecievedItems).ToList();
 
             var received = _context.RecievedItems.Include(r => r.OrderItem).ToList();
 
@@ -38,15 +53,22 @@ namespace CS4790TeamProject.Controllers
 
             return View(OVM);
         }
-        /*
+       */
         public async Task<IActionResult> Index()
         {
 
-            var applicationDbContext = _context.PurchaseOrder.Include(p => p.Vendor);
-            return View(await applicationDbContext.ToListAsync());
+            var applicationDbContext = await _context.PurchaseOrder.Include(p => p.Vendor)
+                                                  .Include(p => p.OrderItems)
+                                                    .ThenInclude(o => o.RecievedItems)
+                                                  .Include(p => p.OrderItems)
+                                                    .ThenInclude(o => o.Item)
+                                                  .ToListAsync();
+
+
+            return View(applicationDbContext);
             
         }
-        */
+        
         // GET: PurchaseOrders/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -71,24 +93,28 @@ namespace CS4790TeamProject.Controllers
         public IActionResult Create()
         {
             ViewData["VendorID"] = new SelectList(_context.Vendor, "VendorId", "VendorName");
-            return View();
-        }
-        
+            ViewData["ItemID"] = new SelectList(_context.Item, "ItemId", "ItemName");
+            ViewData["MeasureID"] = new SelectList(_context.Measures, "MeasureId", "MeasureName");
 
+            return View(OrdersVM);
+        }
         // POST: PurchaseOrders/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PurchaseOrderId,VendorID,DateOrdered,VendorPO,Received,LastModifiedBy,LastModifiedDate")] PurchaseOrder purchaseOrder)
+        public async Task<IActionResult> Create([Bind("PurchaseOrderId,VendorID,DateOrdered,VendorPO,OrderItems,Received,LastModifiedBy,LastModifiedDate")] PurchaseOrder purchaseOrder)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(purchaseOrder);
+                _context.Add(OrdersVM.PurchaseOrders);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["VendorID"] = new SelectList(_context.Vendor, "VendorId", "VendorId", purchaseOrder.VendorID);
+            ViewData["VendorID"] = new SelectList(_context.Vendor, "VendorId", "VendorName");
+            ViewData["ItemID"] = new SelectList(_context.Item, "ItemId", "ItemName");
+            ViewData["MeasureID"] = new SelectList(_context.Measures, "MeasureId", "MeasureName");
+
             return View(purchaseOrder);
         }
 
@@ -181,7 +207,7 @@ namespace CS4790TeamProject.Controllers
         }
 
       
-        public async Task<IActionResult> Receive(int id)
+        public async Task<IActionResult> Receive(int? id)
         {
             if (id == null)
             {

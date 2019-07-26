@@ -5,18 +5,42 @@
 
 }
 
-<h2>This is a list of both vendors and purchase orders</h2>
+<div style="margin-top: 20px">
+    <div style="float: left" class="col-sm-6">
+        <div>
+            <h5>@Model.Vendors.VendorName Purchase History</h5>
+        </div>
 
-<h5>@Model.Vendors.VendorName</h5>
+        <div>
+            @foreach (var order in Model.PurchaseOrders)
+            {
+                <div class="btn btn-outline-primary col-sm-6 text-center" style="margin: 20px" asp-route-id="@order.PurchaseOrderId">
+                    Order @order.PurchaseOrderId <br>
+                    Date Ordered: @order.DateOrdered.ToShortDateString()
+                </div>
+            }
+        </div>
+    </div>
 
 
-<h5>List of more stuff</h5>
+    <div style="float: right; border: solid blue 2px" class="col-sm-6">
+        <div>
+            <h5>@Model.Vendors.VendorName</h5>
+        </div>
 
-<ul>
-    @foreach (var order in Model.PurchaseOrders)
-    {
-        <li>
-            Purchase Order: @order.PurchaseOrderId;
-        </li>
-    }
-</ul>
+        <div>
+            <ul>
+                @foreach (var order in Model.PurchaseOrders)
+                {
+                    <li>
+                        Purchase Order: @order.PurchaseOrderId;
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="text-center">
+    <a asp-action="Index" class="btn btn-secondary col-sm-2">Back to List</a>
+</div>

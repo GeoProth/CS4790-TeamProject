@@ -11,6 +11,6 @@ namespace CS4790TeamProject.Models.ViewModels
 
         public List<PurchaseOrder> PurchaseOrders { get; set; }
 
-        public OrdersViewModel OrdersViewModels { get; set; }
+        public List<OrderItem> OrderDetails { get; set; }
     }
 }

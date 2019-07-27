@@ -46,6 +46,8 @@ namespace CS4790TeamProject.Views.Vendors
             return View(vendor);
         }
 
+
+        
         public async Task<IActionResult> History(int id)
         {
 
@@ -54,7 +56,7 @@ namespace CS4790TeamProject.Views.Vendors
                 Vendors = new Models.Vendor(),
                 PurchaseOrders = _context.PurchaseOrder
                     .Where(m => m.VendorID == id)
-                    .ToList()
+                    .ToList(),
             };
 
 
@@ -71,29 +73,39 @@ namespace CS4790TeamProject.Views.Vendors
             return View(VendorHistoryVM);
         }
 
+        
         public async Task<IActionResult> HistoryDetails(int id)
         {
 
-            var HistoryOrderVM = new OrdersViewModel()
+            var OrdersViewModels = new OrdersViewModel()
             {
                 PurchaseOrder = new Models.PurchaseOrder(),
                 OrderItems = _context.OrderItem
                     .Where(m => m.PurchaseOrderID == id)
+
             };
 
-            HistoryOrderVM.PurchaseOrder = await _context.PurchaseOrder
+            OrdersViewModels.PurchaseOrder = await _context.PurchaseOrder
                 .Include(m => m.OrderItems)
                 .AsNoTracking()
                 .SingleOrDefaultAsync(n => n.PurchaseOrderId == id);
 
-            if (HistoryOrderVM.PurchaseOrder == null)
-            {
-                return NotFound();
-            }
 
-            return View(HistoryOrderVM);
+            return View(OrdersViewModels);
 
         }
+        
+
+            /**
+        public async Task<IActionResult> HistoryDetails(int id)
+        {
+            var order = _context.OrderItem
+                .FirstOrDefaultAsync(m => m.PurchaseOrderID == id);
+
+            return View(order);
+        }
+    **/
+
 
         // GET: Vendors/Create
         public IActionResult Create()

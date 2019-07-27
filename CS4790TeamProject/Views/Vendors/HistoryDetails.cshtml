@@ -5,12 +5,25 @@
 
 }
 
+<div style="margin-top: 20px">
+    Purchase Order Number: @Model.PurchaseOrder.PurchaseOrderId
+</div>
 
-@Model.PurchaseOrder.PurchaseOrderId
+<div style="border: solid 2px blue; margin-top: 10px">
+    @foreach (var item in Model.OrderItems)
+    {
+        <ul>
+            Item ID: @item.ItemID
+            <br />
+            Item Price: @item.Price
+            <br />
+            Quantity Ordered: @item.QuantityOrdered
+            <br />
+            Total Price: (@item.Price * @item.QuantityOrdered)
+        </ul>
+    }
+</div>
 
-@foreach(var item in Model.OrderItems)
-{
-    <ul>
-        @item.ItemID | @item.Price | @item.QuantityOrdered |
-    </ul>
-}
+    <div class="text-center">
+        <a asp-action="History" asp-route-id="@Model.PurchaseOrder.VendorID" class="btn btn-secondary col-sm-2">Back to List</a>
+    </div>

@@ -1,47 +1,83 @@
-﻿@model CS4790TeamProject.Models.PurchaseOrder
+﻿@model CS4790TeamProject.Models.ViewModels.OrdersViewModel
 
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
+<h1>Create Order</h1>
 
-<h4>PurchaseOrder</h4>
+
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="VendorID" class="control-label"></label>
-                <select asp-for="VendorID" class="form-control" asp-items="ViewBag.VendorID"></select>
+                <label asp-for="PurchaseOrder.Vendor.VendorId" class="control-label">@Html.DisplayNameFor(model => Model.PurchaseOrder.VendorID)</label>
+                <select asp-for="PurchaseOrder.Vendor.VendorId" class="form-control" asp-items="ViewBag.VendorID"></select>
             </div>
             <div class="form-group">
-                <label asp-for="DateOrdered" class="control-label"></label>
-                <input asp-for="DateOrdered" class="form-control" />
-                <span asp-validation-for="DateOrdered" class="text-danger"></span>
+                <label asp-for="@Model.PurchaseOrder.DateOrdered" class="control-label"></label>
+                <input asp-for="@Model.PurchaseOrder.DateOrdered" class="form-control" />
+                <span asp-validation-for="@Model.PurchaseOrder.DateOrdered" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="VendorPO" class="control-label"></label>
-                <input asp-for="VendorPO" class="form-control" />
-                <span asp-validation-for="VendorPO" class="text-danger"></span>
+            <div class="border">
+                <div class="fa-pull-left">
+                    <div class="form-group">
+                        <label asp-for="@Model.OrderItems" class="control-label">Part: </label>
+                        <select asp-for="@Model.OrderItems" class="form-control" asp-items="ViewBag.ItemID"></select>
+
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.OrderItems." class="control-label">Unit of Measure: </label>
+                        <select asp-for="OrderItems" class="form-control" asp-items="@ViewBag.MeasureID"></select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="OrderItems" class="control-label">Quantity:</label>
+                        <input asp-for="OrderItems" class="form-control" min="0" step="1" />
+                    </div>
+                </div>
+                <div class="fa-pull-right form-group">
+                    <span>Parts:</span>
+                    <table class="inner_table fa-scroll form-control">
+                        <tbody>
+                            @foreach (OrderItem oi in Model.OrderItems)
+                            {
+                                <tr>
+                                    <td>
+                                        @ViewBag.ItemID
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Received" /> @Html.DisplayNameFor(model => model.Received)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="LastModifiedBy" class="control-label"></label>
-                <input asp-for="LastModifiedBy" class="form-control" />
-                <span asp-validation-for="LastModifiedBy" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LastModifiedDate" class="control-label"></label>
-                <input asp-for="LastModifiedDate" class="form-control" />
-                <span asp-validation-for="LastModifiedDate" class="text-danger"></span>
-            </div>
+
+
+            @*
+                <div class="form-group">
+                    <label asp-for="VendorPO" class="control-label"></label>
+                    <input asp-for="VendorPO" class="form-control" />
+                    <span asp-validation-for="VendorPO" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="Received" /> @Html.DisplayNameFor(model => model.Received)
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LastModifiedBy" class="control-label"></label>
+                    <input asp-for="LastModifiedBy" class="form-control" />
+                    <span asp-validation-for="LastModifiedBy" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LastModifiedDate" class="control-label"></label>
+                    <input asp-for="LastModifiedDate" class="form-control" />
+                    <span asp-validation-for="LastModifiedDate" class="text-danger"></span>
+                </div>
+            *@
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -53,3 +89,23 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+<style>
+    .border {
+        border-style: solid;
+        border-width: 5px;
+        width: 800px;
+    }
+
+    .inner_table {
+        border-style: solid;
+        border-width: 5px;
+        width: 400px;
+        height: 400px;
+        overflow-y: scroll;
+    }
+</style>
+
+
+@section Scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

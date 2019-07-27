@@ -7,12 +7,15 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CS4790TeamProject.Data;
 using CS4790TeamProject.Models;
+using CS4790TeamProject.Models.ViewModels;
 
 namespace CS4790TeamProject.Views.Vendors
 {
     public class VendorsController : Controller
     {
         private readonly ApplicationDbContext _context;
+
+        public VendorHistoryViewModel VendorHistoryVM { get; set; }
 
         public VendorsController(ApplicationDbContext context)
         {
@@ -42,6 +45,67 @@ namespace CS4790TeamProject.Views.Vendors
 
             return View(vendor);
         }
+
+
+        
+        public async Task<IActionResult> History(int id)
+        {
+
+            VendorHistoryVM = new VendorHistoryViewModel()
+            {
+                Vendors = new Models.Vendor(),
+                PurchaseOrders = _context.PurchaseOrder
+                    .Where(m => m.VendorID == id)
+                    .ToList(),
+            };
+
+
+            VendorHistoryVM.Vendors = await _context.Vendor
+                .Include(m => m.PurchaseOrders)
+                .AsNoTracking()
+                .SingleOrDefaultAsync(n => n.VendorId == id);
+
+            if (VendorHistoryVM.Vendors == null)
+            {
+                return NotFound();
+            }
+
+            return View(VendorHistoryVM);
+        }
+
+        
+        public async Task<IActionResult> HistoryDetails(int id)
+        {
+
+            var OrdersViewModels = new OrdersViewModel()
+            {
+                PurchaseOrder = new Models.PurchaseOrder(),
+                OrderItems = _context.OrderItem
+                    .Where(m => m.PurchaseOrderID == id)
+
+            };
+
+            OrdersViewModels.PurchaseOrder = await _context.PurchaseOrder
+                .Include(m => m.OrderItems)
+                .AsNoTracking()
+                .SingleOrDefaultAsync(n => n.PurchaseOrderId == id);
+
+
+            return View(OrdersViewModels);
+
+        }
+        
+
+            /**
+        public async Task<IActionResult> HistoryDetails(int id)
+        {
+            var order = _context.OrderItem
+                .FirstOrDefaultAsync(m => m.PurchaseOrderID == id);
+
+            return View(order);
+        }
+    **/
+
 
         // GET: Vendors/Create
         public IActionResult Create()

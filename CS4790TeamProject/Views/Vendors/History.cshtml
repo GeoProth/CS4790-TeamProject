@@ -1,0 +1,28 @@
+﻿@model  CS4790TeamProject.Models.ViewModels.VendorHistoryViewModel
+
+
+@{
+
+}
+
+<div class="text-center" style="margin-top: 20px">
+    <div class="col-sm-12">
+        <div>
+            <h5>@Model.Vendors.VendorName Purchase History</h5>
+        </div>
+
+        <div>
+            @foreach (var order in Model.PurchaseOrders)
+            {
+                <a class="btn btn-outline-primary col-sm-6 text-center" style="margin: 20px" asp-action="HistoryDetails" asp-route-id="@order.PurchaseOrderId">
+                    Order @order.PurchaseOrderId <br>
+                    Date Ordered: @order.DateOrdered.ToShortDateString()
+                </a>
+            }
+        </div>
+    </div>
+</div>
+
+<div class="text-center">
+    <a asp-action="Index" class="btn btn-secondary col-sm-2">Back to List</a>
+</div>

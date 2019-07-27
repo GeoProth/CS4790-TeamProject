@@ -485,7 +485,6 @@ C:\Users\gprot\Desktop\CS4790\TeamProject\CS4790-TeamProject\CS4790TeamProject\o
 C:\Users\gprot\Desktop\CS4790\TeamProject\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\PurchaseOrders\Receive.g.cshtml.cs
 <<<<<<< HEAD
 =======
-C:\Users\gprot\Desktop\CS4790\TeamProject\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\Shared\PurchaseOrderSummary.g.cshtml.cs
 C:\Users\Muhlestein\Desktop\Brandon\Weber\Summer 2019\CS 4790\test1\CS4790TeamProject\bin\Debug\netcoreapp2.2\CS4790TeamProject.deps.json
 C:\Users\Muhlestein\Desktop\Brandon\Weber\Summer 2019\CS 4790\test1\CS4790TeamProject\bin\Debug\netcoreapp2.2\CS4790TeamProject.runtimeconfig.json
 C:\Users\Muhlestein\Desktop\Brandon\Weber\Summer 2019\CS 4790\test1\CS4790TeamProject\bin\Debug\netcoreapp2.2\CS4790TeamProject.runtimeconfig.dev.json
@@ -579,3 +578,6 @@ C:\Users\Muhlestein\Desktop\Brandon\Weber\Summer 2019\CS 4790\test1\CS4790TeamPr
 C:\Users\Muhlestein\Desktop\Brandon\Weber\Summer 2019\CS 4790\test1\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\Vendors\HistoryDetails.g.cshtml.cs
 C:\Users\Muhlestein\Desktop\Brandon\Weber\Summer 2019\CS 4790\test1\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_HistoryOrderDetails.g.cshtml.cs
 >>>>>>> Vendors_2
+C:\Users\gprot\Desktop\CS4790\TeamProject\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_HistoryOrderDetails.g.cshtml.cs
+C:\Users\gprot\Desktop\CS4790\TeamProject\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\Vendors\History.g.cshtml.cs
+C:\Users\gprot\Desktop\CS4790\TeamProject\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\Vendors\HistoryDetails.g.cshtml.cs

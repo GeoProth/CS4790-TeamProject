@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CS4790TeamProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190723171114_FixedEntityRelationShips")]
-    partial class FixedEntityRelationShips
+    [Migration("20190726201008_AddedItemIDForeignKeyToAssemblyRecipe")]
+    partial class AddedItemIDForeignKeyToAssemblyRecipe
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -432,7 +432,7 @@ namespace CS4790TeamProject.Migrations
 
             modelBuilder.Entity("CS4790TeamProject.Models.AssemblyRecipe", b =>
                 {
-                    b.HasOne("CS4790TeamProject.Models.Item")
+                    b.HasOne("CS4790TeamProject.Models.Item", "Item")
                         .WithMany("AssemblyRecipes")
                         .HasForeignKey("ItemID")
                         .OnDelete(DeleteBehavior.Cascade);

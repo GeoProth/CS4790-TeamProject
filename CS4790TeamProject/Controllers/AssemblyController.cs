@@ -7,12 +7,17 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CS4790TeamProject.Data;
 using CS4790TeamProject.Models;
+using CS4790TeamProject.Models.ViewModels;
 
 namespace CS4790TeamProject.Controllers
 {
     public class AssemblyController : Controller
     {
         private readonly ApplicationDbContext _context;
+
+        public int testVal { get; set; }
+
+        public AssemblyRecipeViewModel AssemblyRecipeVM { get; set; }
 
         public AssemblyController(ApplicationDbContext context)
         {
@@ -22,7 +27,24 @@ namespace CS4790TeamProject.Controllers
         // GET: Assembly
         public async Task<IActionResult> Index()
         {
+
             return View(await _context.AssemblyRecipe.ToListAsync());
+        }
+
+        public ActionResult Assemble(int? recipeID)
+        {
+            if (recipeID != null)
+            {
+                var recipe = _context.AssemblyRecipe.FirstOrDefault(r => r.AssemblyRecipeId == recipeID);
+                if (recipe == null)
+                {
+                    return NotFound();
+                }
+
+                return View(recipe);
+            }
+
+            return NotFound();
         }
 
         // GET: Assembly/Details/5
@@ -46,7 +68,10 @@ namespace CS4790TeamProject.Controllers
         // GET: Assembly/Create
         public IActionResult Create()
         {
-            return View();
+            ViewData["ItemID"] = new SelectList(_context.Item, "ItemId", "ItemName");
+            AssemblyRecipeVM = new AssemblyRecipeViewModel();
+            AssemblyRecipeVM.allItems = _context.Item.ToList();
+            return View(AssemblyRecipeVM);
         }
 
         // POST: Assembly/Create
@@ -54,15 +79,23 @@ namespace CS4790TeamProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AssemblyRecipeId,ItemID")] AssemblyRecipe assemblyRecipe)
+        public async Task<IActionResult> Create(AssemblyRecipeViewModel newVM)
         {
+            //[Bind("AssemblyRecipeId,RecipeName,ItemID")] AssemblyRecipe assemblyRecipe
             if (ModelState.IsValid)
             {
-                _context.Add(assemblyRecipe);
+                var newRecipe = new AssemblyRecipe();
+                newRecipe.ItemID = newVM.itemID;
+                var temp = await _context.Item.FirstOrDefaultAsync(i => i.ItemId == newVM.itemID);
+                newRecipe.RecipeName = temp.ItemName;
+                newRecipe.RecipeLines = newVM.recipeLines;
+
+                _context.Add(newRecipe);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(assemblyRecipe);
+            //return View(newVM.AssemblyRecipe);
+            return View();
         }
 
         // GET: Assembly/Edit/5
@@ -86,7 +119,7 @@ namespace CS4790TeamProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("AssemblyRecipeId,ItemID")] AssemblyRecipe assemblyRecipe)
+        public async Task<IActionResult> Edit(int id, [Bind("AssemblyRecipeId,RecipeName,ItemID")] AssemblyRecipe assemblyRecipe)
         {
             if (id != assemblyRecipe.AssemblyRecipeId)
             {

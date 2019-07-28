@@ -10,6 +10,7 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
 <table class="table">
     <thead>
         <tr>
@@ -17,21 +18,67 @@
                 @Html.DisplayNameFor(model => model.RecipeName)
             </th>
             <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-
-                @Html.DisplayFor(modelItem => item.RecipeName)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.AssemblyRecipeId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.AssemblyRecipeId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.AssemblyRecipeId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RecipeName)
+                </td>
+                <td>
+                    @Html.ActionLink("Assemble", "Assemble", "Assembly", new { recipeID = item.AssemblyRecipeId }, null)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.AssemblyRecipeId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.AssemblyRecipeId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.AssemblyRecipeId">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*
+            <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.RecipeName)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+
+                        @Html.DisplayFor(modelItem => item.RecipeName)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.AssemblyRecipeId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.AssemblyRecipeId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.AssemblyRecipeId">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+*@
+

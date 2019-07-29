@@ -1,7 +1,13 @@
 ﻿@model IEnumerable<CS4790TeamProject.Models.Item>
 
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 <br />
-
+<br />
+<h1 style="text-align:left">Inventory</h1>
+<br />
 <p>
     <a asp-action="Create" id="create-button"><i class="fa fa-plus-circle" style="font-size:36px;"></i></a>
 </p>

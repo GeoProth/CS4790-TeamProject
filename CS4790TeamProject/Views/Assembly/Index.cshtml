@@ -4,11 +4,12 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h1>Assembly</h1>
-
+<br />
+<br />
+<h1 style="text-align:left">Assembly</h1>
+<br />
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create"><i class="fa fa-plus-circle" style="font-size:36px;"></i></a>
 </p>
 
 <table class="table">
@@ -28,13 +29,13 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.RecipeName)
                 </td>
-                <td>
+                <td class="btn btn-light">
                     @Html.ActionLink("Assemble", "Assemble", "Assembly", new { recipeID = item.AssemblyRecipeId }, null)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.AssemblyRecipeId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.AssemblyRecipeId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.AssemblyRecipeId">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.AssemblyRecipeId" class="btn btn-primary">Edit</a> 
+                    <a asp-action="Details" asp-route-id="@item.AssemblyRecipeId" class="btn btn-info">Details</a> 
+                    <a asp-action="Delete" asp-route-id="@item.AssemblyRecipeId" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
         }

@@ -22,7 +22,20 @@ $(document).ready(function () {
     });
 
     var table3 = $('#table_vendor').DataTable({
-        responsive: true
+        responsive: true,
+        "columnDefs": [
+            { "orderable": false, "targets": 1 },
+            { "orderable": false, "targets": 2 }
+        ]
+    });
+
+    var table4 = $('#table_assemblies').DataTable({
+        responsive: true,
+
+        "columnDefs": [
+            { "orderable": false, "targets": 1 },
+            { "orderable": false, "targets": 2 }
+        ]
     });
 
     //var table4 = $('#table_orders2').DataTable({
@@ -44,6 +57,7 @@ $(document).ready(function () {
     table1.column(7).visible(false);
     table1.column(8).visible(false);
     table1.column(9).visible(false);
+
 
     //table2.column(4).visible(false);
 

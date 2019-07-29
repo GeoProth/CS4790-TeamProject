@@ -19,14 +19,17 @@
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+    @*<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">*@
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
 
     @*<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css" />*@
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-   
-    
+    @*<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">*@
+
+
 
 </head>
 <body>
@@ -63,13 +66,13 @@
                 @if (User.Identity.IsAuthenticated)
                 {
                     <div>
-                        <a id="navbarTitle" class="navbar-brand offset-lg-5 col-12 offset-md-5" asp-area="" asp-controller="Home" asp-action="Index" >Village Drill</a>
+                        <a id="navbarTitle" class="navbar-brand offset-lg-5 col-12 offset-md-5" asp-area="" asp-controller="Home" asp-action="Index">Village Drill</a>
                     </div>
                 }
                 else
                 {
                     <div>
-                        <a id="navbarTitle" class="navbar-brand offset-lg-1 offset-md-1 col-12" asp-area="" asp-controller="Home" asp-action="Index" >Village Drill</a>
+                        <a id="navbarTitle" class="navbar-brand offset-lg-1 offset-md-1 col-12" asp-area="" asp-controller="Home" asp-action="Index">Village Drill</a>
                     </div>
                 }
                 <div style="float:right;">
@@ -117,7 +120,14 @@
         </script>
     </environment>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+    @*<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>*@
+
+    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+
+
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>

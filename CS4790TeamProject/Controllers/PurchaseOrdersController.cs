@@ -72,29 +72,33 @@ namespace CS4790TeamProject.Controllers
             return View(purchaseOrder);
         }
         // GET: PurchaseOrders/Create
+        /*
         public IActionResult Create()
         {
             ViewData["VendorID"] = new SelectList(_context.Vendor, "VendorId", "VendorName");
             ViewData["ItemID"] = new SelectList(_context.Item, "ItemId", "ItemName");
             ViewData["MeasureID"] = new SelectList(_context.Measures, "MeasureId", "MeasureName");
 
-            return View(OrdersVM);
+            //return View(OrdersVM);
+            return View();
         }
-
-        /* // GET: PurchaseOrders/Create
+        */
+         // GET: PurchaseOrders/Create
          public IActionResult Create()
          {
              ViewData["VendorID"] = new SelectList(_context.Vendor, "VendorId", "VendorName");
              return View();
          }
-         */
+         
+         /*
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("PurchaseOrderId,VendorID,DateOrdered,VendorPO,OrderItems,Received,LastModifiedBy,LastModifiedDate")] PurchaseOrder purchaseOrder)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(OrdersVM.PurchaseOrder);
+                //_context.Add(OrdersVM.PurchaseOrder);
+                _context.Add(purchaseOrder);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -103,9 +107,10 @@ namespace CS4790TeamProject.Controllers
             ViewData["MeasureID"] = new SelectList(_context.Measures, "MeasureId", "MeasureName");
 
             return View(purchaseOrder);
+            //return View(OrdersVm.PurchaseOrder);
         }
-
-        /*
+        */
+        
         // POST: PurchaseOrders/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -122,7 +127,7 @@ namespace CS4790TeamProject.Controllers
             ViewData["VendorID"] = new SelectList(_context.Vendor, "VendorId", "VendorId", purchaseOrder.VendorID);
             return View(purchaseOrder);
         }
-        */
+        
         // GET: PurchaseOrders/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {

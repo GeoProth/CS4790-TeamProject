@@ -584,3 +584,4 @@ C:\Users\reddt\Source\Repos\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netco
 C:\Users\reddt\Source\Repos\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_HistoryOrderDetails.g.cshtml.cs
 C:\Users\reddt\Source\Repos\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\Vendors\History.g.cshtml.cs
 C:\Users\reddt\Source\Repos\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\Vendors\HistoryDetails.g.cshtml.cs
+C:\Users\gprot\Desktop\CS4790\TeamProject\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\Assembly\Assemble.g.cshtml.cs

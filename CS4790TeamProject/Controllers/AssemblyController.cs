@@ -70,7 +70,19 @@ namespace CS4790TeamProject.Controllers
         {
             ViewData["ItemID"] = new SelectList(_context.Item, "ItemId", "ItemName");
             AssemblyRecipeVM = new AssemblyRecipeViewModel();
-            AssemblyRecipeVM.allItems = _context.Item.ToList();
+            AssemblyRecipeVM.allItems = new List<Item>();
+
+            List<Item> tempList = new List<Item>();
+            tempList = _context.Item.ToList();
+
+            foreach(Item item in tempList)
+            {
+                if(item.IsAssemblyItem == false)
+                {
+                    AssemblyRecipeVM.allItems.Add(item);
+                }
+            }
+
             return View(AssemblyRecipeVM);
         }
 
@@ -84,10 +96,17 @@ namespace CS4790TeamProject.Controllers
             //[Bind("AssemblyRecipeId,RecipeName,ItemID")] AssemblyRecipe assemblyRecipe
             if (ModelState.IsValid)
             {
+                //Create new AssemblyRecipe object
                 var newRecipe = new AssemblyRecipe();
                 newRecipe.ItemID = newVM.itemID;
-                var temp = await _context.Item.FirstOrDefaultAsync(i => i.ItemId == newVM.itemID);
-                newRecipe.RecipeName = temp.ItemName;
+
+                //Retrieve the item that it is based on
+                var item = await _context.Item.FirstOrDefaultAsync(i => i.ItemId == newVM.itemID);
+
+                //Make the item an assembly item
+                item.IsAssemblyItem = true;
+
+                newRecipe.RecipeName = item.ItemName;
                 newRecipe.RecipeLines = newVM.recipeLines;
 
                 _context.Add(newRecipe);

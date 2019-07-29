@@ -25,6 +25,7 @@ namespace CS4790TeamProject.Models
         public int MaxQty { get; set; }
         public int MeasureID { get; set; }
         [Display(Name = "Measure Amount")]
+        public bool IsAssemblyItem { get; set; }
         public decimal MeasureAmnt { get; set; }
         [Display(Name = "Last Modified By")]
         public string LastModifiedBy { get; set; }

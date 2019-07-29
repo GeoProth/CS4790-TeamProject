@@ -167,15 +167,12 @@
                 @{
                     List<CS4790TeamProject.Models.Item> assemblyItems = new List<CS4790TeamProject.Models.Item>();
 
-                    List<CS4790TeamProject.Models.AssemblyRecipe> blah = new List<CS4790TeamProject.Models.AssemblyRecipe>();
-
                     foreach (var item in Model)
                     {
-                        if (item.AssemblyRecipes != null)
+                        if (item.IsAssemblyItem)
                         {
-                            blah = item.AssemblyRecipes.ToList();
+                            assemblyItems.Add(item);
                         }
-
                     }
                 }
                 <tr>

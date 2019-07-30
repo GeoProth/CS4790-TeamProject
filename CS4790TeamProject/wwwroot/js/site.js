@@ -38,6 +38,13 @@ $(document).ready(function () {
         ]
     });
 
+    $("#myInput").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $("#myList li").filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+
     //var table4 = $('#table_orders2').DataTable({
     //    responsive: true
     //});

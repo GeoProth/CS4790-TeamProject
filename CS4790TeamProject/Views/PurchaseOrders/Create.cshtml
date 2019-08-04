@@ -78,27 +78,41 @@
                         <span asp-validation-for="TempOrderItem.Price" class="text-danger"></span>
                     </div>
                     <div class="form-group text-center">
-                        <input name="button" id="btnAddPart" type="button" value="Add Part" class="btn btn-primary fa-pull-right" @*asp-page-handler="additem"*@ />
+                        <input name="button" id="btnAddPart" type="submit" value="Add Part" class="btn btn-primary fa-pull-right" asp-page-handler="AddItem" />
                     </div>
                 </div>
                 <div class="col-1"></div>
-                <table class="table col-7" id="tblItems" style="background-color:dimgrey;color:black;">
-                    <thead>
-                        <tr class="row">
-                            <th class="col-7 pl-4"><h5>Item</h5></th>
-                            <th class="col-4"><h5>Quantity</h5></th>
-                            <th class="col-1"><h4><i class="fa fa-trash-o"></i></h4></th>
-                        </tr>
-                    </thead>
-                    <tbody style="background-color:dimgrey;color:black">
-                        <tr class="row">
-                            <td class="col-7 pl-4">Hello</td>
-                            <td class="col-4">6</td>
-                            <td class="col-1"><i class="fa fa-trash-o"></i></td>
-                        </tr>
-                    </tbody>
-                </table>
-           
+                <div class="col-7 card">
+                    <table class="table" id="tblItems" style="background-color:dimgrey;color:black;">
+                        <thead style="background-color:dimgrey;color:black;">
+                            <tr class="row">
+                                <th class="col-7 pl-4"><h5>Item</h5></th>
+                                <th class="col-4"><h5>Quantity</h5></th>
+                                <th class="col-1"><h4><i class="fa fa-trash-o"></i></h4></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @*
+                            @if (@Model.OrderItems.Count() > 0)
+                            {
+                                @foreach (var item in @Model.OrderItems)
+                                {
+                                    <tr class="row">
+                                        <td class="col-7">@item.Item.ItemName</td>
+                                        <td class="col-4">@item.QuantityOrdered</td>
+                                        <td class="col-1"><button type="submit" asp-page-handler="removeitem" asp-route-index="@item.ItemID"><i class="fa fa-trash-o"></i></button></td>
+                                    </tr>
+                                }
+
+                            }
+                            else
+                            {
+                                <tr class="row"><td class="col-12 text-center">NO ITEMS</td></tr>
+                            }
+                                *@
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div class="row">
                 <div class="form-group col-6 text-center">

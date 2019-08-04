@@ -70,7 +70,21 @@ namespace CS4790TeamProject.Controllers
             LoadViewData();
             return View(OrdersVM);
         }
+        [HttpPost, ActionName("AddItem")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> OnPostAddItemAsync()
+        {
+            await GetDataFromViewBag();
+            OrdersVM.TempOrderItem.PurchaseOrderID = OrdersVM.PurchaseOrder.PurchaseOrderId;
+            OrdersVM.TempOrderItem.PurchaseOrder = OrdersVM.PurchaseOrder;
+            OrdersVM.OrderItems.Append(OrdersVM.TempOrderItem);
 
+            _context.OrderItem.Add(OrdersVM.TempOrderItem);
+            await _context.SaveChangesAsync();
+            OrdersVM.TempOrderItem = new OrderItem();
+            LoadViewData();
+            return View(OrdersVM);
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(string submit)
@@ -91,7 +105,7 @@ namespace CS4790TeamProject.Controllers
                     _context.PurchaseOrder.Add(OrdersVM.PurchaseOrder);
                     await _context.SaveChangesAsync();
 
-                    return RedirectToPage("./Index");
+                    return RedirectToPage("Index");
                 case "Add Part":
                     if (OrdersVM.OrderItems == null)
                         OrdersVM.OrderItems = new List<OrderItem>();
@@ -223,7 +237,7 @@ namespace CS4790TeamProject.Controllers
         }
         private async Task GetDataFromViewBag()
         {
-            OrdersVM.TempOrderItem.ItemID = Convert.ToInt32(Request.Form["ItemID"]);
+            OrdersVM.TempOrderItem.ItemID = Convert.ToInt32(Request.Form["TempOrderItem.Item.ItemId"]);
             OrdersVM.TempOrderItem.PurchaseOrderID = OrdersVM.PurchaseOrder.PurchaseOrderId; //is this needed? creating a new order, don't know the new PO ID yet
             OrdersVM.TempOrderItem.VendorSKU = Convert.ToString(Request.Form["VendorSKU"]);
             OrdersVM.TempOrderItem.Price = Convert.ToDecimal(Request.Form["Price"]);

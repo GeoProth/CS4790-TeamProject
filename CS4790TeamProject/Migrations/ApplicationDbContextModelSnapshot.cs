@@ -169,6 +169,8 @@ namespace CS4790TeamProject.Migrations
 
                     b.Property<DateTime>("DateOrdered");
 
+                    b.Property<DateTime>("DeliveryDate");
+
                     b.Property<string>("LastModifiedBy");
 
                     b.Property<DateTime>("LastModifiedDate");

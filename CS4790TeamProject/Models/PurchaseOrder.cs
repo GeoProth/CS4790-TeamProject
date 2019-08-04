@@ -18,6 +18,10 @@ namespace CS4790TeamProject.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DateOrdered { get; set; }
+        [Display(Name = "Delivery Date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime DeliveryDate { get; set; }
         [Display(Name="Vendor PO")]
         public string VendorPO { get; set; }
 

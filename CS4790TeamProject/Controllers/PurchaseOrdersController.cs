@@ -19,15 +19,7 @@ namespace CS4790TeamProject.Controllers
         public PurchaseOrdersController(ApplicationDbContext context)
         {
             _context = context;
-            OrdersVM = new OrdersViewModel()
-            {
-                PurchaseOrder = new PurchaseOrder(),
-                OrderItems = _context.OrderItem
-                                      .Include(o => o.Item)
-                                      .Include(o => o.RecievedItems)
-                                      .ToList(),
-                RecievedItems = _context.RecievedItems.Include(r => r.OrderItem).ToList()
-            };
+           
         }
         // GET: PurchaseOrders
         public async Task<IActionResult> Index()
@@ -44,15 +36,7 @@ namespace CS4790TeamProject.Controllers
             return View(applicationDbContext);
 
         }
-        /*
-        public async Task<IActionResult> Index()
-        {
-
-            var applicationDbContext = _context.PurchaseOrder.Include(p => p.Vendor);
-            return View(await applicationDbContext.ToListAsync());
-            
-        }
-        */
+     
         // GET: PurchaseOrders/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -74,55 +58,56 @@ namespace CS4790TeamProject.Controllers
         // GET: PurchaseOrders/Create
         public IActionResult Create()
         {
-            ViewData["VendorID"] = new SelectList(_context.Vendor, "VendorId", "VendorName");
-            ViewData["ItemID"] = new SelectList(_context.Item, "ItemId", "ItemName");
-            ViewData["MeasureID"] = new SelectList(_context.Measures, "MeasureId", "MeasureName");
+            OrdersVM = new OrdersViewModel()
+            {
+                PurchaseOrder = new PurchaseOrder(),
+                OrderItems = new List<OrderItem>(),
+                TempOrderItem = new OrderItem(),
+                Vendor = new Vendor()
 
+            };
+
+            LoadViewData();
             return View(OrdersVM);
         }
 
-        /* // GET: PurchaseOrders/Create
-         public IActionResult Create()
-         {
-             ViewData["VendorID"] = new SelectList(_context.Vendor, "VendorId", "VendorName");
-             return View();
-         }
-         */
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PurchaseOrderId,VendorID,DateOrdered,VendorPO,OrderItems,Received,LastModifiedBy,LastModifiedDate")] PurchaseOrder purchaseOrder)
+        public async Task<IActionResult> Create(string submit)
         {
-            if (ModelState.IsValid)
+            LoadViewData();
+            switch (submit)
             {
-                _context.Add(OrdersVM.PurchaseOrder);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["VendorID"] = new SelectList(_context.Vendor, "VendorId", "VendorName");
-            ViewData["ItemID"] = new SelectList(_context.Item, "ItemId", "ItemName");
-            ViewData["MeasureID"] = new SelectList(_context.Measures, "MeasureId", "MeasureName");
+                case "Create Order":
+                    if (!ModelState.IsValid)
+                    {
+                        return View(OrdersVM);
+                    }
 
-            return View(purchaseOrder);
+                    await GetDataFromViewBag();
+
+                    OrdersVM.PurchaseOrder.LastModifiedBy = User.Identity.Name;
+                    OrdersVM.PurchaseOrder.LastModifiedDate = DateTime.Now;
+                    _context.PurchaseOrder.Add(OrdersVM.PurchaseOrder);
+                    await _context.SaveChangesAsync();
+
+                    return RedirectToPage("./Index");
+                case "Add Part":
+                    if (OrdersVM.OrderItems == null)
+                        OrdersVM.OrderItems = new List<OrderItem>();
+
+                    await GetDataFromViewBag();
+
+                    OrdersVM.OrderItems.Append(OrdersVM.TempOrderItem);
+                    OrdersVM.TempOrderItem = new OrderItem();
+
+                    return View(OrdersVM);
+                default:
+                    return View(OrdersVM);
+            }
         }
 
-        /*
-        // POST: PurchaseOrders/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PurchaseOrderId,VendorID,DateOrdered,VendorPO,Received,LastModifiedBy,LastModifiedDate")] PurchaseOrder purchaseOrder)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(purchaseOrder);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["VendorID"] = new SelectList(_context.Vendor, "VendorId", "VendorId", purchaseOrder.VendorID);
-            return View(purchaseOrder);
-        }
-        */
+   
         // GET: PurchaseOrders/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -136,7 +121,7 @@ namespace CS4790TeamProject.Controllers
             {
                 return NotFound();
             }
-            ViewData["VendorID"] = new SelectList(_context.Vendor, "VendorId", "VendorId", purchaseOrder.VendorID);
+           
             return View(purchaseOrder);
         }
 
@@ -203,7 +188,7 @@ namespace CS4790TeamProject.Controllers
             var purchaseOrder = await _context.PurchaseOrder.FindAsync(id);
             _context.PurchaseOrder.Remove(purchaseOrder);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index");
         }
 
         private bool PurchaseOrderExists(int id)
@@ -228,6 +213,36 @@ namespace CS4790TeamProject.Controllers
             }
 
             return View(purchaseOrder);
+        }
+
+        private void LoadViewData()
+        {
+            ViewData["VendorID"] = new SelectList(_context.Vendor, "VendorId", "VendorName");
+            ViewData["ItemID"] = new SelectList(_context.Item, "ItemId", "ItemName");
+            ViewData["MeasureID"] = new SelectList(_context.Measures, "MeasureId", "MeasureName");
+        }
+        private async Task GetDataFromViewBag()
+        {
+            OrdersVM.TempOrderItem.ItemID = Convert.ToInt32(Request.Form["ItemID"]);
+            OrdersVM.TempOrderItem.PurchaseOrderID = OrdersVM.PurchaseOrder.PurchaseOrderId; //is this needed? creating a new order, don't know the new PO ID yet
+            OrdersVM.TempOrderItem.VendorSKU = Convert.ToString(Request.Form["VendorSKU"]);
+            OrdersVM.TempOrderItem.Price = Convert.ToDecimal(Request.Form["Price"]);
+            OrdersVM.TempOrderItem.QuantityOrdered = Convert.ToInt32(Request.Form["QuantityOrdered"]);
+    
+            OrdersVM.TempOrderItem.LastModifiedBy = User.Identity.Name;
+            OrdersVM.TempOrderItem.LastModifiedDate = DateTime.Now;
+            OrdersVM.TempOrderItem.PurchaseOrder = await _context.PurchaseOrder.FirstOrDefaultAsync(id => id.PurchaseOrderId == Convert.ToInt32(Request.Form["PurchaseOrderID"])); //no PO ID yetv
+            OrdersVM.TempOrderItem.Item = await _context.Item.FirstOrDefaultAsync(id => id.ItemId == Convert.ToInt32(Request.Form["ItemID"]));
+
+            OrdersVM.OrderItems = await _context.OrderItem.Where(id => id.VendorSKU == OrdersVM.TempOrderItem.VendorSKU).ToListAsync(); //need to find orderitems for this purchase order - need to maintain purchase order
+
+           OrdersVM.Vendor.VendorId = Convert.ToInt32(Request.Form["VendorID"]);
+
+            OrdersVM.PurchaseOrder.DeliveryDate = Convert.ToDateTime(Request.Form["DeliveryDate"]);
+            OrdersVM.PurchaseOrder.DateOrdered = Convert.ToDateTime(Request.Form["DateOrdered"]);
+            OrdersVM.PurchaseOrder.VendorPO = Request.Form["VendorSKU"];
+            OrdersVM.PurchaseOrder.Vendor = await _context.Vendor.FirstOrDefaultAsync(a => a.VendorId == Convert.ToInt32(Request.Form["VendorID"]));
+            OrdersVM.PurchaseOrder.VendorID = Convert.ToInt32(Request.Form["VendorID"]);
         }
     }
 }

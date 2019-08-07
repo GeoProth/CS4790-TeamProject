@@ -45,24 +45,13 @@
                 <span asp-validation-for="MaxQty" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="MeasureID" class="control-label"></label>
-                <input asp-for="MeasureID" class="form-control" />
-                <span asp-validation-for="MeasureID" class="text-danger"></span>
+                <label asp-for="MeasureID" class="mr-3">Measure type:</label>
+                <select name="measureID" asp-for="MeasureID" class="form-control" asp-items="@ViewBag.measureID"></select>
             </div>
             <div class="form-group">
                 <label asp-for="MeasureAmnt" class="control-label"></label>
                 <input asp-for="MeasureAmnt" class="form-control" />
                 <span asp-validation-for="MeasureAmnt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LastModifiedBy" class="control-label"></label>
-                <input asp-for="LastModifiedBy" class="form-control" />
-                <span asp-validation-for="LastModifiedBy" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LastModifiedDate" class="control-label"></label>
-                <input asp-for="LastModifiedDate" class="form-control" />
-                <span asp-validation-for="LastModifiedDate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
@@ -74,4 +63,3 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-

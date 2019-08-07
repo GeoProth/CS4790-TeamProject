@@ -12,8 +12,10 @@ namespace CS4790TeamProject.Models
         public int VendorId { get; set; }
         [Display(Name="Vendor Name")]
         public string VendorName { get; set; }
-        [Display(Name="Vendor Address")]
-        public string VendorAddress { get; set; }
+        [Display(Name="Vendor Web Address")]
+        public string VendorWebAddress { get; set; }
+        [Display(Name="Phone Number")]
+        public string VendorPhoneNumber { get; set; }
         public string LastModifiedBy { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]

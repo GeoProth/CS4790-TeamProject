@@ -7,7 +7,7 @@
     <body>
         <h2 style="text-align:center">Create Order</h2>
         <hr />
-        <form method="post">
+        <form method="post" asp-action="Create" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-4">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -40,7 +40,7 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="PurchaseOrder.DeliveryDate" class="control-label">Delivery Date:</label>
-                        <input name="DateDelivered" asp-for="PurchaseOrder.DeliveryDate" class="form-control" />
+                        <input name="DeliveryDate" asp-for="PurchaseOrder.DeliveryDate" class="form-control" />
                         <span asp-validation-for="PurchaseOrder.DeliveryDate" class="text-danger"></span>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                     <div class="form-inline mb-3">
                         <label asp-for="TempOrderItem.Item" class="control-label mr-3">Part:</label>
                         <div class="input-group">
-                            <select name="ItemID" asp-for="TempOrderItem.Item.ItemId" class="form-control" id="partName" asp-items="@ViewBag.ItemID"></select>
+                            <select name="ItemID" asp-for="TempOrderItem.Item.ItemId" class="form-control"  asp-items="@ViewBag.ItemID"></select>
                             <div class="text-right ml-3">
                                 <span class="input-group-append">
                                     <a class="btn btn-sm" data-toggle="modal" data-target="#createPartModal">
@@ -67,7 +67,7 @@
                     </div>
                     <div class="form-inline pl-1 mb-3 fa-pull-right">
                         <label asp-for="TempOrderItem.QuantityOrdered" class="control-label mr-3">Quantity:</label>
-                        <input name="QuantityOrdered" asp-for="TempOrderItem.QuantityOrdered" min="0" id="qntyOrdered" type="number" class="form-control col-4" />
+                        <input name="QuantityOrdered" asp-for="TempOrderItem.QuantityOrdered" min="0"  type="number" class="form-control col-4" />
                         <span asp-validation-for="TempOrderItem.QuantityOrdered" class="text-danger"></span>
                     </div>
                     <div class="form-inline mb-3 fa-pull-right">
@@ -78,7 +78,7 @@
                         <span asp-validation-for="TempOrderItem.Price" class="text-danger"></span>
                     </div>
                     <div class="form-group text-center">
-                        <input name="button" id="btnAddPart" type="button" value="Add Part" class="btn btn-primary fa-pull-right" @*asp-page-handler="AddItem"*@ />
+                        <input name="button"  type="submit" value="Add Part" class="btn btn-primary fa-pull-right" asp-action="CreateAddItems" />
                     </div>
                 </div>
                 <div class="col-1"></div>
@@ -92,7 +92,7 @@
                             </tr>
                         </thead>
                         <tbody style="background-color:dimgrey;color:black;">
-                            @*
+                           
                             @if (@Model.OrderItems.Count() > 0)
                             {
                                 @foreach (var item in @Model.OrderItems)
@@ -107,9 +107,9 @@
                             }
                             else
                             {
-                                <tr class="row"><td class="col-12 text-center">NO ITEMS</td></tr>
+                                <tr class="row"><td class="col-12 text-center">EMPTY</td></tr>
                             }
-                                *@
+                                
                         </tbody>
                     </table>
                 </div>
@@ -125,9 +125,9 @@
         </form>
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-        <script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+<script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
         <script type="text/javascript">
-            $("body").on("click", "#btnAddPart", function () {
+            $("#btnAddPart").click(function () {
                 var partName = $("#partName option:selected").text();
                 var part = $("#partName").val();
                 var qnty = $("#qntyOrdered").val();
@@ -147,7 +147,7 @@
                 cell = $(row.insertCell(-1)).addClass("col-1");
                 var btnRemove = $("<input />");
                 btnRemove.attr("type", "button");
-                btnRemove.attr("onclick", "Remove(this);");
+                btnRemove.attr("onClick", "Remove(this);");
                 btnRemove.append("<i class='fa fa-trash-o'></i>");
                 cell.append(btnRemove);
 

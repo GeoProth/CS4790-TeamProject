@@ -194,40 +194,6 @@ namespace CS4790TeamProject.Controllers
             return View(await _context.Item.ToListAsync());
         }
 
-        public ItemViewModel itemToVM(Item item)
-        {
-            ItemVM = new ItemViewModel();
-
-            ItemVM.itemID = item.ItemId;
-            ItemVM.ItemName = item.ItemName;
-            ItemVM.Description = item.Description;
-            ItemVM.OnhandQty = item.OnhandQty;
-            ItemVM.ListRetailCost = item.ListRetailCost;
-            ItemVM.ReorderQty = item.ReorderQty;
-            ItemVM.MaxQty = item.MaxQty;
-            ItemVM.measureID = item.MeasureID;
-            ItemVM.IsAssemblyItem = item.IsAssemblyItem;
-            ItemVM.measureAmount = item.MeasureAmnt;
-
-            getMeasureList();
-
-            return ItemVM;
-        }
-
-        public void getMeasureList()
-        {
-            ViewData["measureID"] = new SelectList(_context.Measures, "measureID", "measureName");
-            ItemVM.Measures = new List<Measures>();
-
-            List<Measures> tempList = new List<Measures>();
-            tempList = _context.Measures.ToList();
-
-            foreach (Measures measure in tempList)
-            {
-                ItemVM.Measures.Add(measure);
-            }
-        }
-
         private void LoadViewData()
         {
             ViewData["measureID"] = new SelectList(_context.Measures, "MeasureId", "MeasureName");

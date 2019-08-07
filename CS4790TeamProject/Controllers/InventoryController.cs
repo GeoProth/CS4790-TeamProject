@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CS4790TeamProject.Data;
 using CS4790TeamProject.Models;
+using CS4790TeamProject.Models.ViewModels;
+using Microsoft.AspNetCore.Http;
 
 namespace CS4790TeamProject.Controllers
 {
@@ -14,16 +17,12 @@ namespace CS4790TeamProject.Controllers
     {
         private readonly ApplicationDbContext _context;
 
+        public ItemViewModel ItemVM { get; set; }
+
         public InventoryController(ApplicationDbContext context)
         {
             _context = context;
         }
-        /*
-        // GET: Inventory
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.Item.ToListAsync());
-        }*/
 
         public async Task<IActionResult> Index(string searchString)
         {
@@ -60,6 +59,7 @@ namespace CS4790TeamProject.Controllers
         // GET: Inventory/Create
         public IActionResult Create()
         {
+            LoadViewData();
             return View();
         }
 
@@ -72,6 +72,9 @@ namespace CS4790TeamProject.Controllers
         {
             if (ModelState.IsValid)
             {
+                //item.MeasureID = Convert.ToInt32(Request.Form["measureID"]);
+
+
                 _context.Add(item);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -92,6 +95,9 @@ namespace CS4790TeamProject.Controllers
             {
                 return NotFound();
             }
+
+            LoadViewData();
+
             return View(item);
         }
 
@@ -186,6 +192,45 @@ namespace CS4790TeamProject.Controllers
         public async Task<IActionResult> Reorder(int? id)
         {
             return View(await _context.Item.ToListAsync());
+        }
+
+        public ItemViewModel itemToVM(Item item)
+        {
+            ItemVM = new ItemViewModel();
+
+            ItemVM.itemID = item.ItemId;
+            ItemVM.ItemName = item.ItemName;
+            ItemVM.Description = item.Description;
+            ItemVM.OnhandQty = item.OnhandQty;
+            ItemVM.ListRetailCost = item.ListRetailCost;
+            ItemVM.ReorderQty = item.ReorderQty;
+            ItemVM.MaxQty = item.MaxQty;
+            ItemVM.measureID = item.MeasureID;
+            ItemVM.IsAssemblyItem = item.IsAssemblyItem;
+            ItemVM.measureAmount = item.MeasureAmnt;
+
+            getMeasureList();
+
+            return ItemVM;
+        }
+
+        public void getMeasureList()
+        {
+            ViewData["measureID"] = new SelectList(_context.Measures, "measureID", "measureName");
+            ItemVM.Measures = new List<Measures>();
+
+            List<Measures> tempList = new List<Measures>();
+            tempList = _context.Measures.ToList();
+
+            foreach (Measures measure in tempList)
+            {
+                ItemVM.Measures.Add(measure);
+            }
+        }
+
+        private void LoadViewData()
+        {
+            ViewData["measureID"] = new SelectList(_context.Measures, "MeasureId", "MeasureName");
         }
     }
 }

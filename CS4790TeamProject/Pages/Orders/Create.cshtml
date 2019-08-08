@@ -6,6 +6,7 @@
     List<OrderItem> SaveList = new List<OrderItem>();
 
 }
+
 <body>
     <h2 style="text-align:center">Create Order</h2>
     <hr />
@@ -101,11 +102,11 @@
                         @foreach (var item in @Model.OrderItems)
                         {
                             <tr class="row">
-                                <td>@item.ItemID</td>
-                                <td>@item.Item.ItemName</td>
-                                <td>@item.QuantityOrdered</td>
-                                <td>@item.Price</td>
-                                <td>@item.Item.Measure</td>
+                                <td id="iId">@item.ItemID</td>
+                                <td id="iName">@item.Item.ItemName</td>
+                                <td id="iqty">@item.QuantityOrdered</td>
+                                <td id="iprice">@item.Price</td>
+                                <td id="imeasure">@item.Item.Measure</td>
                                 <td><input type="button" class="btn btn-danger" /><i class="fa fa-trash-o"></i></td>
                             </tr>
                         }
@@ -128,25 +129,18 @@
     <script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
 
     <script type="text/javascript">
-        var items = new Array();
-        var tempItem = {};
         $("body").on("click", "#btnAddPart", function () {
             //Reference item boxes stor them in vars
             var txtName = $("#itemInfo option:selected").text();
             var txtmeasure = $("#measure option:selected").text();
-            var sku = $("#sku").val();
-            var measureID = $("#measure").val();
-            var item = $("#itemInfo").val();
-            var txtQty = $("#qntyOrdered").val();
-            var txtPrice = $("#price").val();
-            if (item == null || txtQty == 0 || txtPrice == 0) {
+            var measureID = $("#measure");
+            var itemID = $("#itemInfo");
+            var txtQty = $("#qntyOrdered");
+            var txtPrice = $("#price");
+            //make sure user inputs values
+            if (txtQty == 0 || txtPrice == 0) {
                 return;
             }
-            tempItem.ItemId = item;
-            tempItem.VendorSku = sku;
-            tempItem.Price = txtPrice;
-            tempItem.Qnty = txtQty;
-            
 
             //Get the reference of the Table's TBODY element.
             var tBody = $("#tblItems > TBODY")[0];
@@ -155,19 +149,19 @@
             var row = tBody.insertRow(-1);
 
             var cell = $(row.insertCell(-1));
-            cell.html(item);
+            cell.html(itemID.val());
 
             cell = $(row.insertCell(-1));
             cell.html(txtName);
 
             cell = $(row.insertCell(-1));
-            cell.html(txtQty);
+            cell.html(txtQty.val());
 
             cell = $(row.insertCell(-1));
             cell.html(txtmeasure);
 
             cell = $(row.insertCell(-1));
-            cell.html(txtPrice);
+            cell.html(txtPrice.val());
 
             cell = $(row.insertCell(-1));
             var btnRemove = $("<button>");
@@ -178,16 +172,49 @@
             cell.append(btnRemove);
 
             //clear boxes
-            item.prop('selectedIndex', 0);
+            itemID.prop('selectedIndex', 0);
             measureID.prop('selectedIndex', 0);
             txtQty.val(0);
             txtPrice.val(0);
+
+            var OrderItem = {
+                ItemID: itemID,
+                Price: txtPrice,
+                QuantityOrdered: txtQty
+            };
+            var Item = {
+                ItemID: itemID,
+                MeasureID: measureID
+            };
+
+
+            $.ajax({
+                url: "/Create/AddItem",
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                 beforeSend: function (xhr) {
+                    xhr.setRequestHeader("XSRF-TOKEN",
+                        $('input:hidden[name="_RequestVerificationToken"]').val());
+                },
+                data: JSON.stringify({
+                    Order: OrderItem, It: Item
+                }),
+                cache: false,
+                success: function (r) {
+                    alert(r + " record(s) inserted.");
+                },
+                failure: function (response) {
+                    alert(response);
+                }
+            });
+
         });
 
         function Remove(button) {
             //Determine Row
             var row = $(button).closest("TR");
-            var name = $("TD", row).eq(0).html();
+            var name = $("TD", row).eq(1).html();
             if (confirm("Do you want to delete: " + name)) {
                 var table = $("#tblItems")[0];
                 table.deleteRow(row[0].rowIndex);

@@ -51,20 +51,27 @@ namespace CS4790TeamProject.Pages.Orders
             LoadViewData();
         }
 
-        public ActionResult OnPostAddList(List<OrderItem> listItems)
+        public ActionResult OnPostAddItem(OrderItem OrderItem, Item It)
         {
-            if(listItems == null)
+            if(OrderItems == null)
             {
-                listItems = new List<OrderItem>();
+                OrderItems = new List<OrderItem>();
             }
 
-            foreach(var il in listItems)
-            {
-                _context.OrderItem.Add(il);
-            }
-            int i = _context.SaveChanges();
-            return new JsonResult(i.ToString());
+            TempOrderItem = new OrderItem();
+            TempOrderItem = OrderItem;
+            TempOrderItem.Item = It;
+            OrderItems.Add(TempOrderItem);
+            TempOrderItem = new OrderItem();
+
+            return Json(new { message = "this worked" });
         }
+
+        private ActionResult Json(object p)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task OnPostRemoveItemAsync(int index)
         {
             await _context.OrderItem.FirstOrDefaultAsync(id => id.OrderItemId == index);

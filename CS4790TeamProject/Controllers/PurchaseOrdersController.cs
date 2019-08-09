@@ -75,8 +75,9 @@ namespace CS4790TeamProject.Controllers
             purchaseOrder.DateOrdered = Convert.ToDateTime(Request.Form["DateOrdered"]);
             purchaseOrder.DeliveryDate = Convert.ToDateTime(Request.Form["DeliveryDate"]);
             _context.PurchaseOrder.Add(purchaseOrder);
-            int PoID = await _context.SaveChangesAsync();
-            return RedirectToAction("AddOrderItems", PoID);
+             await _context.SaveChangesAsync();
+            int id = purchaseOrder.PurchaseOrderId;
+            return RedirectToAction("AddOrderItems", new { id = id });
 
         }
         /// <summary>
@@ -87,8 +88,7 @@ namespace CS4790TeamProject.Controllers
         public IActionResult AddOrderItems(int id)
         {
             PurchaseOrder = _context.PurchaseOrder.FirstOrDefault(p => p.PurchaseOrderId == id);
-            ViewData["ItemID"] = new SelectList(_context.Item, "ItemId", "ItemName");
-            ViewData["MeasureID"] = new SelectList(_context.Measures, "MeasureID", "MeasureName");
+            ViewData["Items"] = new SelectList(_context.Item, "ItemId", "ItemName");
             return View(PurchaseOrder);
         }
 

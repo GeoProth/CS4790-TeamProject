@@ -1,15 +1,18 @@
 ﻿@model CS4790TeamProject.Models.PurchaseOrder
 @{
+    ViewData["Title"] = "Add Items";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <body>
+    <h1 style="text-align:center">Add Order Items</h1>
     <table id="tblOrderItems" class="table" cellpadding="0" cellspacing="0">
         <thead>
             <tr>
                 <th style="width:150px">Item ID</th>
                 <th style="width:150px">Price</th>
                 <th style="width:150px">Qty</th>
+                <th style="width:150px"><i class="fa fa-trash-o"></i></th>
                 <th></th>
             </tr>
         </thead>
@@ -26,17 +29,18 @@
                         <td>@item.ItemID</td>
                         <td>@item.Price</td>
                         <td>@item.QuantityOrdered</td>
-                        <td><input type="button" value="Remove" onclick="Remove(this)" /></td>
+                        <td><input type="button" onclick="Remove(this)" /><i class="fa fa-trash-o"></i></td>
                     </tr>
                 }
             }
         </tbody>
         <tfoot>
             <tr>
-                <td><input type="text" id="txtID" /></td>
+                <td><select id="txtID" asp-items="@ViewBag.Items"></select></td>
                 <td><input type="text" id="txtPrice" /></td>
                 <td><input type="text" id="txtQty" /></td>
                 <td><input type="button" id="btnAdd" value="Add" /></td>
+                <td></td>
             </tr>
         </tfoot>
     </table>
@@ -48,6 +52,7 @@
         $("body").on("click", "#btnAdd", function () {
             //Reference the Name and Country TextBoxes.
             var txtID = $("#txtID");
+            //var itemID = $("#txtID");
             var txtPrice = $("#txtPrice");
             var txtQty = $("#txtQty");
 
@@ -73,7 +78,7 @@
             var btnRemove = $("<input />");
             btnRemove.attr("type", "button");
             btnRemove.attr("onclick", "Remove(this);");
-            btnRemove.val("Remove");
+            btnRemove.append("<i class='fa fa-trash-o'></i>");
             cell.append(btnRemove);
 
             //Clear the TextBoxes.
@@ -113,7 +118,7 @@
             //Send the JSON array to Controller using AJAX.
             $.ajax({
                 type: "POST",
-                url: "/Orders/InsertOrderItems",
+                url: "/PurchaseOrders/InsertOrderItems",
                 data: JSON.stringify(items),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",

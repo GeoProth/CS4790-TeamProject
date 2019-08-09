@@ -29,8 +29,6 @@ namespace CS4790TeamProject.Pages.Orders
         public CreateModel(ApplicationDbContext context)
         {
             _context = context;
-            if (OrderItems is null)
-                OrderItems = new List<OrderItem>();
         }
 
         public IActionResult OnGet()
@@ -38,33 +36,58 @@ namespace CS4790TeamProject.Pages.Orders
             LoadViewData();
             return Page();
         }
-
-        public async Task OnPostAddItemAsync()
+        /*
+                public async Task OnPostAddItemAsync()
+                {
+                    await GetDataFromViewBag();
+                    TempOrderItem.PurchaseOrderID = PurchaseOrder.PurchaseOrderId;
+                    TempOrderItem.PurchaseOrder = PurchaseOrder;
+                    OrderItems.Add(TempOrderItem);
+                    _context.OrderItem.Add(TempOrderItem);
+                    await _context.SaveChangesAsync();
+                    TempOrderItem = new OrderItem();
+                    LoadViewData();
+                }
+        */
+        
+        public JsonResult SaveOrder(int vendorId, string vendorPo, DateTime ordered, DateTime delivery, OrderItem[] orderItems)
         {
-            await GetDataFromViewBag();
-            TempOrderItem.PurchaseOrderID = PurchaseOrder.PurchaseOrderId;
-            TempOrderItem.PurchaseOrder = PurchaseOrder;
-            OrderItems.Add(TempOrderItem);
-            _context.OrderItem.Add(TempOrderItem);
-            await _context.SaveChangesAsync();
-            TempOrderItem = new OrderItem();
-            LoadViewData();
-        }
-
-        public ActionResult OnPostAddList(List<OrderItem> listItems)
-        {
-            if(listItems == null)
+            string result = "Error! Order Not Complete!";
+            if (vendorId != 0 && vendorPo != null && ordered != null && delivery != null && orderItems != null)
             {
-                listItems = new List<OrderItem>();
+                //create new purchase order, get id back
+                var purchaseOrder = new PurchaseOrder();
+                purchaseOrder.VendorID = vendorId;
+                purchaseOrder.Vendor = _context.Vendor.FirstOrDefault(v => v.VendorId == vendorId);
+                purchaseOrder.VendorPO = vendorPo;
+                purchaseOrder.DateOrdered = ordered;
+                purchaseOrder.DeliveryDate = delivery;
+                _context.PurchaseOrder.Add(purchaseOrder);
+                _context.SaveChanges();
+                int poID = purchaseOrder.PurchaseOrderId;
+
+                foreach(var item in orderItems)
+                {
+                    var order = new OrderItem();
+                    order.PurchaseOrderID = poID;
+                    order.PurchaseOrder = _context.PurchaseOrder.FirstOrDefault(p => p.PurchaseOrderId == poID);
+                    order.ItemID = item.ItemID;
+                    order.Item = _context.Item.FirstOrDefault(i => i.ItemId == item.ItemID);
+                    order.Price = item.Price;
+                    order.QuantityOrdered = item.QuantityOrdered;
+
+                    _context.OrderItem.Add(order);
+                }
+
+                int inserted = _context.SaveChanges();
+                result = "Success! Order Placed!";
+
             }
 
-            foreach(var il in listItems)
-            {
-                _context.OrderItem.Add(il);
-            }
-            int i = _context.SaveChanges();
-            return new JsonResult(i.ToString());
+            return new JsonResult(result);
         }
+
+        /*
         public async Task OnPostRemoveItemAsync(int index)
         {
             await _context.OrderItem.FirstOrDefaultAsync(id => id.OrderItemId == index);
@@ -135,14 +158,14 @@ namespace CS4790TeamProject.Pages.Orders
             LoadViewData();
             return RedirectToPage("./Create");
         }
-
+*/
         private void LoadViewData()
         {
             ViewData["Vendors"] = new SelectList(_context.Vendor, "VendorId", "VendorName");
             ViewData["Items"] = new SelectList(_context.Item, "ItemId", "ItemName");
             ViewData["Measures"] = new SelectList(_context.Measures, "MeasureId", "MeasureName");
         }
-
+        /*
         private async Task GetDataFromViewBag()
         {
             TempOrderItem.ItemID = Convert.ToInt32(Request.Form["ItemID"]);
@@ -166,5 +189,6 @@ namespace CS4790TeamProject.Pages.Orders
             //PurchaseOrder.Vendor = await _context.Vendor.FirstOrDefaultAsync(a => a.VendorId == Convert.ToInt32(Request.Form["VendorID"]));
             //PurchaseOrder.VendorID = Convert.ToInt32(Request.Form["VendorID"]);
         }
+        */
     }
 }

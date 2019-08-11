@@ -10,7 +10,7 @@ namespace CS4790TeamProject.Models.ViewModels
         
         public PurchaseOrder PurchaseOrder { get; set; }
 
-        public IEnumerable<OrderItem> OrderItems { get; set; }
+        public List<OrderItem> OrderItems { get; set; }
 
         public OrderItem TempOrderItem { get; set; }
 

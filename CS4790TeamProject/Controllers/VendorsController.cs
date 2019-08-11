@@ -73,7 +73,7 @@ namespace CS4790TeamProject.Views.Vendors
             return View(VendorHistoryVM);
         }
 
-        
+        /*
         public async Task<IActionResult> HistoryDetails(int id)
         {
 
@@ -94,7 +94,7 @@ namespace CS4790TeamProject.Views.Vendors
             return View(OrdersViewModels);
 
         }
-        
+   */     
 
             /**
         public async Task<IActionResult> HistoryDetails(int id)

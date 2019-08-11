@@ -18,6 +18,7 @@ namespace CS4790TeamProject.Pages.Orders
 
         [BindProperty]
         public PurchaseOrder PurchaseOrder { get; set; }
+        [BindProperty]
         public List<OrderItem> OrderItems { get; set; }
         [BindProperty]
         public OrderItem TempOrderItem { get; set; }
@@ -29,65 +30,40 @@ namespace CS4790TeamProject.Pages.Orders
         public CreateModel(ApplicationDbContext context)
         {
             _context = context;
+            if (OrderItems is null)
+                OrderItems = new List<OrderItem>();
         }
 
         public IActionResult OnGet()
         {
+            
             LoadViewData();
             return Page();
         }
-        /*
-                public async Task OnPostAddItemAsync()
-                {
-                    await GetDataFromViewBag();
-                    TempOrderItem.PurchaseOrderID = PurchaseOrder.PurchaseOrderId;
-                    TempOrderItem.PurchaseOrder = PurchaseOrder;
-                    OrderItems.Add(TempOrderItem);
-                    _context.OrderItem.Add(TempOrderItem);
-                    await _context.SaveChangesAsync();
-                    TempOrderItem = new OrderItem();
-                    LoadViewData();
-                }
-        */
-        
-        public JsonResult SaveOrder(int vendorId, string vendorPo, DateTime ordered, DateTime delivery, OrderItem[] orderItems)
+
+        public async Task OnPostAddItemAsync()
         {
-            string result = "Error! Order Not Complete!";
-            if (vendorId != 0 && vendorPo != null && ordered != null && delivery != null && orderItems != null)
-            {
-                //create new purchase order, get id back
-                var purchaseOrder = new PurchaseOrder();
-                purchaseOrder.VendorID = vendorId;
-                purchaseOrder.Vendor = _context.Vendor.FirstOrDefault(v => v.VendorId == vendorId);
-                purchaseOrder.VendorPO = vendorPo;
-                purchaseOrder.DateOrdered = ordered;
-                purchaseOrder.DeliveryDate = delivery;
-                _context.PurchaseOrder.Add(purchaseOrder);
-                _context.SaveChanges();
-                int poID = purchaseOrder.PurchaseOrderId;
+            //await GetDataFromViewBag();
+            TempOrderItem.ItemID = Convert.ToInt32(Request.Form["ItemID"]);
+            TempOrderItem.PurchaseOrderID = PurchaseOrder.PurchaseOrderId; 
+            TempOrderItem.VendorSKU = Convert.ToString(Request.Form["VendorSKU"]);
+            TempOrderItem.Price = Convert.ToDecimal(Request.Form["Price"]);
+            TempOrderItem.QuantityOrdered = Convert.ToInt32(Request.Form["QuantityOrdered"]);
+            TempOrderItem.Item = await _context.Item.FirstOrDefaultAsync(id => id.ItemId == Convert.ToInt32(Request.Form["ItemID"]));
 
-                foreach(var item in orderItems)
-                {
-                    var order = new OrderItem();
-                    order.PurchaseOrderID = poID;
-                    order.PurchaseOrder = _context.PurchaseOrder.FirstOrDefault(p => p.PurchaseOrderId == poID);
-                    order.ItemID = item.ItemID;
-                    order.Item = _context.Item.FirstOrDefault(i => i.ItemId == item.ItemID);
-                    order.Price = item.Price;
-                    order.QuantityOrdered = item.QuantityOrdered;
+            TempOrderItem.LastModifiedBy = User.Identity.Name;
+            TempOrderItem.LastModifiedDate = DateTime.Now;
 
-                    _context.OrderItem.Add(order);
-                }
-
-                int inserted = _context.SaveChanges();
-                result = "Success! Order Placed!";
-
-            }
-
-            return new JsonResult(result);
+            TempOrderItem.PurchaseOrder = PurchaseOrder;
+            OrderItems.Add(TempOrderItem);
+            _context.OrderItem.Add(TempOrderItem);
+           
+            await _context.SaveChangesAsync();
+            OrderItems = _context.OrderItem.Where(o => o.PurchaseOrderID == TempOrderItem.PurchaseOrderID).ToList();
+            TempOrderItem = new OrderItem();
+            LoadViewData();
         }
 
-        /*
         public async Task OnPostRemoveItemAsync(int index)
         {
             await _context.OrderItem.FirstOrDefaultAsync(id => id.OrderItemId == index);
@@ -113,7 +89,6 @@ namespace CS4790TeamProject.Pages.Orders
                     PurchaseOrder.LastModifiedDate = DateTime.Now;
                     _context.PurchaseOrder.Add(PurchaseOrder);
                     await _context.SaveChangesAsync();
-                    OrderItems.Clear();
 
                     return RedirectToPage("./Index");
                 case "Add Part":
@@ -131,64 +106,35 @@ namespace CS4790TeamProject.Pages.Orders
             }
         }
 
-        public async Task<IActionResult> OnPostCreateVendorAsync()
-        {
-            if (string.IsNullOrEmpty(Vendor.VendorName) || string.IsNullOrEmpty(Vendor.VendorAddress))
-                return Page();
 
-            Vendor.LastModifiedBy = User.Identity.Name;
-            Vendor.LastModifiedDate = DateTime.Now;
-            _context.Vendor.Add(Vendor);
-            await _context.SaveChangesAsync();
-
-            LoadViewData();
-            return RedirectToPage("./Create");
-        }
-
-        public async Task<IActionResult> OnPostCreateItemAsync()
-        {
-            if (string.IsNullOrEmpty(Item.ItemName))
-                return Page();
-
-            Item.LastModifiedBy = User.Identity.Name;
-            Item.LastModifiedDate = DateTime.Now;
-            _context.Item.Add(Item);
-            await _context.SaveChangesAsync();
-
-            LoadViewData();
-            return RedirectToPage("./Create");
-        }
-*/
         private void LoadViewData()
         {
             ViewData["Vendors"] = new SelectList(_context.Vendor, "VendorId", "VendorName");
             ViewData["Items"] = new SelectList(_context.Item, "ItemId", "ItemName");
             ViewData["Measures"] = new SelectList(_context.Measures, "MeasureId", "MeasureName");
         }
-        /*
         private async Task GetDataFromViewBag()
         {
             TempOrderItem.ItemID = Convert.ToInt32(Request.Form["ItemID"]);
-            TempOrderItem.PurchaseOrderID = PurchaseOrder.PurchaseOrderId;
+            TempOrderItem.PurchaseOrderID = PurchaseOrder.PurchaseOrderId; //is this needed? creating a new order, don't know the new PO ID yet
             TempOrderItem.VendorSKU = Convert.ToString(Request.Form["VendorSKU"]);
             TempOrderItem.Price = Convert.ToDecimal(Request.Form["Price"]);
             TempOrderItem.QuantityOrdered = Convert.ToInt32(Request.Form["QuantityOrdered"]);
            
             TempOrderItem.LastModifiedBy = User.Identity.Name;
             TempOrderItem.LastModifiedDate = DateTime.Now;
-            PurchaseOrder.Vendor = await _context.Vendor.FirstOrDefaultAsync(v => v.VendorId == Convert.ToInt32(Request.Form["VendorID"]));
-            PurchaseOrder.VendorID = Convert.ToInt32(Request.Form["VendorID"]);
+            TempOrderItem.PurchaseOrder = await _context.PurchaseOrder.FirstOrDefaultAsync(id => id.PurchaseOrderId == Convert.ToInt32(Request.Form["PurchaseOrderID"])); //no PO ID yetv
             TempOrderItem.Item = await _context.Item.FirstOrDefaultAsync(id => id.ItemId == Convert.ToInt32(Request.Form["ItemID"]));
-            OrderItems = await _context.OrderItem.Where(id => id.VendorSKU == TempOrderItem.VendorSKU).ToListAsync();
-            Vendor.VendorId = Convert.ToInt32(Request.Form["VendorID"]);
-            TempOrderItem.PurchaseOrder = await _context.PurchaseOrder.FirstOrDefaultAsync(id => id.PurchaseOrderId == Convert.ToInt32(Request.Form["PurchaseOrderID"])); 
 
-            PurchaseOrder.DeliveryDate = Convert.ToDateTime(Request.Form["DeliveryDate"]);
+            OrderItems = await _context.OrderItem.Where(id => id.VendorSKU == TempOrderItem.VendorSKU).ToListAsync(); //need to find orderitems for this purchase order - need to maintain purchase order
+
+            Vendor.VendorId = Convert.ToInt32(Request.Form["VendorID"]);
+
+            PurchaseOrder.DeliveryDate = Convert.ToDateTime(Request.Form["DateDelivered"]);
             PurchaseOrder.DateOrdered = Convert.ToDateTime(Request.Form["DateOrdered"]);
             PurchaseOrder.VendorPO = Request.Form["VendorSKU"];
-            //PurchaseOrder.Vendor = await _context.Vendor.FirstOrDefaultAsync(a => a.VendorId == Convert.ToInt32(Request.Form["VendorID"]));
-            //PurchaseOrder.VendorID = Convert.ToInt32(Request.Form["VendorID"]);
+            PurchaseOrder.Vendor = await _context.Vendor.FirstOrDefaultAsync(a => a.VendorId == Convert.ToInt32(Request.Form["VendorID"]));
+            PurchaseOrder.VendorID = Convert.ToInt32(Request.Form["VendorID"]);
         }
-        */
     }
 }

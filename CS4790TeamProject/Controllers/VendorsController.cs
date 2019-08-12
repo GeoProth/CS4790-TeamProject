@@ -81,7 +81,7 @@ namespace CS4790TeamProject.Views.Vendors
             {
                 PurchaseOrder = new Models.PurchaseOrder(),
                 OrderItems = _context.OrderItem
-                    .Where(m => m.PurchaseOrderID == id)
+                    .Where(m => m.PurchaseOrderID == id).ToList()
 
             };
 
@@ -94,18 +94,7 @@ namespace CS4790TeamProject.Views.Vendors
             return View(OrdersViewModels);
 
         }
-        
-
-            /**
-        public async Task<IActionResult> HistoryDetails(int id)
-        {
-            var order = _context.OrderItem
-                .FirstOrDefaultAsync(m => m.PurchaseOrderID == id);
-
-            return View(order);
-        }
-    **/
-
+       
 
         // GET: Vendors/Create
         public IActionResult Create()

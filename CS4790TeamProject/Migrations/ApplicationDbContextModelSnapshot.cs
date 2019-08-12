@@ -94,6 +94,8 @@ namespace CS4790TeamProject.Migrations
 
                     b.Property<string>("Description");
 
+                    b.Property<bool>("IsAssemblyItem");
+
                     b.Property<string>("ItemName");
 
                     b.Property<string>("LastModifiedBy");
@@ -248,9 +250,11 @@ namespace CS4790TeamProject.Migrations
 
                     b.Property<DateTime>("LastModifiedDate");
 
-                    b.Property<string>("VendorAddress");
-
                     b.Property<string>("VendorName");
+
+                    b.Property<string>("VendorPhoneNumber");
+
+                    b.Property<string>("VendorWebAddress");
 
                     b.HasKey("VendorId");
 
@@ -432,7 +436,7 @@ namespace CS4790TeamProject.Migrations
 
             modelBuilder.Entity("CS4790TeamProject.Models.AssemblyRecipe", b =>
                 {
-                    b.HasOne("CS4790TeamProject.Models.Item")
+                    b.HasOne("CS4790TeamProject.Models.Item", "Item")
                         .WithMany("AssemblyRecipes")
                         .HasForeignKey("ItemID")
                         .OnDelete(DeleteBehavior.Cascade);

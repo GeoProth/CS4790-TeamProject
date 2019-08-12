@@ -90,3 +90,4 @@ C:\Users\gprot\Desktop\CS4790\TeamProject\CS4790-TeamProject\CS4790TeamProject\o
 C:\Users\gprot\Desktop\CS4790\TeamProject\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\CS4790TeamProject.pdb
 C:\Users\gprot\Desktop\CS4790\TeamProject\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\CS4790TeamProject.csproj.CopyComplete
 C:\Users\gprot\Desktop\CS4790\TeamProject\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\CS4790TeamProject.csprojAssemblyReference.cache
+C:\Users\gprot\Desktop\CS4790\TeamProject\CS4790-TeamProject\CS4790TeamProject\obj\Debug\netcoreapp2.2\Razor\Views\Assembly\Assemble.g.cshtml.cs

@@ -17,7 +17,7 @@ namespace CS4790TeamProject.Controllers
     {
         private readonly ApplicationDbContext _context;
 
-        public ItemViewModel ItemVM { get; set; }
+        //public ItemViewModel ItemVM { get; set; }
 
         public InventoryController(ApplicationDbContext context)
         {

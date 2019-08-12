@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CS4790TeamProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190803231406_AddedDeliveryDate")]
-    partial class AddedDeliveryDate
+    [Migration("20190812212703_StartingNewDB")]
+    partial class StartingNewDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -95,6 +95,8 @@ namespace CS4790TeamProject.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description");
+
+                    b.Property<bool>("IsAssemblyItem");
 
                     b.Property<string>("ItemName");
 
@@ -250,9 +252,11 @@ namespace CS4790TeamProject.Migrations
 
                     b.Property<DateTime>("LastModifiedDate");
 
-                    b.Property<string>("VendorAddress");
-
                     b.Property<string>("VendorName");
+
+                    b.Property<string>("VendorPhoneNumber");
+
+                    b.Property<string>("VendorWebAddress");
 
                     b.HasKey("VendorId");
 
@@ -434,7 +438,7 @@ namespace CS4790TeamProject.Migrations
 
             modelBuilder.Entity("CS4790TeamProject.Models.AssemblyRecipe", b =>
                 {
-                    b.HasOne("CS4790TeamProject.Models.Item")
+                    b.HasOne("CS4790TeamProject.Models.Item", "Item")
                         .WithMany("AssemblyRecipes")
                         .HasForeignKey("ItemID")
                         .OnDelete(DeleteBehavior.Cascade);

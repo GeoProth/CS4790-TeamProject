@@ -12,9 +12,9 @@
             <div class="col-4">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group mb-0">
-                    <label asp-for="PurchaseOrder.Vendor.VendorName" class="control-label">Vendor:</label>
+                    <label asp-for="@Model.PurchaseOrder.Vendor.VendorId" class="control-label">Vendor:</label>
                     <div class="input-group">
-                        <select asp-for="PurchaseOrder.Vendor.VendorName" class="form-control" id="vendorID" name="VendorID" asp-items="@ViewBag.Vendors"></select>
+                        <select asp-for="@Model.PurchaseOrder.Vendor.VendorId" class="form-control" id="vendorID" name="VendorID" asp-items="@ViewBag.Vendors"></select>
                         <div class="col-1 text-right">
                             <span class="input-group-append">
                                 <a class="btn btn-sm" data-toggle="modal" data-target="#createVendorModal">
@@ -25,23 +25,23 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label asp-for="PurchaseOrder.DateOrdered" class="control-label">Order Date:</label>
-                    <input name="DateOrdered" asp-for="PurchaseOrder.DateOrdered" id="dateOrdered" class="form-control" />
-                    <span asp-validation-for="PurchaseOrder.DateOrdered" class="text-danger"></span>
+                    <label asp-for="@Model.PurchaseOrder.DateOrdered" class="control-label">Order Date:</label>
+                    <input name="DateOrdered" asp-for="@Model.PurchaseOrder.DateOrdered" id="dateOrdered" class="form-control" />
+                    <span asp-validation-for="@Model.PurchaseOrder.DateOrdered" class="text-danger"></span>
 
                 </div>
             </div>
             <div class="col-2"></div>
             <div class="col-4">
                 <div class="form-group mb-2">
-                    <label asp-for="PurchaseOrder.VendorPO" class="control-label">Vendor PO:</label>
-                    <input name="VendorSKU" asp-for="PurchaseOrder.VendorPO" id="vendorPO" class="form-control" />
-                    <span asp-validation-for="PurchaseOrder.VendorPO" class="text-danger"></span>
+                    <label asp-for="@Model.PurchaseOrder.VendorPO" class="control-label">Vendor PO:</label>
+                    <input name="VendorSKU" asp-for="@Model.PurchaseOrder.VendorPO" id="vendorPO" class="form-control" />
+                    <span asp-validation-for="@Model.PurchaseOrder.VendorPO" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="PurchaseOrder.DeliveryDate" class="control-label">Delivery Date:</label>
-                    <input name="DeliveryDate" asp-for="PurchaseOrder.DeliveryDate" id="deliveryDate" class="form-control" />
-                    <span asp-validation-for="PurchaseOrder.DeliveryDate" class="text-danger"></span>
+                    <label asp-for="@Model.PurchaseOrder.DeliveryDate" class="control-label">Delivery Date:</label>
+                    <input name="DeliveryDate" asp-for="@Model.PurchaseOrder.DeliveryDate" id="deliveryDate" class="form-control" />
+                    <span asp-validation-for="@Model.PurchaseOrder.DeliveryDate" class="text-danger"></span>
                 </div>
             </div>
         </div>
@@ -49,9 +49,9 @@
         <div class="row border p-3 mb-3">
             <div class="col-4">
                 <div class="form-inline mb-3">
-                    <label asp-for="TempOrderItem.Item.ItemId" class="control-label">Part:</label>
+                    <label asp-for="@Model.TempOrderItem.Item.ItemId" class="control-label">Part:</label>
                     <div class="input-group">
-                        <select id="itemInfo" name="ItemID" asp-for="TempOrderItem.Item.ItemId" class="form-control" asp-items="@ViewBag.Items"></select>
+                        <select id="itemInfo" name="ItemID" asp-for="@Model.TempOrderItem.Item.ItemId" class="form-control" asp-items="@ViewBag.Items"></select>
                         <div class="text-right ml-3">
                             <span class="input-group-append">
                                 <a class="btn btn-sm" data-toggle="modal" data-target="#createPartModal">
@@ -60,26 +60,27 @@
                             </span>
                         </div>
                     </div>
-                </div>
+                </div>@*
                 <div class="form-inline pl-1 mb-3 fa-pull-right">
-                    <label asp-for="TempOrderItem.Item.MeasureID" class="control-label mr-3">Unit of Measure</label>
-                    <select asp-for="TempOrderItem.Item.MeasureID" name="MeasureID" class="form-control" asp-items="@ViewBag.Measures"></select>
-                    <span asp-validation-for="TempOrderItem.Item.MeasureID" class="text-danger"></span>
+                    <label asp-for="@Model.TempOrderItem.Item.MeasureID" class="control-label mr-3">Unit of Measure</label>
+                    <select asp-for="@Model.TempOrderItem.Item.MeasureID" name="MeasureID" class="form-control" asp-items="@ViewBag.Measures"></select>
+                    <span asp-validation-for="@Model.TempOrderItem.Item.MeasureID" class="text-danger"></span>
                 </div>
+                          *@
                 <div class="form-inline pl-1 mb-3 fa-pull-right">
-                    <label asp-for="TempOrderItem.QuantityOrdered" class="control-label mr-3">Quantity:</label>
-                    <input id="qntyOrdered" name="QntyOrdered" asp-for="TempOrderItem.QuantityOrdered" min="0" type="number" class="form-control col-4" />
-                    <span asp-validation-for="TempOrderItem.QuantityOrdered" class="text-danger"></span>
+                    <label asp-for="@Model.TempOrderItem.QuantityOrdered" class="control-label mr-3">Quantity:</label>
+                    <input id="qntyOrdered" name="QntyOrdered" asp-for="@Model.TempOrderItem.QuantityOrdered" min="0" type="number" class="form-control col-4" />
+                    <span asp-validation-for="@Model.TempOrderItem.QuantityOrdered" class="text-danger"></span>
                 </div>
                 <div class="form-inline mb-3 fa-pull-right">
-                    <label asp-for="TempOrderItem.Price" class="control-label mr-3">Price:</label>
+                    <label asp-for="@Model.TempOrderItem.Price" class="control-label mr-3">Price:</label>
                     <div class="form-inline">
-                        $<input id="price" name="Price" asp-for="TempOrderItem.Price" class="form-control ml-1 col-4" />
+                        $<input id="price" name="Price" asp-for="@Model.TempOrderItem.Price" class="form-control ml-1 col-4" />
                     </div>
-                    <span asp-validation-for="TempOrderItem.Price" class="text-danger"></span>
+                    <span asp-validation-for="@Model.TempOrderItem.Price" class="text-danger"></span>
                 </div>
                 <div class="form-group text-center">
-                    <input type="submit" name="submitButton" value="Add Part" @*id="btnAddPart"*@ class="btn btn-primary fa-pull-right" />
+                    <input type="button" name="submitButton" value="Add Part" id="btnAddPart" class="btn btn-primary fa-pull-right" />
                 </div>
             </div>
             <div class="col-1"></div>
@@ -87,44 +88,30 @@
                 <table id="tblItems" class="table table-striped p-0" style="width:100%">
                     <thead class="thead-dark table-bordered border-primary">
                         <tr class="card-header">
-                            <th><h5>Item</h5></th>
+                            <th><h5>ID</h5></th>
+                            <th><h5>Name</h5></th>
                             <th><h5>Quantity</h5></th>
                             <th><h5>Price</h5></th>
                             <th class="pl-4"><h5><i class="fa fa-trash-o"></i></h5></th>
                         </tr>
                     </thead>
                     <tbody style="background-color:dimgray;color:black">
-                        @if (Model.OrderItems.Count() > 0)
-                        {
-                            @foreach (var item in @Model.OrderItems)
-                            {
-                                <tr class="row">
-                                    <td>@item.Item.ItemName</td>
-                                    <td>@item.QuantityOrdered</td>
-                                    <td>@item.Price</td>
-                                    <td><input type="submit" name="submitButton" class="btn btn-danger btn-sm" value="Remove"/>@*<i class="fa fa-trash-o"></i>*@</td>
-                                </tr>
-                            }
-                        }
-                        else
-                        {
-                            <tr class="row"><td class="col-12 text-center">EMPTY</td></tr>
-                        }
-
+                        
+        
                     </tbody>
                 </table>
             </div>
         </div>
         <div class="row">
             <div class="form-group col-6 text-center">
-                <input type="submit" name="submitButton" @*id="btnSave"*@ value="Create Order" class="btn btn-success" />
+                <input type="button" name="submitButton" id="btnSave" value="Create Order" class="btn btn-success" />
             </div>
             <div class="col-6 text-center">
                 <a class="btn btn-danger" style="width:auto;" asp-action="Index">Cancel</a>
             </div>
         </div>
     </form>
-    @*
+
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
 
@@ -136,7 +123,12 @@
             var item = $("#itemInfo");
             var txtQty = $("#qntyOrdered");
             var txtPrice = $("#price");
-            if (item == null || txtQty == 0 || txtPrice == 0) {
+            if (txtQty.val() == 0) {
+                alert("Missing Quantity!");
+                return;
+            }
+            if (txtPrice.val() == 0) {
+                alert("Missing Price!");
                 return;
             }
 
@@ -147,15 +139,20 @@
             var row = tBody.insertRow(-1);
 
             var cell = $(row.insertCell(-1));
+            cell.attr("style", "text-align:center");
             cell.html(item.val());
+            
 
             cell = $(row.insertCell(-1));
+            cell.attr("style", "text-align:center");
             cell.html(txtName);
 
             cell = $(row.insertCell(-1));
+            cell.attr("style", "text-align:center");
             cell.html(txtQty.val());
 
             cell = $(row.insertCell(-1));
+            cell.attr("style", "text-align:center");
             cell.html(txtPrice.val());
 
             cell = $(row.insertCell(-1));
@@ -182,32 +179,42 @@
             }
         };
 
+      
         $("body").on("click", "#btnSave", function () {
             //Loop through tabel rows and build a JSON array.
-            var orderArr = [];
-            orderArr.length = 0;
+            var PurchaseOrder = {
+                VendorID: $("#vendorID").val(),
+                VendorPO: $("#vendorPO").val(),
+                DateOrdered: $("DeliveryDate").val(),
+                DeliveryDate: $("DeliveryDate").val(),
+            }
+
+            var OrderItems = new Array();
             $("#tblItems TBODY TR").each(function () {
-                orderArr.push({
-                    itemID: $(this).find("TD").eq(0).html(),
-                    qnty: $(this).find("TD").eq(2).html(),
-                    price: $(this).find("TD").eq(3).html()
-                });
+                var row = $(this);
+                var OrderItem = {
+                    ItemID: row.find("TD").eq(0).html(),
+                    Price: row.find("TD").eq(3).html(),
+                    QuantityOrdered: row.find("TD").eq(2).html(),
+                };
+                OrderItems.push(OrderItem);
             });
 
-            var data = JSON.stringify({
-                vendorID: $("#vendorID").val(),
-                vendorPO: $("#vendorPO").val(),
-                dateOrdered: $("#dateOrdered").val(),
-                deliveryDate: $("#deliveryDate").val(),
-                items: orderArr
-            });
-
-            console.log(data);
+            var Vendor = {
+                VendorId: $("#vendorID").val()
+            }
+            var model = {
+                "PurchaseOrder": PurchaseOrder,
+                "OrderItems": OrderItems,
+                "Vendor": Vendor
+            }
+  
+            console.log(model);
 
             $.ajax({
                 type: "POST",
-                url: "@Url.Action("", "Orders")",
-                data: data,
+                url: "@Url.Action("SaveOrder","PurchaseOrders")",
+                data: model,
                 headers: {
                     RequestVerificationToken:
                         $('input:hidden[name="__RequestVerificationToken"]').val(),
@@ -216,7 +223,7 @@
                 },
 
                 success: function (r) {
-                    alert(r + " Order inserted.");
+                    alert(r);
                     location.reload();
                 },
                 error: function (xhr, status, error) {
@@ -226,5 +233,5 @@
         });
 
     </script>
-    *@
+ 
 </body>

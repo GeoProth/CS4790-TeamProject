@@ -8,6 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using CS4790TeamProject.Data;
 using CS4790TeamProject.Models;
 using CS4790TeamProject.Models.ViewModels;
+using Newtonsoft.Json;
+using System.Web;
+
 
 namespace CS4790TeamProject.Controllers
 {
@@ -66,30 +69,69 @@ namespace CS4790TeamProject.Controllers
         // GET: PurchaseOrders/Create
         public IActionResult Create()
         {
-            
+        
             LoadViewData();
             return View(OrdersVM);
         }
-       
         [HttpPost]
-        public async Task<IActionResult> Create(OrdersViewModel model, string submitButton)
+        public async Task<JsonResult> SaveOrder(OrdersViewModel model)
+        {
+            string result;
+            if(model.Vendor.VendorId == 0 || model.PurchaseOrder.DateOrdered == null || model.PurchaseOrder.DeliveryDate == null || model.OrderItems == null)
+            {
+                result = "Error! Form not Complete!";
+                return Json(result);
+            }
+            //get the purchase Order and add its properties
+            var purchase = model.PurchaseOrder;
+            purchase.LastModifiedBy = User.Identity.Name;
+            purchase.LastModifiedDate = DateTime.Now;
+            purchase.Vendor = await _context.Vendor.FirstOrDefaultAsync(v => v.VendorId == purchase.VendorID);
+            //store purchase order and get Id
+            _context.PurchaseOrder.Add(purchase);
+             await _context.SaveChangesAsync();//new purchase order id
+
+            //Now add OrderItems with Purchase Id
+            foreach (OrderItem oi in model.OrderItems)
+            {
+                //add the purchase order Id
+                oi.PurchaseOrderID = purchase.PurchaseOrderId;
+                //add the Item
+                oi.Item = await _context.Item.FirstOrDefaultAsync(i => i.ItemId == oi.ItemID);
+                oi.Price = Convert.ToDecimal(oi.Price);
+                oi.LastModifiedBy = User.Identity.Name;
+                oi.LastModifiedDate = DateTime.Now;
+                _context.OrderItem.Add(oi);
+                await _context.SaveChangesAsync();
+
+            }
+            // save changes
+            result = "Purchase Order# " + purchase.PurchaseOrderId.ToString() + " Confirmed.";
+            return Json(result);
+            
+        }
+
+       /*
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(OrdersViewModel OrdersVM, string submitButton)
         {
             if (!ModelState.IsValid) {
-                return View("Create", model);
+                return View("Create", OrdersVM);
             }
             if (submitButton == "Add Part")
             {
-                if (model.TempOrderItem == null)
+                if (OrdersVM.TempOrderItem == null)
                 {
-                    model.TempOrderItem = new OrderItem();
+                    OrdersVM.TempOrderItem = new OrderItem();
                 }
-                model.TempOrderItem.ItemID = Convert.ToInt32(Request.Form["ItemID"]);
-                model.TempOrderItem.Item = _context.Item.FirstOrDefault(i => i.ItemId == model.TempOrderItem.ItemID);
-                model.TempOrderItem.Item.MeasureID = Convert.ToInt32(Request.Form["MeasureID"]);
-                model.TempOrderItem.Price = Convert.ToDecimal(Request.Form["Price"]);
-                model.TempOrderItem.QuantityOrdered = Convert.ToInt32(Request.Form["QntyOrdered"]);
-                model.TempOrderItem.LastModifiedBy = User.Identity.Name;
-                model.TempOrderItem.LastModifiedDate = DateTime.Now;
+                OrdersVM.TempOrderItem.ItemID = Convert.ToInt32(Request.Form["ItemID"]);
+                OrdersVM.TempOrderItem.Item = _context.Item.FirstOrDefault(i => i.ItemId == OrdersVM.TempOrderItem.ItemID);
+                OrdersVM.TempOrderItem.Item.MeasureID = Convert.ToInt32(Request.Form["MeasureID"]);
+                OrdersVM.TempOrderItem.Price = Convert.ToDecimal(Request.Form["Price"]);
+                OrdersVM.TempOrderItem.QuantityOrdered = Convert.ToInt32(Request.Form["QntyOrdered"]);
+                OrdersVM.TempOrderItem.LastModifiedBy = User.Identity.Name;
+                OrdersVM.TempOrderItem.LastModifiedDate = DateTime.Now;
 
                 //_context.OrderItem.Add(model.TempOrderItem);
                 // await _context.SaveChangesAsync();
@@ -97,7 +139,7 @@ namespace CS4790TeamProject.Controllers
                 {
                     OrdersVM.OrderItems = new List<OrderItem>();
                 }
-                OrdersVM.OrderItems.Add(model.TempOrderItem);
+                OrdersVM.OrderItems.Add(OrdersVM.TempOrderItem);
                 LoadViewData();
                 return View(OrdersVM);
                 }
@@ -113,7 +155,7 @@ namespace CS4790TeamProject.Controllers
 
             return View(nameof(Index));
         }
-   
+   */
         // GET: PurchaseOrders/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {

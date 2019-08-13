@@ -70,24 +70,24 @@
         </tr>
     </thead>
     <tbody>
-        
-         @foreach (OrderItem item in Model.OrderItems)
-             {
-                 <tr>
-                     <td style="text-align:center">
-                         @Html.DisplayFor(modelItem => item.Item.ItemName)
-                     </td>
-                     <td style="text-align:center">
-                         @Html.DisplayFor(modelItem => item.QuantityOrdered)
-                     </td>
-                     <td style="text-align:center">
-                         @Html.DisplayFor(modelItem => item.Item.Measure.MeasureName)
-                     </td>
-                     <td style="text-align:center">
-                         @Html.DisplayFor(modelItem => item.Price)
-                     </td>
-                 </tr>
-            } 
+
+        @foreach (OrderItem item in Model.OrderItems)
+        {
+            <tr>
+                <td style="text-align:center">
+                    @Html.DisplayFor(modelItem => item.Item.ItemName)
+                </td>
+                <td style="text-align:center">
+                    @Html.DisplayFor(modelItem => item.QuantityOrdered)
+                </td>
+                <td style="text-align:center">
+                    @Html.DisplayFor(modelItem => item.Item.Measure.MeasureName)
+                </td>
+                <td style="text-align:center">
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
 <div>
@@ -95,11 +95,3 @@
     <a asp-action="Edit" asp-route-id="@Model.PurchaseOrderId" class="btn btn-success btn-sm" style="padding-right:5em">Edit</a>
     <a asp-action="Delete" asp-route-id="@Model.PurchaseOrderId" class="btn btn-danger btn-sm">Delete</a>
 </div>
-
-<style type="text/css">
-    .container {
-        display: flex;
-        justify-content: space-between;
-        margin-right: 10em;
-    }
-</style>

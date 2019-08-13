@@ -22,7 +22,7 @@ namespace CS4790TeamProject.Controllers
         public OrdersViewModel OrdersVM { get; set; }
 
         [BindProperty]
-        public RecieveViewModel ReceiveVM { get; set; }
+        public ReceiveViewModel ReceiveVM { get; set; }
         public PurchaseOrdersController(ApplicationDbContext context)
         {
             _context = context;

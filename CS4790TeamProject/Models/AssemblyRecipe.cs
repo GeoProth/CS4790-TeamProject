@@ -13,12 +13,15 @@ namespace CS4790TeamProject.Models
         public int AssemblyRecipeId { get; set; }
         [Display(Name = "Assembly Name")]
         public string RecipeName { get; set; }
+
         public int ItemID { get; set; }
 
         public virtual ICollection<RecipeLine> RecipeLines { get; set; }
 
         [ForeignKey("ItemID")]
         public virtual Item Item { get; set; }
+
+
     }
 }
 

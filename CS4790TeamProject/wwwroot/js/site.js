@@ -38,6 +38,13 @@ $(document).ready(function () {
         ]
     });
 
+    var table5 = $('#table_assemblies1').DataTable({
+        responsive: true
+
+
+
+    })
+
     $("#myInput").on("keyup", function () {
         var value = $(this).val().toLowerCase();
         $("#myList li").filter(function () {

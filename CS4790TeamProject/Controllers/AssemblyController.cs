@@ -68,20 +68,32 @@ namespace CS4790TeamProject.Controllers
         // GET: Assembly/Create
         public IActionResult Create()
         {
-            ViewData["ItemID"] = new SelectList(_context.Item, "ItemId", "ItemName");
             AssemblyRecipeVM = new AssemblyRecipeViewModel();
+
+
+            ViewData["ItemID"] = new SelectList(_context.Item, "ItemId", "ItemName");
             AssemblyRecipeVM.allItems = new List<Item>();
+            List<Item> tempItemList = new List<Item>();
+            tempItemList = _context.Item.ToList();
 
-            List<Item> tempList = new List<Item>();
-            tempList = _context.Item.ToList();
-
-            foreach(Item item in tempList)
+            foreach (Item item in tempItemList)
             {
-                if(item.IsAssemblyItem == false)
+                if (item.IsAssemblyItem == false)
                 {
                     AssemblyRecipeVM.allItems.Add(item);
                 }
             }
+
+            ViewData["AssemblyRecipeId"] = new SelectList(_context.AssemblyRecipe, "AssemblyRecipeId", "RecipeName");
+            AssemblyRecipeVM.assemblyRecipe = new List<AssemblyRecipe>();
+            List<AssemblyRecipe> tempRecipeList = new List<AssemblyRecipe>();
+            tempRecipeList = _context.AssemblyRecipe.ToList();
+
+            foreach (AssemblyRecipe recipe in tempRecipeList)
+            {
+                AssemblyRecipeVM.assemblyRecipe.Add(recipe);
+            }
+
 
             return View(AssemblyRecipeVM);
         }
@@ -97,24 +109,34 @@ namespace CS4790TeamProject.Controllers
             if (ModelState.IsValid)
             {
                 //Create new AssemblyRecipe object
-                var newRecipe = new AssemblyRecipe();
-                newRecipe.ItemID = newVM.itemID;
+                var newItem = new AssemblyRecipe();
+                newItem.ItemID = newVM.itemID;
+
+                //var newRecipe = new AssemblyRecipe();
+                //newRecipe.AssemblyRecipeId = newVM.AssemblyRecipeID;
+
 
                 //Retrieve the item that it is based on
                 var item = await _context.Item.FirstOrDefaultAsync(i => i.ItemId == newVM.itemID);
 
+                //var recipe = await _context.AssemblyRecipe.FirstOrDefaultAsync(i => i.AssemblyRecipeId == newVM.AssemblyRecipeID);
+
                 //Make the item an assembly item
                 item.IsAssemblyItem = true;
 
-                newRecipe.RecipeName = item.ItemName;
-                newRecipe.RecipeLines = newVM.recipeLines;
+                newItem.RecipeName = item.ItemName;
+                //newItem.RecipeLines = newVM.recipeLines;
 
-                _context.Add(newRecipe);
+                //newRecipe.AssemblyRecipeId = recipe.AssemblyRecipeId;
+                //newRecipe.RecipeName = recipe.RecipeName;
+
+                _context.Add(newItem);
+                //_context.Add(newRecipe);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             //return View(newVM.AssemblyRecipe);
-            return View();
+            return View(newVM);
         }
 
         // GET: Assembly/Edit/5

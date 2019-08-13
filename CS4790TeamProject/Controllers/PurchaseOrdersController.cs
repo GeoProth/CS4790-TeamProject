@@ -132,7 +132,8 @@ namespace CS4790TeamProject.Controllers
             OrdersVM = new OrdersViewModel()
             {
                 PurchaseOrder = await _context.PurchaseOrder.FirstOrDefaultAsync(p => p.PurchaseOrderId == id),
-                OrderItems = await _context.OrderItem.Where(o => o.PurchaseOrderID == id).ToListAsync(),
+                OrderItems = await _context.OrderItem.Where(o => o.PurchaseOrderID == id)
+                                                        .Include(i => i.Item).ToListAsync(),
                 TempOrderItem = new OrderItem(),
                 Vendor = new Vendor(),
                 Item = new Item()//for getting the measureId
@@ -143,6 +144,8 @@ namespace CS4790TeamProject.Controllers
             {
                 return NotFound();
             }
+
+            LoadViewData();
            
             return View(OrdersVM);
         }

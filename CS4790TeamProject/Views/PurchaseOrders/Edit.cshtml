@@ -1,11 +1,11 @@
 ﻿@model CS4790TeamProject.Models.ViewModels.OrdersViewModel
 
 @{
-    ViewData["Title"] = "Create Purchase Order";
+    ViewData["Title"] = "Edit Purchase Order";
 
 }
 <body>
-    <h2 style="text-align:center">Create Purchase Order</h2>
+    <h2 style="text-align:center">Edit Purchase Order</h2>
     <hr />
     <form method="post" enctype="multipart/form-data">
         <div class="row">
@@ -96,6 +96,17 @@
                         </tr>
                     </thead>
                     <tbody style="background-color:dimgray;color:black"></tbody>
+                    @foreach(var item in Model.OrderItems)
+                    {
+                        <tr>
+                            <td>@item.ItemID</td>
+                            <td>@item.Item.ItemName</td>
+                            <td>@item.QuantityOrdered</td>
+                            <td>@item.Item.Measure.MeasureName</td>
+                            <td>@item.Price</td>
+                            <td><button type="button" onclick="Remove(this)" style="background-color:red"><i class='fa fa-trash-o'></i></button></td>
+                        </tr>
+                    }
                 </table>
             </div>
         </div>

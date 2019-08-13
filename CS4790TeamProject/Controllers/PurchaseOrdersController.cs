@@ -20,17 +20,13 @@ namespace CS4790TeamProject.Controllers
        
         [BindProperty]
         public OrdersViewModel OrdersVM { get; set; }
+
+        [BindProperty]
+        public RecieveViewModel ReceiveVM { get; set; }
         public PurchaseOrdersController(ApplicationDbContext context)
         {
             _context = context;
-            OrdersVM = new OrdersViewModel()
-            {
-                PurchaseOrder = new PurchaseOrder(),
-                OrderItems = new List<OrderItem>(),
-                TempOrderItem = new OrderItem(),
-                Vendor = new Vendor()
-
-            };
+           
         }
         // GET: PurchaseOrders
         public async Task<IActionResult> Index()
@@ -58,6 +54,8 @@ namespace CS4790TeamProject.Controllers
 
             var purchaseOrder = await _context.PurchaseOrder
                 .Include(p => p.Vendor)
+                .Include(p => p.OrderItems)
+                    .ThenInclude(o => o.Item)
                 .FirstOrDefaultAsync(m => m.PurchaseOrderId == id);
             if (purchaseOrder == null)
             {
@@ -70,11 +68,20 @@ namespace CS4790TeamProject.Controllers
        
         public IActionResult Create()
         {
-        
+            OrdersVM = new OrdersViewModel()
+            {
+                PurchaseOrder = new PurchaseOrder(),
+                OrderItems = new List<OrderItem>(),
+                TempOrderItem = new OrderItem(),
+                Vendor = new Vendor(),
+                Item = new Item()//for getting the measureId
+
+            };
+
             LoadViewData();
             return View(OrdersVM);
         }
-        [HttpPost]
+        [HttpPost]// SaveOrder takes in a ViewModel from AJAX and processes the Data
         public async Task<JsonResult> SaveOrder(OrdersViewModel model)
         {
             string result;
@@ -85,6 +92,8 @@ namespace CS4790TeamProject.Controllers
             }
             //get the purchase Order and add its properties
             var purchase = model.PurchaseOrder;
+            purchase.DateOrdered = Convert.ToDateTime(Request.Form["DateOrdered"]);
+            purchase.DeliveryDate = Convert.ToDateTime(Request.Form["DeliveryDate"]);
             purchase.LastModifiedBy = User.Identity.Name;
             purchase.LastModifiedDate = DateTime.Now;
             purchase.Vendor = await _context.Vendor.FirstOrDefaultAsync(v => v.VendorId == purchase.VendorID);
@@ -103,9 +112,9 @@ namespace CS4790TeamProject.Controllers
                 oi.LastModifiedBy = User.Identity.Name;
                 oi.LastModifiedDate = DateTime.Now;
                 _context.OrderItem.Add(oi);
-                await _context.SaveChangesAsync();
-
+                
             }
+            await _context.SaveChangesAsync();
             // save changes
             result = "Purchase Order# " + purchase.PurchaseOrderId.ToString() + " Confirmed.";
             return Json(result);
@@ -120,16 +129,64 @@ namespace CS4790TeamProject.Controllers
             {
                 return NotFound();
             }
+            OrdersVM = new OrdersViewModel()
+            {
+                PurchaseOrder = await _context.PurchaseOrder.FirstOrDefaultAsync(p => p.PurchaseOrderId == id),
+                OrderItems = await _context.OrderItem.Where(o => o.PurchaseOrderID == id).ToListAsync(),
+                TempOrderItem = new OrderItem(),
+                Vendor = new Vendor(),
+                Item = new Item()//for getting the measureId
 
-            var purchaseOrder = await _context.PurchaseOrder.FindAsync(id);
-            if (purchaseOrder == null)
+            };
+           
+            if (OrdersVM.PurchaseOrder == null)
             {
                 return NotFound();
             }
            
-            return View(purchaseOrder);
+            return View(OrdersVM);
         }
 
+        [HttpPost]// SaveOrder takes in a ViewModel from AJAX and processes the Data
+        public async Task<JsonResult> EditOrder(OrdersViewModel model)
+        {
+            string result;
+            if (model.Vendor.VendorId == 0 || model.PurchaseOrder.DateOrdered == null || model.PurchaseOrder.DeliveryDate == null || model.OrderItems == null)
+            {
+                result = "Error! Form not Complete!";
+                return Json(result);
+            }
+            //get the purchase Order and add its properties
+            var purchase = model.PurchaseOrder;
+            purchase.LastModifiedBy = User.Identity.Name;
+            purchase.LastModifiedDate = DateTime.Now;
+            purchase.Vendor = await _context.Vendor.FirstOrDefaultAsync(v => v.VendorId == purchase.VendorID);
+            //store purchase order and get Id
+            _context.PurchaseOrder.Update(purchase);
+            await _context.SaveChangesAsync();//new purchase order id
+
+            
+            //Now add OrderItems with Purchase Id
+            foreach (OrderItem oi in model.OrderItems)
+            {
+                //add the purchase order Id
+                oi.PurchaseOrderID = purchase.PurchaseOrderId;
+                //add the Item
+                oi.Item = await _context.Item.FirstOrDefaultAsync(i => i.ItemId == oi.ItemID);
+                oi.Price = Convert.ToDecimal(oi.Price);
+                oi.LastModifiedBy = User.Identity.Name;
+                oi.LastModifiedDate = DateTime.Now;
+                _context.OrderItem.Update(oi);
+                
+
+            }
+            await _context.SaveChangesAsync();
+            // save changes
+            result = "Purchase Order# " + purchase.PurchaseOrderId.ToString() + " Updated.";
+            return Json(result);
+
+        }
+        /*
         // POST: PurchaseOrders/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -165,7 +222,7 @@ namespace CS4790TeamProject.Controllers
             ViewData["VendorID"] = new SelectList(_context.Vendor, "VendorId", "VendorId", purchaseOrder.VendorID);
             return View(purchaseOrder);
         }
-
+        */
         // GET: PurchaseOrders/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -176,6 +233,7 @@ namespace CS4790TeamProject.Controllers
 
             var purchaseOrder = await _context.PurchaseOrder
                 .Include(p => p.Vendor)
+                .Include(p => p.OrderItems)
                 .FirstOrDefaultAsync(m => m.PurchaseOrderId == id);
             if (purchaseOrder == null)
             {
@@ -201,7 +259,7 @@ namespace CS4790TeamProject.Controllers
             return _context.PurchaseOrder.Any(e => e.PurchaseOrderId == id);
         }
 
-      
+        [HttpGet]      
         public async Task<IActionResult> Receive(int? id)
         {
             if (id == null)

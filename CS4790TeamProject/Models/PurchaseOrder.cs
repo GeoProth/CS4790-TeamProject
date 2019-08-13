@@ -24,7 +24,7 @@ namespace CS4790TeamProject.Models
         public DateTime DeliveryDate { get; set; }
         [Display(Name="Vendor PO")]
         public string VendorPO { get; set; }
-
+        [Display(Name = "Status")]
         public bool Received { get; set; }
         public string LastModifiedBy { get; set; }
         [DataType(DataType.Date)]

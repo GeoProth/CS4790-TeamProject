@@ -16,6 +16,8 @@ namespace CS4790TeamProject.Models.ViewModels
 
         public Vendor Vendor { get; set; }
 
+        public Item Item { get; set; }
+
        
     }
 }

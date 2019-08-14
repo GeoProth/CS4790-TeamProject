@@ -102,7 +102,7 @@ namespace CS4790TeamProject.Views.Vendors
             var purchaseOrder = await _context.PurchaseOrder
                 .Include(p => p.Vendor)
                 .Include(p => p.OrderItems)
-                    .ThenInclude(o => o.Item)
+                    .ThenInclude(o => o.Item).ThenInclude(i => i.Measure)
                 .FirstOrDefaultAsync(m => m.PurchaseOrderId == id);
             if (purchaseOrder == null)
             {

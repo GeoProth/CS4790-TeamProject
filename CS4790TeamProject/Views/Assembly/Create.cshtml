@@ -14,7 +14,21 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
+
+            
+
             <div class="form-group">
+                @*
+
+                    Was being used to select an existing item to mark it as an assembly, but this shouldn't be in the end. 
+                    Commenting out for now, but leaving here in case we need it.
+
+
+
+
+
+
+
                 <label asp-for="itemID" class="control-label"></label>
                 <select name="itemID" id="listbox">
                     @foreach (var item in Model.allItems)
@@ -25,6 +39,73 @@
                     }
                 </select>
                 <span asp-validation-for="itemID" class="text-danger"></span>
+                *@
+
+
+
+
+
+
+
+                @*
+                    I copied your table just to get the formatting down, this can change however we need it
+                *@
+                <table id="table_assemblies1" class="table table-striped table-bordered" cellpadding="0" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th style="width:150px">Id</th>
+                            <th style="width:150px">Recipe</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+
+
+                        @if (Model.recipeLines != null)
+                        {
+                            @foreach (var line in Model.recipeLines)
+                            {
+                                <tr>
+                                    <td>@line.ItemID</td>
+                                    <td>@line.RecipeLineId</td>
+                                    <td><input type="button" value="Remove" onclick="Remove(this)" /></td>
+                                </tr>
+                            }
+                        }
+
+
+
+                    </tbody>
+                    <tfoot>
+                    </tfoot>
+                </table>
+
+                @*
+                    This is the drop down to select the item to add to the recipe.     
+                *@
+                <label asp-for="newLineItemID" class="control-label"></label>
+                <select name="newLineItemID" id="listbox">
+                    @foreach (var item in Model.allItems)
+                    {
+                        <option value="@item.ItemId">
+                            @item.ItemName
+                        </option>
+                    }
+                </select>
+
+                @*
+                    This is the button to add the item to the assembly recipe. Pressing this will call the method 'AddRecipeLineItem' in
+                    the Assembly Controller, but doesn't pass anything to the method yet
+                *@
+                <input type="button" id="btnAddLine" value="Add Item To Recipe" onclick="location.href='@Url.Action("AddRecipeLineItem")'" />
+
+
+                
+
+
+
+
 
 
                 <table id="table_assemblies1" class="table table-striped table-bordered" cellpadding="0" cellspacing="0">
@@ -44,6 +125,9 @@
                                 <td><input type="button" value="Remove" onclick="Remove(this)" /></td>
                             </tr>
                         }
+
+
+
                     </tbody>
                     <tfoot>
                         <tr>

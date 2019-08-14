@@ -1,29 +1,97 @@
-﻿@model CS4790TeamProject.Models.ViewModels.OrdersViewModel
+﻿@model CS4790TeamProject.Models.PurchaseOrder
 
 
 @{
 
 }
 
-<div style="margin-top: 20px">
-    Purchase Order Number: @Model.PurchaseOrder.PurchaseOrderId
-</div>
-
-<div style="border: solid 2px blue; margin-top: 10px">
-    @foreach (var item in Model.OrderItems)
-    {
-        <ul>
-            Item ID: @item.ItemID
-            <br />
-            Item Price: @item.Price
-            <br />
-            Quantity Ordered: @item.QuantityOrdered
-            <br />
-            Total Price: (@item.Price * @item.QuantityOrdered)
-        </ul>
-    }
-</div>
-
-    <div class="text-center">
-        <a asp-action="History" asp-route-id="@Model.PurchaseOrder.VendorID" class="btn btn-secondary col-sm-2">Back to List</a>
+<div class="container col-12" style="margin-top:50px;">
+    <div class="row">
+        <div class="col-6">
+            <h5 style="text-align:center">
+                @Html.DisplayNameFor(model => Model.Vendor.VendorName):
+                @Html.DisplayFor(modle => Model.Vendor.VendorName)
+            </h5>
+        </div>
+        <div class="col-6">
+            <h5 style="text-align:center">
+                Purchase Order Number: @Model.PurchaseOrderId
+            </h5>
+        </div>
     </div>
+
+    <div class="row">
+        <div class="col-4">
+            <h5 style="text-align:center">
+                @Html.DisplayNameFor(model => Model.Received):
+                @if (Model.Received)
+                {
+                    <span style="color:green;font:bold">Received</span>
+
+                }
+                else if (Model.DeliveryDate.Day < DateTime.Now.Day)
+                {
+                    <span style="color:red;font:bold">Overdue</span>
+                }
+                else
+                {
+                    <span style="color:blue;font:bold">Pending</span>
+                }
+            </h5>
+        </div>
+        <div class="col-4">
+            <h5 style="text-align:center">
+                @Html.DisplayNameFor(model => Model.DateOrdered):
+                @Html.DisplayFor(model => Model.DateOrdered)
+            </h5>
+        </div>
+        <div class="col-4">
+            <h5 style="text-align:center">
+                @Html.DisplayNameFor(model => Model.DeliveryDate):
+                @Html.DisplayFor(model => Model.DeliveryDate)
+            </h5>
+        </div>
+    </div>
+</div>
+<table class="table table-striped table-bordered" style="width:100%">
+    <thead>
+        <tr>
+            <th style="text-align:center">
+                Item
+            </th>
+            <th style="text-align:center">
+                Quantity
+            </th>
+            <th style="text-align:center">
+                U/M
+            </th>
+            <th style="text-align:center">
+                Price
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (OrderItem item in Model.OrderItems)
+        {
+            <tr>
+                <td style="text-align:center">
+                    @Html.DisplayFor(modelItem => item.Item.ItemName)
+                </td>
+                <td style="text-align:center">
+                    @Html.DisplayFor(modelItem => item.QuantityOrdered)
+                </td>
+                <td style="text-align:center">
+                    @Html.DisplayFor(modelItem => item.Item.Measure.MeasureName)
+                </td>
+                <td style="text-align:center">
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="text-center">
+    <a asp-action="History" asp-route-id="@Model.VendorID" class="btn btn-secondary col-sm-2">Back to List</a>
+</div>

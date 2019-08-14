@@ -73,19 +73,20 @@ namespace CS4790TeamProject.Views.Vendors
             return View(VendorHistoryVM);
         }
 
-        
+        /*
         public async Task<IActionResult> HistoryDetails(int id)
         {
 
-            var OrdersViewModels = new OrdersViewModel()
+            var OrdersViewModels = new PurchaseOrder()
             {
-                PurchaseOrder = new Models.PurchaseOrder(),
+                //PurchaseOrder = new Models.PurchaseOrder(),
                 OrderItems = _context.OrderItem
                     .Where(m => m.PurchaseOrderID == id).ToList()
 
             };
 
-            OrdersViewModels.PurchaseOrder = await _context.PurchaseOrder
+            //OrdersViewModels.PurchaseOrder = await _context.PurchaseOrder
+            OrdersViewModels = await _context.PurchaseOrder
                 .Include(m => m.OrderItems)
                 .AsNoTracking()
                 .SingleOrDefaultAsync(n => n.PurchaseOrderId == id);
@@ -94,7 +95,22 @@ namespace CS4790TeamProject.Views.Vendors
             return View(OrdersViewModels);
 
         }
-       
+       */
+
+        public async Task<IActionResult> HistoryDetails(int id)
+        {
+            var purchaseOrder = await _context.PurchaseOrder
+                .Include(p => p.Vendor)
+                .Include(p => p.OrderItems)
+                    .ThenInclude(o => o.Item)
+                .FirstOrDefaultAsync(m => m.PurchaseOrderId == id);
+            if (purchaseOrder == null)
+            {
+                return NotFound();
+            }
+
+            return View(purchaseOrder);
+        }
 
         // GET: Vendors/Create
         public IActionResult Create()

@@ -21,7 +21,7 @@ namespace CS4790TeamProject.Models.ViewModels
 
         public List<AssemblyRecipe> assemblyRecipe { get; set; }
 
-        //public List<RecipeLine> recipeLines { get; set; }
+        public List<RecipeLine> recipeLines { get; set; }
 
         public bool IsAssemblyRecipe { get; set; }
 

@@ -86,7 +86,7 @@
                 </div>
             </div>
             <div class="col-1"></div>
-            <div class="row border col-7" style="height:55vh;overflow:auto;background-color:dimgray">
+            <div class="row border col-7" style="height:55vh;overflow:auto;background-color:#17a2b8">
                 <table id="tblItems" class="table table-striped p-0" style="width:100%">
                     <thead class="thead-dark table-bordered border-primary">
                         <tr class="card-header">
@@ -98,7 +98,7 @@
                             <th class="pl-4"><h5><i class="fa fa-trash-o"></i></h5></th>
                         </tr>
                     </thead>
-                    <tbody style="background-color:dimgray;color:black"></tbody>
+                    <tbody style="background-color#17a2b8;color:white"></tbody>
                     @foreach(var item in Model.OrderItems)
                     {
                         <tr>
@@ -135,7 +135,6 @@
         $("body").on("click", "#btnAddPart", function () {
             //Reference item boxes stor them in vars
             var txtName = $("#itemInfo option:selected").text();
-            var sku = $("#sku").val();
             var item = $("#itemInfo");
             var txtQty = $("#qntyOrdered");
             var txtPrice = $("#price");
@@ -155,20 +154,27 @@
             var row = tBody.insertRow(-1);
 
             var cell = $(row.insertCell(-1));
-            cell.attr("style", "text-align:center");
+            cell.attr("style", "text-align:center;color:white");
             cell.html(item.val());
 
 
             cell = $(row.insertCell(-1));
-            cell.attr("style", "text-align:center");
+            cell.attr("style", "text-align:center;color:white");
             cell.html(txtName);
 
             cell = $(row.insertCell(-1));
-            cell.attr("style", "text-align:center");
+            cell.attr("style", "text-align:center;color:white");
             cell.html(txtQty.val());
 
             cell = $(row.insertCell(-1));
-            cell.attr("style", "text-align:center");
+            cell.attr("style", "text-align:center;color:white");
+            cell.html(measure);
+            //hidden field for measureId
+            cell = $(row.insertCell(-1));
+            cell.html(measurId.val()).hide();
+
+            cell = $(row.insertCell(-1));
+            cell.attr("style", "text-align:center;color:white");
             cell.html(txtPrice.val());
 
             cell = $(row.insertCell(-1));
@@ -183,6 +189,7 @@
             item.prop('selectedIndex', 0);
             txtQty.val(0);
             txtPrice.val(0);
+
 
         });
 
@@ -201,7 +208,7 @@
             //Loop through tabel rows and build a JSON array.
             var num = @Model.PurchaseOrder.PurchaseOrderId;
             var PurchaseOrder = {
-                PurchaseOrderID: num,
+                PurchaseOrderId: num,
                 VendorID: $("#vendorID").val(),
                 VendorPO: $("#vendorPO").val(),
                 DateOrdered: $("DeliveryDate").val(),
@@ -213,11 +220,11 @@
                 var row = $(this);
                 var OrderItem = {
                     ItemID: row.find("TD").eq(0).html(),
-                    Price: row.find("TD").eq(4).html(),
+                    Price: row.find("TD").eq(5).html(),
                     QuantityOrdered: row.find("TD").eq(2).html(),
                     Item: {
                         ItemId: row.find("TD").eq(0).html(),
-                        MeasureID: row.find("TD").eq(3).html()
+                        MeasureID: row.find("TD").eq(4).html()
                     }
                 };
                 OrderItems.push(OrderItem);

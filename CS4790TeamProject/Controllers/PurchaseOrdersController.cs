@@ -160,8 +160,10 @@ namespace CS4790TeamProject.Controllers
                 return NotFound();
             }
 
-            LoadViewData();
-           
+            ViewData["Vendors"] = new SelectList(_context.Vendor, "VendorId", "VendorName", OrdersVM.PurchaseOrder.VendorID);
+            ViewData["Items"] = new SelectList(_context.Item, "ItemId", "ItemName");
+            ViewData["Measures"] = new SelectList(_context.Measures, "MeasureId", "MeasureName");
+
             return View(OrdersVM);
         }
 
@@ -183,8 +185,7 @@ namespace CS4790TeamProject.Controllers
 
             purchase = model.PurchaseOrder;
             purchase.PurchaseOrderId = 0;
-            purchase.DateOrdered = Convert.ToDateTime(Request.Form["PurchaseOrder.DateOrdered"]);
-            purchase.DeliveryDate = Convert.ToDateTime(Request.Form["DeliveryDate"]);
+           
             purchase.LastModifiedBy = User.Identity.Name;
             purchase.LastModifiedDate = DateTime.Now;
             purchase.Vendor = await _context.Vendor.FirstOrDefaultAsync(v => v.VendorId == purchase.VendorID);

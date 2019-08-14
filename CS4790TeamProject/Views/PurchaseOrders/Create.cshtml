@@ -85,7 +85,7 @@
                     </div>
                 </div>
                 <div class="col-1"></div>
-                <div class="row border col-7" style="height:45vh;overflow:auto;background-color:dimgray">
+                <div class="row border col-7" style="height:45vh;overflow:auto;background-color:#17a2b8">
                     <table id="tblItems" class="table table-striped p-0" style="width:100%">
                         <thead class="thead-dark table-bordered border-primary">
                             <tr class="card-header">
@@ -97,7 +97,7 @@
                                 <th class="pl-4"><h5><i class="fa fa-trash-o"></i></h5></th>
                             </tr>
                         </thead>
-                        <tbody style="background-color:dimgray;color:black"></tbody>
+                        <tbody style="background-color:#17a2b8;color:white"></tbody>
                     </table>
                 </div>
             </div>
@@ -148,27 +148,27 @@
             var row = tBody.insertRow(-1);
 
             var cell = $(row.insertCell(-1));
-            cell.attr("style", "text-align:center");
+            cell.attr("style", "text-align:center;color:white");
             cell.html(item.val());
 
 
             cell = $(row.insertCell(-1));
-            cell.attr("style", "text-align:center");
+            cell.attr("style", "text-align:center;color:white");
             cell.html(txtName);
 
             cell = $(row.insertCell(-1));
-            cell.attr("style", "text-align:center");
+            cell.attr("style", "text-align:center;color:white");
             cell.html(txtQty.val());
 
             cell = $(row.insertCell(-1));
-            cell.attr("style", "text-align:center");
+            cell.attr("style", "text-align:center;color:white");
             cell.html(measure);
             //hidden field for measureId
             cell = $(row.insertCell(-1));
             cell.html(measurId.val()).hide();
 
             cell = $(row.insertCell(-1));
-            cell.attr("style", "text-align:center");
+            cell.attr("style", "text-align:center;color:white");
             cell.html(txtPrice.val());
 
             cell = $(row.insertCell(-1));

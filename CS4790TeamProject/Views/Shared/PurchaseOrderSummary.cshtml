@@ -30,9 +30,9 @@
             @Html.DisplayFor(model => Model.DateOrdered)
             @if (!Model.Received)
             {
-                <a asp-route-id="@Model.PurchaseOrderId" asp-action="Receive" class="btn btn-success btn-sm pull-right" style="margin-right:2em">Receive</a>
+                <a asp-route-id="@Model.PurchaseOrderId" asp-action="Receive" class="btn btn-success pull-right" style="margin-right:2em">Receive</a>
             }
-            <a asp-route-id="@Model.PurchaseOrderId" asp-action="Details" class="btn btn-primary btn-sm pull-right" style="margin-right:5em">Details</a>
+            <a asp-route-id="@Model.PurchaseOrderId" asp-action="Details" class="btn btn-primary pull-right" style="margin-right:5em">Details</a>
         </span>
     </div>
     <div>

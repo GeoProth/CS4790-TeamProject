@@ -209,8 +209,8 @@ namespace CS4790TeamProject.Controllers
             }
             await _context.SaveChangesAsync();
             // save changes
-            //result = "Purchase Order# " + purchase.PurchaseOrderId.ToString() + " Updated.";
-            return Json(new { redirectUrl = Url.Action("Index", "PurchaseOrders") });
+            result = "Purchase Order# " + purchase.PurchaseOrderId.ToString() + " Updated.";
+            return Json(result);
 
         }
 

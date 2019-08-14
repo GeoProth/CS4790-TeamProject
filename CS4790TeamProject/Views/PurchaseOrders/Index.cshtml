@@ -24,16 +24,15 @@
     <div class="tab-pane active" id="all_tab">
         <br />
         <div style="float:right;">
-
             <label>Search:</label>
-            <input id="myInput" type="text" style="border-radius:5px;"/>
+            <input id="myInputAll" type="text" style="border-radius:5px;"/>
         </div>
         <br />
         <br />
         <div id="myDIV">
 
             <div class="container pre-scrollable" style="overflow:scroll;">
-                <ul id="myList" style="list-style:none;">
+                <ul id="myListAll" style="list-style:none;">
 
                     @foreach (var p in Model)
                     {
@@ -49,36 +48,67 @@
     </div>
     <div class="tab-pane" id="pending_tab">
         <br />
+        <div style="float:right;">
+            <label>Search:</label>
+            <input id="myInputPending" type="text" style="border-radius:5px;" />
+        </div>
+        <br />
+        <br />
         <div class="container pre-scrollable" style="overflow:scroll;">
+            <ul id="myListPending" style="list-style:none;">
 
-            @foreach (var p in Model.Where(p => !p.Received))
-            {
-                @await Html.PartialAsync("PurchaseOrderSummary", p);
-            }
+                @foreach (var p in Model.Where(p => !p.Received))
+                {
+                    <li>
+
+                        @await Html.PartialAsync("PurchaseOrderSummary", p)
+                    </li>
+                }
+            </ul>
 
         </div>
     </div>
     <div class="tab-pane" id="received_tab">
         <br />
+        <div style="float:right;">
+            <label>Search:</label>
+            <input id="myInputReceived" type="text" style="border-radius:5px;" />
+        </div>
+        <br />
+        <br />
+        <div class="container pre-scrollable"  style="overflow:scroll;">
+            <ul id="myListReceived" style="list-style:none;">
 
-        <div class="container" style="overflow:scroll;">
+                @foreach (var p in Model.Where(p => p.Received))
+                {
+                    <li>
 
-            @foreach (var p in Model.Where(p => p.Received))
-            {
-                @await Html.PartialAsync("PurchaseOrderSummary", p);
-            }
+                        @await Html.PartialAsync("PurchaseOrderSummary", p)
+                    </li>
+                }
+            </ul>
 
         </div>
     </div>
     <div class="tab-pane" id="overdue_tab">
         <br />
+        <div style="float:right;">
+            <label>Search:</label>
+            <input id="myInputOverdue" type="text" style="border-radius:5px;" />
+        </div>
+        <br />
+        <br />
+        <div class="container pre-scrollable"  style="overflow:scroll;">
+            <ul id="myListOverdue" style="list-style:none;">
 
-        <div class="container" style="overflow:scroll;">
-            
-            @foreach (var p in Model.Where(p => p.DeliveryDate.Day < DateTime.Now.Day))
-            {
-                @await Html.PartialAsync("PurchaseOrderSummary", p);
-            }
+                @foreach (var p in Model.Where(p => p.DeliveryDate.Day < DateTime.Now.Day))
+                {
+                    <li>
+
+                        @await Html.PartialAsync("PurchaseOrderSummary", p)
+                    </li>
+                }
+            </ul>
 
         </div>
     </div>

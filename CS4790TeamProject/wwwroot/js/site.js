@@ -38,19 +38,50 @@ $(document).ready(function () {
         ]
     });
 
-    var table5 = $('#table_assemblies1').DataTable({
+    var table5 = $('#table_POdetails').DataTable({
         responsive: true
 
 
 
     })
 
-    $("#myInput").on("keyup", function () {
+    $("#myInputAll").on("keyup", function () {
         var value = $(this).val().toLowerCase();
-        $("#myList li").filter(function () {
+        $("#myListAll li").filter(function () {
             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
         });
     });
+
+    $("#myInputPending").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $("#myListPending li").filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+
+    $("#myInputReceived").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $("#myListReceived li").filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+
+    $("#myInputOverdue").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $("#myListOverdue li").filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+
+  
+    $("#Add").on("click", function () {
+        $("#selectboxDIV").append("<label asp-for='itemID' class='control-label'></label><select name='itemID' id='listbox' class='form-control'> @foreach (var item in Model.allItems){<option value='@item.ItemId'>@item.ItemName</option>}</select>");
+    });
+
+    $("#Remove").on("click", function () {
+        $("#selectboxDIV").children().last().remove();
+    });
+   
 
     //var table4 = $('#table_orders2').DataTable({
     //    responsive: true

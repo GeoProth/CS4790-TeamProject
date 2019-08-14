@@ -112,26 +112,30 @@ namespace CS4790TeamProject.Controllers
                 var newItem = new AssemblyRecipe();
                 newItem.ItemID = newVM.itemID;
 
-                //var newRecipe = new AssemblyRecipe();
-                //newRecipe.AssemblyRecipeId = newVM.AssemblyRecipeID;
+                var newRecipe = new AssemblyRecipe();
+                newRecipe.RecipeName = newVM.RecipeName;
 
 
                 //Retrieve the item that it is based on
-                var item = await _context.Item.FirstOrDefaultAsync(i => i.ItemId == newVM.itemID);
+                var itemID = await _context.Item.FirstOrDefaultAsync(i => i.ItemId == newVM.itemID);
 
-                //var recipe = await _context.AssemblyRecipe.FirstOrDefaultAsync(i => i.AssemblyRecipeId == newVM.AssemblyRecipeID);
+                var recipeName = await _context.AssemblyRecipe.FirstOrDefaultAsync(i => i.RecipeName == newVM.RecipeName);
 
                 //Make the item an assembly item
-                item.IsAssemblyItem = true;
+                itemID.IsAssemblyItem = true;
 
-                newItem.RecipeName = item.ItemName;
-                //newItem.RecipeLines = newVM.recipeLines;
+                newItem.RecipeName = itemID.ItemName;
+                newItem.RecipeLines = newVM.recipeLines;
 
-                //newRecipe.AssemblyRecipeId = recipe.AssemblyRecipeId;
-                //newRecipe.RecipeName = recipe.RecipeName;
+                //newRecipe.AssemblyRecipeId = newVM.AssemblyRecipeID;
+                newRecipe.RecipeName = newVM.RecipeName;
+                newRecipe.ItemID = newVM.itemID;
 
-                _context.Add(newItem);
-                //_context.Add(newRecipe);
+                //newRecipe.AssemblyRecipeId = recipeName.AssemblyRecipeId;
+                //newRecipe.RecipeName = recipeName.RecipeName;
+
+                //_context.Add(newItem);
+                _context.Add(newRecipe);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

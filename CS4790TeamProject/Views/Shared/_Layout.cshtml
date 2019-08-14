@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <system.web><globalization culture="en-US" /></system.web>
     
     <title>@ViewData["Title"] - CS4790TeamProject</title>
 
@@ -45,7 +46,7 @@
                             <a class="navbar-brand" href="@Url.Action("Index", "Inventory")">Inventory</a>
                         </li>
                         <li class="nav-item">
-                            <a class="navbar-brand"  asp-page="/Orders/Index">Orders</a>
+                            <a class="navbar-brand"  href="@Url.Action("Index", "PurchaseOrders")">Orders</a>
                         </li>
                         <li class="nav-item">
                             <a class="navbar-brand" href="@Url.Action("Index", "Assembly")">Assemble</a>

@@ -55,7 +55,7 @@ namespace CS4790TeamProject.Controllers
             var purchaseOrder = await _context.PurchaseOrder
                 .Include(p => p.Vendor)
                 .Include(p => p.OrderItems)
-                    .ThenInclude(o => o.Item)
+                    .ThenInclude(o => o.Item).ThenInclude(i => i.Measure)
                 .FirstOrDefaultAsync(m => m.PurchaseOrderId == id);
             if (purchaseOrder == null)
             {
@@ -94,7 +94,7 @@ namespace CS4790TeamProject.Controllers
             
             //get the purchase Order and add its properties
             var purchase = model.PurchaseOrder;
-            purchase.DateOrdered = Convert.ToDateTime(Request.Form["DateOrdered"]);
+            purchase.DateOrdered = Convert.ToDateTime(Request.Form["PurchaseOrder.DateOrdered"]);
             purchase.DeliveryDate = Convert.ToDateTime(Request.Form["DeliveryDate"]);
             purchase.LastModifiedBy = User.Identity.Name;
             purchase.LastModifiedDate = DateTime.Now;
@@ -110,6 +110,7 @@ namespace CS4790TeamProject.Controllers
                 oi.PurchaseOrderID = purchase.PurchaseOrderId;
                 //add the Item
                 oi.Item = await _context.Item.FirstOrDefaultAsync(i => i.ItemId == oi.ItemID);
+                oi.Item.Measure = await _context.Measures.FirstOrDefaultAsync(m => m.MeasureId == oi.Item.MeasureID); 
                 oi.Price = Convert.ToDecimal(oi.Price);
                 oi.LastModifiedBy = User.Identity.Name;
                 oi.LastModifiedDate = DateTime.Now;
@@ -136,7 +137,7 @@ namespace CS4790TeamProject.Controllers
             return RedirectToAction("Index");
         }
     
-        // GET: PurchaseOrders/Edit/5
+       // GET: PurchaseOrders/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -163,6 +164,8 @@ namespace CS4790TeamProject.Controllers
            
             return View(OrdersVM);
         }
+        
+
 
         [HttpPost]// SaveOrder takes in a ViewModel from AJAX and processes the Data
         public async Task<JsonResult> EditOrder(OrdersViewModel model)
@@ -175,14 +178,25 @@ namespace CS4790TeamProject.Controllers
             }
             //get the purchase Order and add its properties
             var purchase = model.PurchaseOrder;
+
+            //gonna have to delete and then reinsert
+            var deletePurchase = await _context.PurchaseOrder.FindAsync(purchase.PurchaseOrderId);
+            _context.PurchaseOrder.Remove(deletePurchase);
+            await _context.SaveChangesAsync();
+            //now re-insert
+
+            purchase = model.PurchaseOrder;
+            purchase.DateOrdered = Convert.ToDateTime(Request.Form["DateOrdered"]);
+            purchase.DeliveryDate = Convert.ToDateTime(Request.Form["DeliveryDate"]);
             purchase.LastModifiedBy = User.Identity.Name;
             purchase.LastModifiedDate = DateTime.Now;
+
+
             purchase.Vendor = await _context.Vendor.FirstOrDefaultAsync(v => v.VendorId == purchase.VendorID);
             //store purchase order and get Id
-            _context.PurchaseOrder.Update(purchase);
+            _context.PurchaseOrder.Add(purchase);
             await _context.SaveChangesAsync();//new purchase order id
 
-            
             //Now add OrderItems with Purchase Id
             foreach (OrderItem oi in model.OrderItems)
             {
@@ -193,13 +207,13 @@ namespace CS4790TeamProject.Controllers
                 oi.Price = Convert.ToDecimal(oi.Price);
                 oi.LastModifiedBy = User.Identity.Name;
                 oi.LastModifiedDate = DateTime.Now;
-                _context.OrderItem.Update(oi); 
+                _context.OrderItem.Add(oi);
 
             }
             await _context.SaveChangesAsync();
-            // save changes
-            result = "Purchase Order# " + purchase.PurchaseOrderId.ToString() + " Updated.";
-            return Json(result);
+
+            //result = "Purchase Order# " + purchase.PurchaseOrderId.ToString() + " Updated.";
+            return Json(new { redirectUrl = Url.Action("Index", "PurchaseOrders") });
 
         }
        

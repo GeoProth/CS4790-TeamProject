@@ -92,12 +92,17 @@
 </table>
 <div class="row">
     <div class="col">
-        <a asp-action="Index" class="btn btn-primary btn-sm" style="padding-right:5em">Back</a>
+        <a asp-action="Index" class="btn btn-info" style="padding-right:5em">Back</a>
     </div>
     <div class="col">
-        <a asp-action="Edit" asp-route-id="@Model.PurchaseOrderId" class="btn btn-success btn-sm" style="padding-right:5em">Edit</a>
+        <a @*asp-action="Edit" asp-route-id="@Model.PurchaseOrderId"*@ class="btn btn-success" style="padding-right:5em">Edit</a>
     </div>
+    @if (!Model.Received) { 
     <div class="col">
-        <a asp-action="Delete" asp-route-id="@Model.PurchaseOrderId" class="btn btn-danger btn-sm">Delete</a>
+        <a asp-action="Receive" asp-route-id="@Model.PurchaseOrderId" class="btn btn-primary">Receive</a>
+    </div>
+    }
+    <div class="col">
+        <a asp-action="Delete" asp-route-id="@Model.PurchaseOrderId" class="btn btn-danger">Delete</a>
     </div>
 </div>

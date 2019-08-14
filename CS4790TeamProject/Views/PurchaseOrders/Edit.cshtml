@@ -4,6 +4,9 @@
     ViewData["Title"] = "Edit Purchase Order";
 
 }
+<script>
+
+</script>
 <body>
     <h2 style="text-align:center">Edit Purchase Order</h2>
     <hr />
@@ -115,7 +118,7 @@
                 <a class="btn btn-info" style="width:auto;" asp-action="Index">Back</a>
             </div>
             <div class="form-group col-4 text-center">
-                <input type="button" name="submitButton" id="btnSave" value="Create Order" class="btn btn-success" />
+                <input type="button" name="submitButton" id="btnSave" value="Update Order" class="btn btn-success" />
             </div>
             <div class="col-4 text-center">
                 <a class="btn btn-danger" style="width:auto;" asp-action="Create">Cancel</a>
@@ -127,6 +130,8 @@
     <script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
 
     <script type="text/javascript">
+
+
         $("body").on("click", "#btnAddPart", function () {
             //Reference item boxes stor them in vars
             var txtName = $("#itemInfo option:selected").text();
@@ -178,6 +183,7 @@
             item.prop('selectedIndex', 0);
             txtQty.val(0);
             txtPrice.val(0);
+
         });
 
         function Remove(button) {
@@ -193,7 +199,9 @@
 
         $("body").on("click", "#btnSave", function () {
             //Loop through tabel rows and build a JSON array.
+            var num = @Model.PurchaseOrder.PurchaseOrderId;
             var PurchaseOrder = {
+                PurchaseOrderID: num,
                 VendorID: $("#vendorID").val(),
                 VendorPO: $("#vendorPO").val(),
                 DateOrdered: $("DeliveryDate").val(),
@@ -225,7 +233,7 @@
             }
 
             console.log(model);
-
+           
             $.ajax({
                 type: "POST",
                 url: "@Url.Action("EditOrder","PurchaseOrders")",
@@ -238,8 +246,9 @@
                 },
 
                 success: function (r) {
-                    alert(r);
-                    location.reload();
+                    alert("Purchase Order# " + orderNum + " Updated");
+                    window.location.href = r.Url;
+                    
                 },
                 error: function (xhr, status, error) {
                     alert(xhr.responseText);

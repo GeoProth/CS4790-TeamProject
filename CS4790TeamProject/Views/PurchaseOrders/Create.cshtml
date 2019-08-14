@@ -7,7 +7,7 @@
     <body>
         <h2 style="text-align:center">Create Purchase Order</h2>
         <hr />
-        <form method="post" enctype="multipart/form-data" asp-action="SaveOrder">
+        <form method="post" action="/PurchaseOrders/SaveOrder">
             <div class="row">
                 <div class="col-4">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -25,9 +25,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                       
+                        
                         <label asp-for="@Model.PurchaseOrder.DateOrdered" class="control-label">Order Date:</label>
-                        <input asp-for="@Model.PurchaseOrder.DateOrdered" type="date" id="dateOrdered" class="form-control" />
+                        <input asp-for="@Model.PurchaseOrder.DateOrdered"  id="dateOrdered" class="form-control" />
                         <span asp-validation-for="@Model.PurchaseOrder.DateOrdered" class="text-danger"></span>
                         
                     </div>
@@ -41,8 +41,9 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="@Model.PurchaseOrder.DeliveryDate" class="control-label">Delivery Date:</label>
-                        <input name="DeliveryDate" asp-for="@Model.PurchaseOrder.DeliveryDate" id="deliveryDate" class="form-control" />
+                        <input asp-for="@Model.PurchaseOrder.DeliveryDate" id="deliveryDate" class="form-control" />
                         <span asp-validation-for="@Model.PurchaseOrder.DeliveryDate" class="text-danger"></span>
+                           
                     </div>
                 </div>
             </div>
@@ -127,6 +128,7 @@
             var txtQty = $("#qntyOrdered");
             var txtPrice = $("#price");
             var measure = $("#measureID option:selected").text();
+            var measurId = $("#measureID");
             if (txtQty.val() == 0) {
                 alert("Missing Quantity!");
                 return;
@@ -161,6 +163,9 @@
             cell = $(row.insertCell(-1));
             cell.attr("style", "text-align:center");
             cell.html(measure);
+            //hidden field for measureId
+            cell = $(row.insertCell(-1));
+            cell.html(measurId.val()).hide();
 
             cell = $(row.insertCell(-1));
             cell.attr("style", "text-align:center");
@@ -179,7 +184,7 @@
             txtQty.val(0);
             txtPrice.val(0);
 
-
+            //date always returning as 1/1/0001 ?
             var date = '@Html.Raw(Model.PurchaseOrder.DateOrdered)';
             console.log(date);
 
@@ -194,13 +199,6 @@
                 table.deleteRow(row[0].rowIndex);
             }
         };
-
-            function getFormattedDate(date) {
-                var curr_date = date.getDate();
-                var curr_month = date.getMonth() + 1;
-                var curr_year = date.getFullYear();
-                return curr_date + "-" + curr_month + "-" + curr_year;
-            }
 
 
 
@@ -219,11 +217,11 @@
                 var row = $(this);
                 var OrderItem = {
                     ItemID: row.find("TD").eq(0).html(),
-                    Price: row.find("TD").eq(4).html(),
+                    Price: row.find("TD").eq(5).html(),
                     QuantityOrdered: row.find("TD").eq(2).html(),
                     Item: {
                         ItemId: row.find("TD").eq(0).html(),
-                        MeasureID: row.find("TD").eq(3).html()
+                        MeasureID: row.find("TD").eq(4).html()
                     }
                 };
                 OrderItems.push(OrderItem);

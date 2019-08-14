@@ -74,7 +74,7 @@
         <br />
 
         <div class="container" style="overflow:scroll;">
-
+            
             @foreach (var p in Model.Where(p => p.DeliveryDate.Day < DateTime.Now.Day))
             {
                 @await Html.PartialAsync("PurchaseOrderSummary", p);

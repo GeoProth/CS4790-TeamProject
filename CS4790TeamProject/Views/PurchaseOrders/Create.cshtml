@@ -25,12 +25,11 @@
                         </div>
                     </div>
                     <div class="form-group">
-
-
+                       
                         <label asp-for="@Model.PurchaseOrder.DateOrdered" class="control-label">Order Date:</label>
-                        <input name="DateOrdered" type="date" id="dateOrdered" class="form-control" />
+                        <input asp-for="@Model.PurchaseOrder.DateOrdered" type="date" id="dateOrdered" class="form-control" />
                         <span asp-validation-for="@Model.PurchaseOrder.DateOrdered" class="text-danger"></span>
-
+                        
                     </div>
                 </div>
                 <div class="col-2"></div>
@@ -63,17 +62,17 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-inline pl-1 mb-3 fa-pull-right">
-                        <label asp-for="@Model.TempOrderItem.Item.MeasureID" class="control-label mr-3">Unit of Measure</label>
+                    <div class="form-inline pl-1 mb-3 fa-pull-left">
+                        <label asp-for="@Model.TempOrderItem.Item.MeasureID" class="control-label mr-3">Unit of Measure:</label>
                         <select asp-for="@Model.TempOrderItem.Item.MeasureID" name="MeasureID" id="measureID" class="form-control" asp-items="@ViewBag.Measures"></select>
                         <span asp-validation-for="@Model.TempOrderItem.Item.MeasureID" class="text-danger"></span>
                     </div>
-                    <div class="form-inline pl-1 mb-3 fa-pull-right">
+                    <div class="form-inline pl-1 mb-3 fa-pull-left">
                         <label asp-for="@Model.TempOrderItem.QuantityOrdered" class="control-label mr-3">Quantity:</label>
                         <input id="qntyOrdered" name="QntyOrdered" asp-for="@Model.TempOrderItem.QuantityOrdered" min="0" type="number" class="form-control col-4" />
                         <span asp-validation-for="@Model.TempOrderItem.QuantityOrdered" class="text-danger"></span>
                     </div>
-                    <div class="form-inline mb-3 fa-pull-right">
+                    <div class="form-inline mb-3 pl-1 fa-pull-left">
                         <label asp-for="@Model.TempOrderItem.Price" class="control-label mr-3">Price:</label>
                         <div class="form-inline">
                             $<input id="price" name="Price" asp-for="@Model.TempOrderItem.Price" class="form-control ml-1 col-4" />
@@ -85,7 +84,7 @@
                     </div>
                 </div>
                 <div class="col-1"></div>
-                <div class="row border col-7" style="height:55vh;overflow:auto;background-color:dimgray">
+                <div class="row border col-7" style="height:45vh;overflow:auto;background-color:dimgray">
                     <table id="tblItems" class="table table-striped p-0" style="width:100%">
                         <thead class="thead-dark table-bordered border-primary">
                             <tr class="card-header">
@@ -181,7 +180,7 @@
             txtPrice.val(0);
 
 
-            var date = new Date($("#DateDelivered").datepicker("getDate"));
+            var date = '@Html.Raw(Model.PurchaseOrder.DateOrdered)';
             console.log(date);
 
         });
@@ -195,6 +194,13 @@
                 table.deleteRow(row[0].rowIndex);
             }
         };
+
+            function getFormattedDate(date) {
+                var curr_date = date.getDate();
+                var curr_month = date.getMonth() + 1;
+                var curr_year = date.getFullYear();
+                return curr_date + "-" + curr_month + "-" + curr_year;
+            }
 
 
 

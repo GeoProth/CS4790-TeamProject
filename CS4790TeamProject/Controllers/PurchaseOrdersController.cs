@@ -85,11 +85,13 @@ namespace CS4790TeamProject.Controllers
         public async Task<JsonResult> SaveOrder(OrdersViewModel model)
         {
             string result;
+            
             if(model.Vendor.VendorId == 0 || model.PurchaseOrder.DateOrdered == null || model.PurchaseOrder.DeliveryDate == null || model.OrderItems == null)
             {
                 result = "Error! Form not Complete!";
                 return Json(result);
             }
+            
             //get the purchase Order and add its properties
             var purchase = model.PurchaseOrder;
             purchase.DateOrdered = Convert.ToDateTime(Request.Form["DateOrdered"]);
@@ -121,6 +123,18 @@ namespace CS4790TeamProject.Controllers
             
         }
 
+        public async Task<IActionResult> Receive(int? id)
+        {
+            if(id == null)
+            {
+                return NotFound();
+            }
+            var order = await _context.PurchaseOrder.FirstOrDefaultAsync(o => o.PurchaseOrderId == id);
+            order.Received = true;
+            await _context.SaveChangesAsync();
+           
+            return RedirectToAction("Index");
+        }
     
         // GET: PurchaseOrders/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -179,8 +193,7 @@ namespace CS4790TeamProject.Controllers
                 oi.Price = Convert.ToDecimal(oi.Price);
                 oi.LastModifiedBy = User.Identity.Name;
                 oi.LastModifiedDate = DateTime.Now;
-                _context.OrderItem.Update(oi);
-                
+                _context.OrderItem.Update(oi); 
 
             }
             await _context.SaveChangesAsync();
@@ -189,43 +202,7 @@ namespace CS4790TeamProject.Controllers
             return Json(result);
 
         }
-        /*
-        // POST: PurchaseOrders/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PurchaseOrderId,VendorID,DateOrdered,VendorPO,Received,LastModifiedBy,LastModifiedDate")] PurchaseOrder purchaseOrder)
-        {
-            if (id != purchaseOrder.PurchaseOrderId)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(purchaseOrder);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!PurchaseOrderExists(purchaseOrder.PurchaseOrderId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["VendorID"] = new SelectList(_context.Vendor, "VendorId", "VendorId", purchaseOrder.VendorID);
-            return View(purchaseOrder);
-        }
-        */
+       
         // GET: PurchaseOrders/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -261,7 +238,7 @@ namespace CS4790TeamProject.Controllers
         {
             return _context.PurchaseOrder.Any(e => e.PurchaseOrderId == id);
         }
-
+        /*  Possible incorporation of receiving Items individually (if have time)
         [HttpGet]      
         public async Task<IActionResult> Receive(int? id)
         {
@@ -280,7 +257,7 @@ namespace CS4790TeamProject.Controllers
 
             return View(purchaseOrder);
         }
-
+        */
         private void LoadViewData()
         {
             ViewData["Vendors"] = new SelectList(_context.Vendor, "VendorId", "VendorName");

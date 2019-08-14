@@ -164,7 +164,6 @@ namespace CS4790TeamProject.Controllers
            
             return View(OrdersVM);
         }
-        
 
 
         [HttpPost]// SaveOrder takes in a ViewModel from AJAX and processes the Data
@@ -177,21 +176,17 @@ namespace CS4790TeamProject.Controllers
                 return Json(result);
             }
             //get the purchase Order and add its properties
-            var purchase = model.PurchaseOrder;
-
-            //gonna have to delete and then reinsert
-            var deletePurchase = await _context.PurchaseOrder.FindAsync(purchase.PurchaseOrderId);
-            _context.PurchaseOrder.Remove(deletePurchase);
+            var purchase = await _context.PurchaseOrder.FindAsync(model.PurchaseOrder.PurchaseOrderId);
+            _context.PurchaseOrder.Remove(purchase);
             await _context.SaveChangesAsync();
-            //now re-insert
+
 
             purchase = model.PurchaseOrder;
-            purchase.DateOrdered = Convert.ToDateTime(Request.Form["DateOrdered"]);
+            purchase.PurchaseOrderId = 0;
+            purchase.DateOrdered = Convert.ToDateTime(Request.Form["PurchaseOrder.DateOrdered"]);
             purchase.DeliveryDate = Convert.ToDateTime(Request.Form["DeliveryDate"]);
             purchase.LastModifiedBy = User.Identity.Name;
             purchase.LastModifiedDate = DateTime.Now;
-
-
             purchase.Vendor = await _context.Vendor.FirstOrDefaultAsync(v => v.VendorId == purchase.VendorID);
             //store purchase order and get Id
             _context.PurchaseOrder.Add(purchase);
@@ -204,6 +199,7 @@ namespace CS4790TeamProject.Controllers
                 oi.PurchaseOrderID = purchase.PurchaseOrderId;
                 //add the Item
                 oi.Item = await _context.Item.FirstOrDefaultAsync(i => i.ItemId == oi.ItemID);
+                oi.Item.Measure = await _context.Measures.FirstOrDefaultAsync(m => m.MeasureId == oi.Item.MeasureID);
                 oi.Price = Convert.ToDecimal(oi.Price);
                 oi.LastModifiedBy = User.Identity.Name;
                 oi.LastModifiedDate = DateTime.Now;
@@ -211,12 +207,12 @@ namespace CS4790TeamProject.Controllers
 
             }
             await _context.SaveChangesAsync();
-
+            // save changes
             //result = "Purchase Order# " + purchase.PurchaseOrderId.ToString() + " Updated.";
             return Json(new { redirectUrl = Url.Action("Index", "PurchaseOrders") });
 
         }
-       
+
         // GET: PurchaseOrders/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {

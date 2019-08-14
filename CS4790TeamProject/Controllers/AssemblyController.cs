@@ -223,5 +223,12 @@ namespace CS4790TeamProject.Controllers
         {
             return _context.AssemblyRecipe.Any(e => e.AssemblyRecipeId == id);
         }
+
+        //Method to add an item to a Recipe line
+        //Has no content yet because I'm working on getting the item's ID to pass successfully
+        public async Task<IActionResult> AddRecipeLineItem(int itemID)
+        {
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
